@@ -289,18 +289,34 @@ class CustomInlineFormSet(BaseInlineFormSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for form in self.forms:
-            case_detail_id = form.instance.scheme.civil_detail_id
-            result = CivilNaturePerson.objects.filter(case_id=case_detail_id).values_list("name", "name")
-            result = list(result)
-            result.insert(0, ('', '---------'))
-            form.fields["ask_user"].widget.choices = result
+            if form.instance.scheme_id:
+                case_detail_id = form.instance.scheme.civil_detail_id
+                result = CivilNaturePerson.objects.filter(case_id=case_detail_id).values_list("name", "name")
+                result = list(result)
+                result.insert(0, ('', '---------'))
+                form.fields["ask_user"].widget.choices = result
+
+
+# class CivilAskOutlineForm(forms.ModelForm):
+#     """询问提纲"""
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         case_id = kwargs.pop("case_id", None)
+#         print("case_id", case_id)
+#         result = CivilNaturePerson.objects.filter(case_id=case_id).values_list("name", "name")
+#         result = list(result)
+#         result.insert(0, ('', '---------'))
+#         self.fields["ask_user"].widget.choices = result
+#
+#     class Meta:
+#         model = AskingOutline
+#         fields = "__all__"
 
 
 # 询问提纲
 AskingOutlineFormSet = inlineformset_factory(
                     CivilLawsuitScheme,
                     AskingOutline,
-                    formset=CustomInlineFormSet,
                     fields=('target', 'ask_user', 'content'),
                     widgets={
                         "target": forms.Select(attrs={'class': "form-control"}),

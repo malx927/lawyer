@@ -1,7 +1,7 @@
 
 # -*- coding:utf-8 -*-
 from django import forms
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, BaseInlineFormSet
 
 from crimicase.models import Criminal, CriminalDetail, CrimiNaturePerson, CrimiLegalPerson, CrimiLawsuitScheme, \
     CrimiEvidence, CrimiAskingOutline, CrimiApplications, CriminalHisResult
@@ -232,13 +232,28 @@ EvidenceFormSet = inlineformset_factory(
                     extra=1, can_delete=True
                 )
 
+
+class CustomInlineFormSet(BaseInlineFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.forms:
+            print(form)
+            # case_detail_id = form.instance.scheme.crimi_detail_id
+            # result = CrimiNaturePerson.objects.filter(case_id=case_detail_id).values_list("name", "name")
+            # result = list(result)
+            # result.insert(0, ('', '---------'))
+            # form.fields["ask_user"].widget.choices = result
+
+
 # 询问提纲
 AskingOutlineFormSet = inlineformset_factory(
                     CrimiLawsuitScheme,
                     CrimiAskingOutline,
-                    fields=('target', 'content'),
+                    formset=CustomInlineFormSet,
+                    fields=('target', 'ask_user', 'content'),
                     widgets={
                         "target": forms.Select(attrs={'class': "form-control"}),
+                        "ask_user": forms.Select(attrs={'class': "form-control"}),
                         "content": forms.TextInput(attrs={'class': "form-control", 'placeholder': '请输入询问内容'}),
                     },
                     extra=1, can_delete=True

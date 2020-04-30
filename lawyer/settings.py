@@ -164,7 +164,9 @@ PERMISSION_VALID_URL = [
     '/adm/api/.*',
     '/calculator/.*',
     '/calculator/api/.*',
-    '/print/.*'
+    '/print/.*',
+    '/civil/api/.*',
+
 ]
 
 PERMISSION_SESSION_KEY = 'permission_session_key'

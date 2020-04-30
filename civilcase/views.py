@@ -12,7 +12,9 @@ from baseinfo.models import LegalStatus
 from civilcase.forms import CivilCaseForm, CivilDetailForm, NaturePersonFormSet, LegalPersonFormSet, \
     CivilCaseSchemeForm, EvidenceListFormSet, AskingOutlineFormSet, CompensateFormSet, ApplicationsFormSet, \
     CivilLawyerForm, HisResultFormSet
-from civilcase.models import Civil, CivilDetail, CivilLawsuitScheme
+from civilcase.models import Civil, CivilDetail, CivilLawsuitScheme, CivilNaturePerson
+
+
 # from civilcase.utils import render_to_pdf
 
 
@@ -270,6 +272,8 @@ class CivilCaseDetailSchemeView(View):
             context["form"] = form
             evidence_formset = EvidenceListFormSet(instance=scheme)
             asking_formset = AskingOutlineFormSet(instance=scheme)
+            for index, form in enumerate(asking_formset):
+                form.fields['ask_user'].widget.choices = [('', '--------')] + self.getPersonList(scheme.civil_detail_id)
             compensate_formset = CompensateFormSet(instance=scheme)
             applications_formset = ApplicationsFormSet(instance=scheme)
             context["evidence_formset"] = evidence_formset
@@ -294,6 +298,9 @@ class CivilCaseDetailSchemeView(View):
             context["civil_detail"] = civil_detail
             evidence_formset = EvidenceListFormSet()
             asking_formset = AskingOutlineFormSet()
+            for index, form in enumerate(asking_formset):
+                form.fields['ask_user'].widget.choices = [('', '--------')] + self.getPersonList(detail_id)
+
             compensate_formset = CompensateFormSet()
             applications_formset = ApplicationsFormSet()
             context["evidence_formset"] = evidence_formset
@@ -367,6 +374,10 @@ class CivilCaseDetailSchemeView(View):
                 "applications_formset": applications_formset,
             }
             return render(request, template_name="civilcase/civil_detail_scheme.html", context=context)
+
+    def getPersonList(self, case_detail_id):
+        result = CivilNaturePerson.objects.filter(case_id=case_detail_id).values_list("name", "name")
+        return list(result)
 
 
 class CivilCaseDetailListView(View):

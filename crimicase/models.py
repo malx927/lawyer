@@ -261,6 +261,7 @@ class CrimiAskingOutline(models.Model):
     """刑事询问提纲"""
     scheme = models.ForeignKey(CrimiLawsuitScheme, verbose_name='案件名称', on_delete=models.CASCADE)
     target = models.IntegerField(verbose_name='询问对象', default=1, choices=CRI_ASK_TARGET)
+    ask_user = models.CharField(verbose_name="姓名", max_length=64, blank=True, null=True)
     content = models.CharField(verbose_name='询问内容', max_length=400, blank=True, null=True)
     update_at = models.DateTimeField(verbose_name="修改时间", auto_now_add=True)
     create_at = models.DateTimeField(verbose_name="创建时间", auto_now=True)

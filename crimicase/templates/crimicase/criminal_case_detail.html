@@ -199,12 +199,12 @@
                             <th class="text-center" style="width:5%;">序号</th>
                             <th class="text-center" style="width:10%;">姓名</th>
                             <th class="text-center">法律地位</th>
-                            <th class="text-center">性别</th>
-                            <th class="text-center" style="width:8%;">年龄</th>
-                            <th class="text-center">现住址</th>
+                            <th class="text-center"  style="width:5%;">性别</th>
+                            <th class="text-center" style="width:5%;">年龄</th>
+                            <th class="text-center" style="width:8%;">民族</th>
                             <th class="text-center">联系电话</th>
                             <th class="text-center">身份证</th>
-                            <th class="text-center" style="width:10%;">民族</th>
+                            <th class="text-center">现住址</th>
                             </thead>
                             <tbody class="formset-body">
                             {{ nature_person_formset.management_form }}
@@ -233,8 +233,8 @@
                                         <span class="text-danger">{{ person.age.errors.0 }}</span>
                                     </td>
                                     <td class="text-center">
-                                        {{ person.address }}
-                                        <span class="text-danger">{{ person.address.errors.0 }}</span>
+                                        {{ person.nation }}
+                                        <span class="text-danger">{{ person.nation.errors.0 }}</span>
                                     </td>
                                     <td class="text-center">
                                         {{ person.tel }}
@@ -246,11 +246,10 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="input-group">
-                                            {{ person.nation }}
-                                            <span class="input-group-btn">
-                                </span>
+                                            {{ person.address }}
+                                            <span class="input-group-btn"></span>
                                         </div>
-                                        <span class="text-danger">{{ person.nation.errors.0 }}</span>
+                                        <span class="text-danger">{{ person.address.errors.0 }}</span>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -330,7 +329,14 @@
                 </div>
             </div>
             <div class="row mgt-50">
-                <div class="col-sm-2 col-sm-offset-3 text-center">
+                <div class="col-sm-2 col-md-offset-2  text-center">
+                     {% if action == "update" %}
+                        <a  class="btn btn-primary btn-w160" href="{% url 'criminal:criminal-case-update' form.criminal.value %}" >上一步</a>
+                    {% else %}
+                         <a  class="btn btn-primary btn-w160" href="{% url 'criminal:criminal-case-update' criminal.id %}" >上一步</a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-2  text-center">
                     <button type="submit" class="btn btn-primary btn-w160" name="save" >保存</button>
                 </div>
                 <div class="col-sm-2 text-center">

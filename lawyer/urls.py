@@ -39,4 +39,5 @@ urlpatterns = [
     url(r'^private/', include('crimiprivate.urls', namespace='private')),
     url(r'^crmcivil/', include('crimicivil.urls', namespace='crmcivil')),
     url(r'^print/', include('civilcase.print_urls', namespace='print')),
+    url(r'^civil/api/', include('civilcase.api.urls', namespace='civil-api')),
 ]

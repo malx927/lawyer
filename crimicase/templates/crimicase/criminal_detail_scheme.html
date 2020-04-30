@@ -252,6 +252,7 @@
                     <thead class="thead">
                     <tr>
                         <th class="text-center" style="width: 20%">询问对象</th>
+                        <th class="text-center" style="width: 10%">姓名</th>
                         <th class="text-center">询问内容</th>
                     </tr>
                     </thead>
@@ -265,6 +266,10 @@
                                 {% if asking.instance.pk %}{{ asking.DELETE }}{% endif %}
                                 {{ asking.target }}
                                 <span class="text-danger">{{ asking.target.errors.0 }}</span>
+                            </td>
+                            <td>
+                                {{ asking.ask_user }}
+                                <span class="text-danger">{{ asking.ask_user.errors.0 }}</span>
                             </td>
                             <td>
                                 <div class="input-group">
