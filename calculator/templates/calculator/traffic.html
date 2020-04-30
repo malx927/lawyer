@@ -1,0 +1,477 @@
+{% extends 'mlawyer/mbase.html' %}{% load static %}
+{% block title %}交通事故{% endblock title %}
+{% block css %}
+    <style>
+     .mgt-20{
+         margin-top: 20px;
+     }
+    </style>
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div class="mgt-20"></div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">基础信息</div>
+        </div>
+        <div class="panel-body">
+            <form action="" method="post">
+            {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_age">年龄<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" name="age" id="id_age" placeholder="年龄" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_house_type">户口属性<span class="text-danger">*</span></label>
+                            <select id="id_house_type" name="house_type" class="form-control" required>
+                                <option value="">----</option>
+                                {% for key, value in house_type.items %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_province">住所地/常住地省<span class="text-danger">*</span></label>
+                            <select id="id_province" name="province" class="form-control" required>
+                                <option value="">----</option>
+                                {% for province in province_list %}
+                                    <option value="{{ province.code }}">{{ province.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_city">所在市<span class="text-danger">*</span></label>
+                            <select id="id_city" name="city" class="form-control" required>
+                                <option value="">----</option>
+                                {% for city in city_list %}
+                                    <option value="{{ city.code }}">{{ city.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_court_province">受案法院所在地省<span class="text-danger">*</span></label>
+                            <select id="id_court_province" name="court_province" class="form-control">
+                                <option value="">----</option>
+                                {% for province in province_list %}
+                                    <option value="{{ province.code }}">{{ province.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_court_city">所在市<span class="text-danger">*</span></label>
+                            <select id="id_court_city" name="court_city" class="form-control">
+                                <option value="0">----</option>
+                                {% for city in city_list %}
+                                    <option value="{{ city.code }}">{{ city.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_dead">是否死亡</label>
+                            <select name="dead" id="id_dead" class="form-control">
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_funeral_expense">丧葬费</label>
+                            <div class="input-group">
+                                <input type="number" name="funeral_expense" step="0.01" id="id_funeral_expense" class="form-control" readonly placeholder="丧葬费">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                            <span class="text-danger" id="id_funeral_error"></span>
+                        </div>
+                    </div>
+                </div>
+{#                <div class="row">#}
+{#                    <div class="col-xs-12">#}
+{#                        <div class="form-group">#}
+{#                            <label for="id_city_house">同一事故中是否有城镇户口</label>#}
+{#                            <select name="city_house" id="id_city_house" class="form-control">#}
+{#                                <option value="">----</option>#}
+{#                                <option value="1">是</option>#}
+{#                                <option value="0">否</option>#}
+{#                            </select>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6 col-xs-12">#}
+{#                        <div class="form-group">#}
+{#                            <label for="id_one_years">是否在城镇居住一年以上</label>#}
+{#                            <select id="id_one_years" name="one_years" class="form-control">#}
+{#                                <option value="">----</option>#}
+{#                                <option value="1">是</option>#}
+{#                                <option value="0">否</option>#}
+{#                            </select>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-md-6 col-xs-12">#}
+{#                        <div class="form-group">#}
+{#                            <label for="id_stable_income">一年以上稳定工资收入证明</label>#}
+{#                            <select name="stable_income" id="id_stable_income" class="form-control">#}
+{#                                <option value="">----</option>#}
+{#                                <option value="1">是</option>#}
+{#                                <option value="0">否</option>#}
+{#                            </select>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_exec_house">执行标准</label>
+                            <select name="exec_house" id="id_exec_house" class="form-control" >
+                                <option value="">----</option>
+                                {% for key, value in house_type.items %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_fix_income">是否有固定收入</label>
+                            <select name="fix_income" id="id_fix_income" class="form-control">
+                                <option value="">----</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_fix_income_money">日收入金额</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" name="fix_income_money" id="id_fix_income_money" class="form-control"  placeholder="日收入">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_prove_income">举证三年收入的平均日收入</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" class="form-control" id="id_prove_income" name="prove_income" placeholder="三年收入的平均日收入">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_industry">从事的行业</label>
+                            <select name="industry" id="id_industry" class="form-control">
+                                <option value="">----</option>
+                                {% for ind in industries %}
+                                    <option value="{{ ind.id }}">({{ ind.id }}){{ ind.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_industry_wage">行业收入</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" class="form-control" name="industry_wage" id="id_industry_wage" placeholder="行业收入" readonly>
+                                <div class="input-group-addon">元</div>
+                            </div>
+                            <span class="text-danger" id="id_industry_wage_error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_spirit_fee">精神抚慰金</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" name="spirit_fee" id="id_spirit_fee" class="form-control"  placeholder="精神抚慰金">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_other_fee">其他费用</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" name="other_fee" id="id_other_fee" class="form-control"  placeholder="其他费用">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_car_type">对方车辆类型</label>
+                            <select name="car_type" id="id_car_type" class="form-control">
+                                <option value="1">机动车辆</option>
+                                <option value="2">非机动车辆</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_insure">对方是否有保险</label>
+                            <select name="insure" id="id_insure" class="form-control">
+                                <option value="1">有</option>
+                                <option value="2">无</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_asset_lost">财产损失</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" class="form-control" id="id_asset_lost" name="asset_lost" placeholder="财产损失">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_duty_confirm">责任认定</label>
+                            <select name="duty_confirm" id="id_duty_confirm" class="form-control">
+                                <option value="">-----</option>
+                                {% for key, value in duty_type.items %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                        <button type="submit" class="btn btn-success" style="width: 90px;">下一步</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+{% block extjs %}
+    <script>
+        $(function () {
+            $("#id_province").change(function (event) {
+                var code = event.target.value;
+                if (code.length == 0) return;
+                $('#id_city').empty();
+                var option = $("<option>").val("").text("----");
+                $("#id_city").append(option)
+                var params = {
+                    "code": code,
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "calculator-api:area-code-list" %}',
+                    dataType: 'json',
+                    data: params,
+                    timeout: 5000,
+                    success: function (data) {
+                        console.log(JSON.stringify(data));
+                        $.each(data, function (index, item) {
+                            var option = $("<option>").val(item.code).text(item.name);
+                            $('#id_city').append(option);
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            })
+            $("#id_court_province").change(function (event) {
+                var code = event.target.value;
+                if (code.length == 0) return;
+                $('#id_court_city').empty();
+                var option = $("<option>").val("").text("----");
+                $("#id_court_city").append(option)
+                params = {
+                    "code": code,
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "calculator-api:area-code-list" %}',
+                    dataType: 'json',
+                    data: params,
+                    timeout: 5000,
+                    success: function (data) {
+                        console.log(JSON.stringify(data));
+                        $.each(data, function (index, item) {
+                            var option = $("<option>").val(item.code).text(item.name);
+                            $('#id_court_city').append(option);
+                        })
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            })
+            $("#id_industry").change(function (event) {
+                var id = event.target.value;
+                if (id.length == 0){
+                    $("#id_prove_income").attr("disabled", false);
+                    return;
+                }
+
+                var province = $("#id_province").val();
+                if(province.length == 0){
+                    $(this).val("");
+                    $("#id_province").focus();
+                    alert("请选择住所地/常住地");
+                    return;
+                }
+                var court_province = $("#id_court_province").val();
+                console.log(court_province);
+                var params = {
+                    "indust_id": id,
+                    "province": province,
+                    "court_province": court_province,
+                };
+
+                $("#id_prove_income").attr("disabled", true);
+
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "calculator-api:indust-aver-wage" %}',
+                    dataType: 'json',
+                    data: params,
+                    timeout: 5000,
+                    success: function (data) {
+                        if(data.success == "true"){
+                            $("#id_industry_wage").val(data.result.day_aver_wage);
+                            $("#id_industry_wage_error").text("");
+                        }
+                        else{
+                            $("#id_industry_wage").val("");
+                            $("#id_industry_wage_error").text(data.error_msg);
+
+                        }
+
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            });
+
+            $("#id_house_type").change(function (event) {
+                var id = event.target.id;
+                if( id == "id_house_type"){
+
+                    var house_type = event.target.value;
+                    if(house_type == "1"){
+                        $("#id_exec_house").val(event.target.value);
+
+                    }else{
+                        $("#id_exec_house").val(event.target.value);
+                    }
+                }
+
+            });
+
+            $("#id_fix_income").change(function (event) {
+               var fix_income = event.target.value;
+               if(fix_income=="1"){
+                    $("#id_prove_income").attr("disabled", true);
+                    $("#id_industry").attr("disabled", true);
+                    $("#id_fix_income_money").attr("disabled", false);
+               }else{
+                    $("#id_prove_income").attr("disabled", false);
+                    $("#id_industry").attr("disabled", false);
+                    $("#id_fix_income_money").attr("disabled", true);
+               }
+            });
+
+             $("#id_dead").change(function (event) {
+               var dead = event.target.value;
+               $("#id_funeral_error").text("")
+               if(dead == "1"){     /* 死亡*/
+                 var province = $("#id_province").val();
+                 var court_province =  $("#id_court_province").val();
+                 if( province.length == 0 || court_province.length == 0 ){
+                     $(this).val('0')
+                     alert("请选择常住所在地和案件受理地");
+                     return;
+                 }
+                 var params ={
+                     "dead": dead,
+                     "province": province,
+                     "court_province": court_province,
+                 }
+                 $.ajax({
+                    type: 'GET',
+                    url: '{% url "calculator-api:calc-funeral-expense" %}',
+                    dataType: 'json',
+                    data: params,
+                    timeout: 5000,
+                    success: function (data) {
+                        console.log(JSON.stringify(data));
+                        if(data.success == "true"){
+                            $("#id_funeral_expense").val(data.funeral_expense)
+                        }
+                        else{
+                            if(data.funeral_expense==0){
+                                 $("#id_funeral_expense").val('');
+                                $("#id_funeral_error").text("无法正确得到丧葬费")
+                            }
+                        }
+
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+               }else{
+                   $("#id_funeral_expense").val('');
+               }
+            });
+
+             $("#id_prove_income").on("input onpropertychange ", function () {
+                 if($(this).val() == ""|| $.trim($(this).val()).length == 0){
+                     console.log("input property change");
+                     $("#id_industry").attr("disabled", false);
+                 }else{
+                     console.log($(this).val());
+                     $("#id_industry").attr("disabled", true);
+                     $("#id_industry").val("");
+                     $("#id_industry_wage").val("");
+                 }
+             })
+
+        })
+    </script>
+{% endblock extjs %}
+

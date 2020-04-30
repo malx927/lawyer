@@ -1,0 +1,80 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static %}
+{% block title %}法定代表人身份证明{% endblock title %}
+{% block css %}
+    <style>
+        @page {
+            margin: 2.5cm;
+            size: a4 portrait;
+        }
+        .table {
+            border: 0px solid black;
+            border-collapse: collapse;
+            padding-top: 3px;
+            font-size: 18pt;
+            font-family: 宋体;
+            width: 100%;
+        }
+
+        .table td {
+            height: 20px;
+            word-wrap: break-word;
+            word-break: break-all;
+            letter-spacing: 6px;
+            border: 0px solid black!important;
+        }
+
+        div {
+            line-height: 42px;
+        }
+
+        span {
+            display: block;
+            text-indent: 2.2rem;
+            line-height: 42px;
+        }
+
+        .table .td_h {
+            height: 140px;
+        }
+
+        .td_right {
+            text-align: right;
+            padding-right: 30px;
+        }
+    </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center">
+            <h1 style="height: 80px;">法定代表人身份证明</h1>
+        </caption>
+        <tbody>
+        <tr>
+            {% if civil.cli_legal_person %}
+            <td><span>{{ civil.cli_legal_person|default:"" }}在我单位任{{ civil.cli_legal_job }}，是我单位的法定代表人（负责人）。</span></td>
+            {% else %}
+            <td><span>{{ civil.party_legal_person|default:"" }}在我单位任{{ civil.party_legal_job }}，是我单位的法定代表人（负责人）。</span></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="td_h"><span>特此证明！</span></td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <div>（单位公章）</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <div>{% now 'Y年m月d日' %}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock print_content %}
+

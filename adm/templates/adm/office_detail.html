@@ -1,0 +1,105 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}律所信息{% endblock title %}
+{% block right %}
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <div class="panel panel-default mgt">
+                <div class="panel-heading">
+                    <h3 class="panel-title">律所信息</h3>
+                </div>
+                <div class="panel-body">
+                    {% if form %}
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="id_name"
+                                       class="col-sm-3 control-label">{{ form.name.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.name.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_credit_code"
+                                       class="col-sm-3 control-label">{{ form.credit_code.label }}:</label>
+                                <div class="col-sm-9">
+                                     <input type="text"  value="{{ form.credit_code.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_address"
+                                       class="col-sm-3 control-label">{{ form.address.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.address.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_category"
+                                       class="col-sm-3 control-label">{{ form.category.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.instance.get_category_display }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_legal_person"
+                                       class="col-sm-3 control-label">{{ form.legal_person.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.legal_person.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_telephone"
+                                       class="col-sm-3 control-label">{{ form.telephone.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.telephone.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_position"
+                                       class="col-sm-3 control-label">{{ form.position.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.position.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_bank"
+                                       class="col-sm-3 control-label">{{ form.bank.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.bank.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_account"
+                                       class="col-sm-3 control-label">{{ form.account.label }}:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  value="{{ form.account.value }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center">
+                                    {% if request|has_permission:"adm:office-update" %}
+                                        <a class="btn btn-primary" href="{% url 'adm:office-update' form.instance.id %}">修改</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock right %}
+
+{% block extjs %}
+    <script>
+    $(function () {
+        {% if form.success %}
+            Swal.fire(
+              '用户创建成功',
+              '',
+              'success'
+            )
+        {% endif %}
+    })
+    </script>
+
+{% endblock %}

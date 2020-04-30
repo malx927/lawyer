@@ -1,0 +1,98 @@
+{% extends 'rbac/base.html' %}{% load static rbac%}
+{% block title %}用户信息{% endblock title %}
+{% block css %}
+    <style>
+
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+		<div class="container-fluid mgt">
+            <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-2"><span class="panel-title h34">用户信息</span></div>
+                                <div class="col-md-10">
+                                    {% if request|has_permission:'rbac:user-add'%}
+                                    <span class="right">
+                                        <a class="btn btn-success" href="{% url 'rbac:user-add' %}">
+                                            <i class="glyphicon glyphicon-plus">新建</i>
+                                        </a>
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>登录名</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>电话</th>
+                                <th>类型</th>
+                                <th>超级管理员</th>
+                                <th>是否有效</th>
+                                {% if request|has_permission:"rbac:user-edit" or  request|has_permission:"rbac:user-del"%}
+                                    <th>选项</th>
+                                {% endif %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.real_name }}</td>
+                                    <td>{{ user.get_gender_display|default:"" }}</td>
+                                    <td>{{ user.telephone }}</td>
+                                    <td>{{ user.post }}</td>
+                                    <td>{{  user.is_superuser|boolean_icon }}</td>
+                                    <td>{{ user.is_active|boolean_icon }}</td>
+                                    <td>
+                                        {% if request|has_permission:"rbac:user-edit" %}
+                                        <a class="btn btn-xs btn-primary" href="{% url 'rbac:user-edit' user.id %}">修改</a>
+                                        {% endif %}
+                                        {% if request|has_permission:"rbac:user-del" %}
+                                        <a class="btn  btn-xs btn-danger btn-del" href="#" data-item="{% url 'rbac:user-del' user.id %}">删除</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+		</div>
+	</div>
+{% endblock %}
+{% block extjs %}
+{#<script>#}
+{#    $(function () {#}
+{#        $(".btn-del").click(function(e){#}
+{#            var url = $(this).attr("data-item");#}
+{#            e.preventDefault();#}
+{#            Swal.fire({#}
+{#              title: '真的要删除吗?',#}
+{#              text: "删除将无法恢复!",#}
+{#              type: 'warning',#}
+{#              showCancelButton: true,#}
+{#              confirmButtonColor: '#3085d6',#}
+{#              cancelButtonColor: '#d33',#}
+{#              confirmButtonText: '确定删除',#}
+{#              cancelButtonText: '取消'#}
+{#            }).then((result) => {#}
+{#              if (result.value) {#}
+{#                   window.location.href =url#}
+{##}
+{#              }#}
+{#            })#}
+{##}
+{#        })#}
+{#    })#}
+{#</script>#}
+{% endblock extjs %}
+
+

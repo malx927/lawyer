@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>待分配法律顾问</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../lib/css/stylels.css" />
+		<link rel="stylesheet" href="../lib/css/lanrenzhijia.css" />
+		<script>
+			function setTab(name, cursel, n) {
+				for(i = 1; i <= n; i++) {
+					var menu = document.getElementById(name + i);
+					var con = document.getElementById("con_" + name + "_" + i);
+					menu.className = i == cursel ? "hover" : "";
+					con.style.display = i == cursel ? "block" : "none";
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="yt">
+			<div class="logo"></div>
+			<div class="youyt">
+				<div class="yonghuming">用户名：<span>某某某</span></div>
+				<div><input type="submit" value="修改密码" style="float: right; border: 1px solid #008AFF; border-radius:4px; margin-bottom: 5px;" onclick="javascript:location.href='xgmm.html'"></div>
+				<div><input type="submit" value="退出" style="float: right; border: 1px solid #008AFF; border-radius:4px;" onclick="javascript:location.href='lsdsy.html'"></div>
+			</div>
+		</div>
+		<!--<div class="banner"></div>-->
+		<div class="dabox">
+			<div class="liftbox">
+				<div class="move">
+					<a href="ajxx.html">案件信息</a>
+				</div>
+				<div class="move green">
+					<a href="gwdw.html">法律顾问</a>
+				</div>
+				<div class="move">
+					<a href="#">非诉业务</a>
+				</div>
+				<div class="move">
+					<a href="index.html">用户授权</a>
+				</div>
+				<div class="move">
+					<a href="ryxx.html">人员信息</a>
+				</div>
+				<div class="move">
+					<a href="lsxx.html">律所信息</a>
+				</div>
+				<div class="move"><a href="qxfp.html">权限分配</a></div>
+				<div class="move"><a href="jsgl.html">角色管理</a></div>
+				<div class="move"><a href="qxxx.html">权限信息</a></div>
+			</div>
+			<div class="youbox">
+				<div class="ryxxtop">待分配法律顾问</div>
+					<div class="grdw">
+						<div class="wfpbox">
+						<div style="float: left; padding-top: 2px;">企业法律顾问：&nbsp;</div>
+						<div id="bg"></div>
+						<div id="main">
+							<input name="button" type="button" class="bton pointer" value="某某某公司" onclick="openBg(1);openSelect('selectItem1',1);" />
+						</div>
+						<div id="selectItem1"  class="selectItem hidden">
+							<ul class="top01-pro">
+								<li id="one1" onclick="setTab('one',1,2)" class="hover"><b>分配企业</b></li>
+							</ul>
+							<div class="box-lanrenzhijia">
+								<div id="con_one_1" class="hover">
+									<div class="ajmc">企业名称：******</div>
+									<form>
+										<div class="ajxxx">
+											<span>联系人员：</span>
+											<input type="text" name="username" id="username" placeholder="请输入联系人员" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>联系电话：</span>
+											<input type="text" name="username" id="username" placeholder="请输入联系电话" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>单位地址：</span>
+											<input type="text" name="username" id="username" placeholder="请输入单位地址" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约时段：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约内容：</span>
+											<input type="text" name="username" id="username" placeholder="请输入签约内容" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>负责人员：</span>
+											<input type="text" name="username" id="username" placeholder="请输入负责人员" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>主办律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>辅助律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入辅助律师" required>
+										</div>
+							
+										<div class="submm">
+											<input type="submit" value="确定" onclick="javascript:location.href='gwxxxq.html'">
+										</div>
+									</form>		
+								</div>
+							</div>	
+						</div>
+					</div>
+						<div class="wfpbox">
+						<div style="float: left; padding-top: 2px;">企业法律顾问：&nbsp;</div>
+						<div id="bg"></div>
+						<div id="main">
+							<input name="button" type="button" class="bton pointer" value="某某某公司" onclick="openBg(1);openSelect('selectItem2',1);" />
+						</div>
+						<div id="selectItem2"  class="selectItem hidden">
+							<ul class="top01-pro">
+								<li id="one1" onclick="setTab('one',1,2)" class="hover"><b>分配企业</b></li>
+							</ul>
+							<div class="box-lanrenzhijia">
+								<div id="con_one_1" class="hover">
+									<div class="ajmc">企业名称：******</div>
+									<form>
+										<div class="ajxxx">
+											<span>联系人员：</span>
+											<input type="text" name="username" id="username" placeholder="请输入联系人员" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>联系电话：</span>
+											<input type="text" name="username" id="username" placeholder="请输入联系电话" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>单位地址：</span>
+											<input type="text" name="username" id="username" placeholder="请输入单位地址" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约时段：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约内容：</span>
+											<input type="text" name="username" id="username" placeholder="请输入签约内容" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>负责人员：</span>
+											<input type="text" name="username" id="username" placeholder="请输入负责人员" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>主办律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>辅助律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入辅助律师" required>
+										</div>
+							
+										<div class="submm">
+											<input type="submit" value="确定" onclick="javascript:location.href='gwxxxq.html'">
+										</div>
+									</form>		
+								</div>
+							</div>	
+						</div>
+					</div>					
+					</div>
+										<div class="grdw">
+						<div class="wfpbox">
+						<div style="float: left; padding-top: 2px;">个人法律顾问：&nbsp;</div>
+						<div id="bg"></div>
+						<div id="main">
+							<input name="button" type="button" class="bton pointer" value="某某某公司" onclick="openBg(1);openSelect('selectItem3',1);" />
+						</div>
+						<div id="selectItem3"  class="selectItem hidden">
+							<ul class="top01-pro">
+								<li id="one1" onclick="setTab('one',1,2)" class="hover"><b>&nbsp;</b></li>
+							</ul>
+							<div class="box-lanrenzhijia">
+								<div id="con_one_1" class="hover">
+									<div class="ajmc">名称</div>
+									<form>
+										<div class="ajxxx">
+											<span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
+											<input type="text" name="username" id="username" placeholder="请输入您的姓名" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span>
+											<input type="text" name="username" id="username" placeholder="请输入您的电话" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+											<input type="text" name="username" id="username" placeholder="请输入您的地址" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约时段：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约内容：</span>
+											<input type="text" name="username" id="username" placeholder="请输入签约内容" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>负责人员：</span>
+											<input type="text" name="username" id="username" placeholder="请输入负责人员" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>主办律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>辅助律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入辅助律师" required>
+										</div>
+							
+										<div class="submm">
+											<input type="submit" value="确定" onclick="javascript:location.href='gwxxxq.html'">
+										</div>
+									</form>		
+								</div>
+							</div>	
+						</div>
+					</div>
+						<div class="wfpbox">
+						<div style="float: left; padding-top: 2px;">个人法律顾问：&nbsp;</div>
+						<div id="bg"></div>
+						<div id="main">
+							<input name="button" type="button" class="bton pointer" value="某某某公司" onclick="openBg(1);openSelect('selectItem4',1);" />
+						</div>
+						<div id="selectItem4"  class="selectItem hidden">
+							<ul class="top01-pro">
+								<li id="one1" onclick="setTab('one',1,2)" class="hover"><b>&nbsp;</b></li>
+							</ul>
+							<div class="box-lanrenzhijia">
+								<div id="con_one_1" class="hover">
+									<div class="ajmc">名称</div>
+									<form>
+										<div class="ajxxx">
+											<span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
+											<input type="text" name="username" id="username" placeholder="请输入您的姓名" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span>
+											<input type="text" name="username" id="username" placeholder="请输入您的电话" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+											<input type="text" name="username" id="username" placeholder="请输入您的地址" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约时段：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>签约内容：</span>
+											<input type="text" name="username" id="username" placeholder="请输入签约内容" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>负责人员：</span>
+											<input type="text" name="username" id="username" placeholder="请输入负责人员" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>主办律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+										</div>
+							
+										<div class="ajxxx">
+											<span>辅助律师：</span>
+											<input type="text" name="username" id="username" placeholder="请输入辅助律师" required>
+										</div>
+							
+										<div class="submm">
+											<input type="submit" value="确定" onclick="javascript:location.href='gwxxxq.html'">
+										</div>
+									</form>		
+								</div>
+							</div>	
+						</div>
+					</div>					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+<script type="text/javascript">
+	function $(o) {
+		if(typeof(o) == "string")
+			return document.getElementById(o);
+		return o;
+	}
+
+	function openBg(state) {
+		if(state == 1) {
+			$("bg").style.display = "block";
+			var h = document.body.offsetHeight > document.documentElement.offsetHeight ? document.body.offsetHeight : document.documentElement.offsetHeight;
+			// alert(document.body.offsetHeight);
+			//alert(document.documentElement.offsetHeight);
+			$("bg").style.height = h + "px";
+		} else {
+			$("bg").style.display = "none";
+		}
+	}
+
+	function openSelect(obj_id, state) {
+		console.log(state)
+		if(state == 1) {
+			$(obj_id).style.display = "block";
+			$(obj_id).style.left = ($("bg").offsetWidth - $(obj_id).offsetWidth) / 2 + "px";
+			$(obj_id).style.top = document.body.scrollTop + 100 + "px";
+		} else {
+			$(obj_id).style.display = "none";
+		}
+	}
+
+	function showSelect(id) {
+		for(var i = 0; i < grow; i++) {
+			$("c0" + i).style.display = "none";
+		}
+		$("c0" + id).style.display = "block";
+		showGrow = id;
+	}
+</script>
+</html>

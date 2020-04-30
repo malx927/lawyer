@@ -1,0 +1,115 @@
+html,body,dl,dd,img,form,div,ul,ol,li,h1,h2,h3,h4,h5,h6,p{margin:0;padding:0;border:0;}
+body{font-size: 12px;font-family: '微软雅黑', Arial;}
+ul,ol,li{ list-style-type:none;}
+.yt{width: 100%; height: 100px; background-color: #acacac;}
+.logo{width: 300px; height: 100px; float: left; margin-left: 300px; background-image: url(../img/logo.png);}
+.youyt{width: 100px; float: right; margin-right: 20%; padding-top: 10px;}
+.banner{width: 100%; height: 250px; background-image: url(../img/bj.jpg); background-repeat: no-repeat;}
+.dabox{width: 100%; display: block; background-color: #ddd; overflow: hidden;}
+.liftbox{width: 10%; padding-top: 20px; float: left;}
+.yonghuming{padding-bottom: 5px; font-size: 14px;}
+.move{width: 50%; height: 30px; background-color: #999; margin-bottom: 20px; margin-left:20%;
+    text-align: center;
+    line-height:30px;
+    border: 1px solid #ddd;
+     border-radius:4px;
+}
+.move a{
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+}
+.move a:hover{
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+}
+.youbox{width: 90%; display: block; float: left; overflow: hidden; min-height: 830px; background-color: #fff;}
+.ynbox{width: 100px; height: 130px; float: left; margin-top: 80px; margin-left: 10%;}
+.ynnbox{width: 100px; height: 100px;}
+.ynname{text-align: center; padding-top: 5px;}
+.ynname a{font-size: 16px; text-decoration: none; color: #000;}
+.sqbox{width:270px; margin: 0 auto;}
+.sqtop{font-size: 20px; text-align: center; padding-top: 20px; width: 230px; margin: 0 auto;}
+.sqbottom{width: 300px; overflow: hidden;}
+.bddbox{width:300px; margin: 0 auto;}
+.bdbox{display: flex; padding-bottom: 20px;}
+.bdbox span{width: 140px; line-height: 30px; float: left; font-size: 14px;}
+.bdbbox form input{    outline: none;
+    flex: 1;
+    height: 25px;
+    }
+.subm{text-align: center; padding-top: 20px;}
+.subm input{width: 70px;}
+
+.green{
+    background-color: #428bca;
+}
+.green a{
+    color: #fff;
+}
+.sqbbox{width: 270px; display: flex; padding-bottom: 20px;}
+.sqbbox span{width: 70px; line-height: 30px; float: left; font-size: 12px;}
+.sjqj{width: 70px; line-height: 80px; float: left; font-size: 12px;}
+.sqbox form input{    outline: none;
+    flex: 1;
+    height: 25px;
+    }
+.lsxxdbox{width: 300px; margin: 0 auto;}
+.lsxxbox span{font-size: 16px;}
+.dyxgzl a{font-size: 16px; margin-left: 10%;}
+.lsxxbox{padding-bottom: 20px;}
+.yminbox{width: 15%; float: left; height: 500px; margin-left: 15px; border: 1px solid #CCCCCC;}
+.ryxxtop{font-size: 24px; text-align: center; padding-top: 10px; padding-bottom: 10px;}
+.rytop{text-align: center; font-size: 16px; margin-top: 5px; margin-bottom: 5px;}
+.rynum{font-size: 14px; text-align: center; padding-bottom: 5px;}
+.rylb{padding-bottom: 5px; text-align: center;}
+.rylb ul{font-size: 14px; padding-bottom: 5px;}
+.sxrylb{padding-left: 20%; padding-bottom: 10px;}
+.sxrylb ul{font-size: 14px; padding-bottom: 5px;}
+.wfpbox{width: 15%; height: 30px; float: left; margin-left: 30px; margin-bottom:20px;}
+.sqbbox a{font-size: 14px; margin-left: 35%;}
+.wwajbox{width: 10%; border: 1px solid #CCCCCC; float: left; margin-left: 30px; margin-bottom: 20px;}
+.wwajnr{font-size: 14px; padding-left: 10px; padding-bottom: 5px; padding-top: 5px;}
+.xiugaianniu{width: 270px; text-align: center; margin: 0 auto;}
+.grdw{width: 50%; float: left;}
+.mt{margin-bottom: 20px;}
+.mt li{float: left; font-weight: 700;}
+.sqxx{
+	background-color: #f8f8f8; 
+	padding: 5px;  
+	border: 1px solid #ddd;"
+}
+.ftlh{
+	float: left; 
+	line-height: 30px;
+}
+.ftllh{
+	float: left; 
+	line-height: 20px;
+}
+.sqxxb{
+	background-color: #fff; 
+	padding: 5px;  
+	border: 1px solid #ddd;
+}
+.ffl{ 
+	float: left; 
+	line-height: 18px;
+}
+.mrft{
+	margin-right: 5px; 
+	float: left;
+}
+.frmr{
+	float: right; 
+	margin-right: 77px;
+}
+.sqxxx{
+	background-color: #f8f8f8; 
+	border: 1px solid #ddd;
+	overflow: hidden; 
+}
+.qd{
+	float: left;
+}

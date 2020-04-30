@@ -1,0 +1,129 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}答辩状{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        size: a4 portrait;
+        margin:2.5cm;
+    }
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+
+        padding-top: 3px;
+        font-size:15pt;
+        font-family: 宋体;
+        width:100%;
+    }
+    .table td{
+        height: 25px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+
+    div{
+        line-height: 30px;
+    }
+    span{
+        display:block;
+        text-indent: 3.5rem;
+        line-height: 30px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+
+    .td_right{
+        text-align: right;
+        padding-right:40px;
+    }
+ </style>
+{% endblock %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center; padding-bottom: 25px;">
+            <h1>答辩状</h1>
+        </caption>
+        <tbody>
+        {% if admin_detail.admin.party_name %}
+            <tr>
+                <td>答辩人: {{ admin_detail.admin.party_name }}</td>
+                <td>性别: {{ admin_detail.admin.get_party_sex_display }}</td>
+                <td>民族：{{ admin_detail.admin.party_nation }}</td>
+                <td>年龄: {{ admin_detail.admin.get_birth_date }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">身份证号: {{ admin_detail.admin.party_id_code }}</td>
+                <td colspan="2">电话: {{ admin_detail.admin.party_tel }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">现住址: {{ admin_detail.admin.party_address }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>答辩人：</td>
+                <td colspan="3">{{ admin_detail.admin.party_legal_name }}</td>
+            </tr>
+            <tr>
+                <td>社会统一信用代码：</td>
+                <td colspan="3">{{ admin_detail.admin.party_legal_code }}</td>
+            </tr>
+            <tr>
+                <td>法定代表人：</td>
+                <td>{{ admin_detail.admin.party_legal_person }}</td>
+                <td>联系电话:</td>
+                <td>{{ admin_detail.admin.party_legal_telephone }}</td>
+            </tr>
+            <tr>
+                <td>住所地：</td>
+                <td colspan="3">{{ admin_detail.admin.party_legal_address }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td colspan="4">
+                <div>答辩人因{{ admin_detail.admin.case_name }}，提出答辩意见如下：</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><div>答辩意见：</div></td>
+        </tr>
+        <tr>
+            <td colspan="4"><span>{{ admin_detail.adminlawsuitscheme.pleadings|safe }}</span></td>
+        </tr>
+
+        <tr>
+            <td colspan="4"><span></span></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_50"></td>
+        </tr>
+        <tr>
+            <td colspan="4"><span>此致</span></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div>{{ admin_detail.court_name }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_50"></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_right">
+                <div style="padding-right:40px;">答辩人：</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_right">
+                <div style="padding-right:40px;">{% now 'Y年m月d日' %}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+

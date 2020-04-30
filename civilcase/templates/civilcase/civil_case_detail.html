@@ -1,0 +1,343 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}民事案件执行{% endblock title %}
+{% block css %}
+    <style>
+        .panel-ex {
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 5px;
+        }
+     .tab-content-ex{
+         margin-top:15px;
+         margin-left: 10px;
+         margin-right: 10px;"
+     }
+     .mgb-25{
+         margin-bottom: 25px;
+     }
+    .form-group{
+         margin-bottom: 10px;
+    }
+    .mgt-50{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .btn-w160{
+        width: 160px;
+    }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        <h3 class="text-center"></h3>
+    </div>
+    <div class="container-fluid">
+        <form  method="post">
+        {% csrf_token %}
+            <div class="panel panel-default">
+{#                <div class="panel-heading">#}
+{#                    <div class="panel-title">民事案件信息</div>#}
+{#                </div>#}
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.civil.id_for_label }}"><span class="red">*</span>{{ form.civil.label }}</label>
+                            <div class="col-sm-4">
+                                {% if action == "update" %}
+                                    <input type="hidden" name="civil" class="form-control" maxlength="30" id="id_civil" value="{{ form.civil.value }}">
+                                    <input type="text" class="form-control" maxlength="30" value="{{ form.instance.civil.case_name }}" disabled>
+                                {% else %}
+                                    <input type="hidden" name="civil" class="form-control" maxlength="30" id="id_civil" value="{{ civil.id }}">
+                                    <input type="text" class="form-control" maxlength="30" value="{{ civil.case_name }}" disabled>
+                                {% endif %}
+                                <span class="text-danger">{{ form.civil.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.stage.id_for_label }}"><span class="red">*</span>{{ form.stage.label }}</label>
+                            <div class="col-sm-2">
+                                {{ form.stage }}
+                                <span class="text-danger">{{ form.stage.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-2 control-label"
+                                   for="{{ form.legal_status.id_for_label }}"><span class="red">*</span>{{ form.legal_status.label }}</label>
+                            <div class="col-sm-2">
+                                {{ form.legal_status }}
+                                <span class="text-danger">{{ form.legal_status.errors.0 }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.court_name.id_for_label }}">{{ form.court_name.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.court_name }}
+                                <span class="text-danger">{{ form.court_name.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.court_tel.id_for_label }}">{{ form.court_tel.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.court_tel }}
+                                <span class="text-danger">{{ form.court_tel.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.court_judge.id_for_label }}">{{ form.court_judge.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.court_judge }}
+                                <span class="text-danger">{{ form.court_judge.errors.0 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">审判结果</div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.judge_date.id_for_label }}">{{ form.judge_date.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.judge_date }}
+                                <span class="text-danger">{{ form.judge_date.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.judge_code.id_for_label }}">{{ form.judge_code.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.judge_code }}
+                                <span class="text-danger">{{ form.judge_code.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.status }}
+                                <span class="text-danger">{{ form.status.errors.0 }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.judge_result.id_for_label }}">{{ form.judge_result.label }}</label>
+                            <div class="col-sm-11">
+                                {{ form.judge_result }}
+                                <span class="text-danger">{{ form.judge_result.errors.0 }}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+         <div class="panel panel-primary">
+             <div class="panel-heading">
+                 <h3 class="panel-title">相对人信息</h3>
+             </div>
+            <div class="panel-body">
+                <div class="panel panel-default"  id="id_{{ nature_person_formset.prefix }}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">自然人信息</h3>
+                        </div>
+                        <div class="col-sm-10 text-right formset-add-btn">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-responsive  table-bordered">
+                    <thead>
+                        <th class="text-center" style="width:5%;">序号</th>
+                        <th class="text-center" style="width:10%;">姓名</th>
+                        <th class="text-center">法律地位</th>
+                        <th class="text-center" style="width:5%;">性别</th>
+                        <th class="text-center" style="width:8%;">年龄</th>
+                        <th class="text-center" style="width:10%;">民族</th>
+                        <th class="text-center" style="width:10%;">联系电话</th>
+                        <th class="text-center">身份证</th>
+                        <th class="text-center">现住址</th>
+                    </thead>
+                    <tbody  class="formset-body">
+                    {{ nature_person_formset.management_form }}
+                    {{ nature_person_formset.non_form_errors }}
+                    {% for person in nature_person_formset %}
+                        <tr>
+                            <td class="text-center xh">
+                                {% for fld in person.hidden_fields %}{{ fld }}{% endfor %}
+                                {% if person.instance.pk %}{{ person.DELETE }}{% endif %}
+                                {{ forloop.counter }}
+                            </td>
+                            <td class="text-center">
+                                {{ person.name }}
+                                <span class="text-danger">{{ person.name.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ person.legal_status }}
+                                <span class="text-danger">{{ person.legal_status.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ person.gender }}
+                                <span class="text-danger">{{ person.gender.errors.0 }}</span>
+                            </td>
+                             <td class="text-center">
+                                {{ person.age }}
+                                <span class="text-danger">{{ person.age.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ person.nation }}
+                                <span class="text-danger">{{ person.nation.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ person.tel }}
+                                <span class="text-danger">{{ person.tel.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ person.id_code }}
+                                <span class="text-danger">{{ person.id_code.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                <div class="input-group">
+                                    {{ person.address }}
+                                    <span class="input-group-btn">
+                                </span>
+                                </div>
+                                <span class="text-danger">{{ person.address.errors.0 }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+                <div class="panel panel-default"  id="id_{{ legal_person_formset.prefix }}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">法人信息</h3>
+                        </div>
+                        <div class="col-sm-10 text-right formset-add-btn">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-responsive  table-bordered">
+                    <thead>
+                        <th class="text-center" style="width:5%;">序号</th>
+                        <th class="text-center">公司名称</th>
+                        <th class="text-center">法律地位</th>
+                        <th class="text-center"  style="width:10%;">法人姓名</th>
+                        <th class="text-center" style="width:8%;">职务</th>
+                        <th class="text-center">联系电话</th>
+                        <th class="text-center">统一社会信用代码</th>
+                        <th class="text-center">住所地</th>
+                    </thead>
+                    <tbody class="formset-body">
+                    {{ legal_person_formset.management_form }}
+                    {{ legal_person_formset.non_form_errors }}
+                    {% for legal in legal_person_formset %}
+                        <tr>
+                            <td class="text-center xh">
+                                {% for fld in legal.hidden_fields %}{{ fld }}{% endfor %}
+                                {% if legal.instance.pk %}{{ legal.DELETE }}{% endif %}
+                                {{ forloop.counter }}
+                            </td>
+                            <td class="text-center">
+                                {{ legal.company_name }}
+                                <span class="text-danger">{{ legal.company_name.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ legal.legal_status }}
+                                <span class="text-danger">{{ person.legal_status.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ legal.legal_person }}
+                                <span class="text-danger">{{ legal.legal_person.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ legal.job }}
+                                <span class="text-danger">{{ legal.job.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ legal.telephone }}
+                                <span class="text-danger">{{ legal.telephone.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                {{ legal.credit_code }}
+                                <span class="text-danger">{{ legal.credit_code.errors.0 }}</span>
+                            </td>
+                            <td class="text-center">
+                                <div class="input-group">
+                                    {{ legal.address }}
+                                    <span class="input-group-btn">
+                                </span>
+                                </div>
+                                <span class="text-danger">{{ legal.address.errors.0 }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            </div>
+         </div>
+
+            <div class="row mgt-50">
+                <div class="col-sm-2 col-md-offset-2  text-center">
+                     {% if action == "update" %}
+                        <a  class="btn btn-primary btn-w160" href="{% url 'civil-case:civil-case-update' form.civil.value %}" >上一步</a>
+                    {% else %}
+                         <a  class="btn btn-primary btn-w160" href="{% url 'civil-case:civil-case-update' civil.id %}" >上一步</a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-2  text-center">
+                    <button type="submit" class="btn btn-primary btn-w160" name="save" >保存</button>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <button type="submit" class="btn btn-primary btn-w160" name="save_create">保存并进入诉讼方案</button>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <button type="submit" class="btn btn-primary btn-w160" name="save_print">保存并打印</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock right %}
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery.formset.js' %}"></script>
+    <script>
+    $(function () {
+        $("#id_party_birth, #id_judge_date").datepicker({
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+            autoclose: true,
+        });
+
+        $('#id_{{ nature_person_formset.prefix }} tbody tr').formset({
+                'prefix': '{{ nature_person_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                'formCssClass':'{{ nature_person_formset.prefix }}-form',
+                added: function (row) {
+                    var xh = $("#id_{{ nature_person_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".xh").text(xh);
+                }
+         });
+
+        $('#id_{{ legal_person_formset.prefix }} tbody tr').formset({
+            'prefix': '{{ legal_person_formset.prefix }}',
+            'addCssClass': 'add-row btn btn-success btn-xs',
+            'deleteCssClass': 'delete-row btn btn-danger',
+            'deleteText': '<i class="fa fa-remove"></i>',
+            'addText': '<i class="fa fa-plus"></i>',
+            'formCssClass': '{{ legal_person_formset.prefix }}-form',
+            added: function (row) {
+                {#var xh = $("#id_{{ nature_person_formset.prefix }}-TOTAL_FORMS").val();#}
+                {#row.find(".xh").text(xh);#}
+            }
+        });
+
+    })
+
+    </script>
+{% endblock %}
+

@@ -1,0 +1,97 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}委托代理协议{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        margin: 2.5cm;
+        size: a4 portrait;
+    }
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family:宋体;
+        color:#000000;
+        width:100%;
+    }
+    .table td{
+        height: 20px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+
+    div{
+        line-height: 42px;
+    }
+    span{
+        display:block;
+        text-indent: 2.2rem;
+        line-height: 42px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+
+    .right{
+        text-align: right;
+    }
+    .td_right{
+        text-align: right;
+        padding-right:30px;
+    }
+ </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center;">
+            <h1>律师会见在押犯罪嫌疑人、<br>被告人专用介绍信</h1>
+        </caption>
+        <tbody>
+        <tr>
+            <td class="right"><span></span></td>
+        </tr>
+        <tr>
+            <td>
+                <div>______________看守所:</div>
+            </td>
+        </tr>
+        <tr>
+            <td><span>根据«中华人民共和国刑事诉讼法»第三十四条、第三十九条以及«中华人民共和国律师法»第三十三条的规定，
+                现指派我所律师{{ criminal.lawyer }}{% if criminal.assist %}、{{ criminal.assist }}{% endif %}
+                前往你处会见{{ criminal.case_name }}中的在犯罪嫌疑人/被告人{{ criminal.get_party_name }}，请予支持。</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_h"><span>特此函告!</span></td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <div>{{ office.name }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <div>{% now 'Y年m月d日' %}</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div></div>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td style="text-align: center;">(本介绍信有效期截至案件终结之日止)</td>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock print_content %}
+

@@ -1,0 +1,125 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}律所信息{% endblock title %}
+{% block right %}
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <div class="panel panel-default mgt">
+                <div class="panel-heading">
+                    <h3 class="panel-title">律所信息</h3>
+                </div>
+                <div class="panel-body">
+                    {% if form %}
+                        <form class="form-horizontal" method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_name"
+                                       class="col-sm-3 control-label">{{ form.name.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.name }}
+                                    <p class="text-danger">{{ form.name.errors.0 }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_credit_code"
+                                       class="col-sm-3 control-label">{{ form.credit_code.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.credit_code }}
+                                    <p class="text-danger">{{ form.credit_code.errors.0 }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_address"
+                                       class="col-sm-3 control-label">{{ form.address.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.address }}
+                                    <p class="text-danger">{{ form.address.errors.0 }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_category"
+                                       class="col-sm-3 control-label">{{ form.category.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.category }}
+                                    <p class="text-danger">{{ form.category.errors.0 }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_legal_person"
+                                       class="col-sm-3 control-label">{{ form.legal_person.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.legal_person }}
+                                    <p class="text-danger">{{ form.legal_person.errors.0 }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_telephone"
+                                       class="col-sm-3 control-label">{{ form.telephone.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.telephone }}
+                                    <p class="text-danger">{{ form.telephone.errors.0 }}</p>
+                                    {#                                <p class="text-danger">{{ message }}</p>#}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_position"
+                                       class="col-sm-3 control-label">{{ form.position.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.position }}
+                                    <p class="text-danger">{{ form.position.errors.0 }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_bank"
+                                       class="col-sm-3 control-label">{{ form.bank.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.bank }}
+                                    <p class="text-danger">{{ form.bank.errors.0 }}</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_account"
+                                       class="col-sm-3 control-label">{{ form.account.label }}:</label>
+                                <div class="col-sm-9">
+                                    {{ form.account }}
+                                    <p class="text-danger">{{ form.account.errors.0 }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center">
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center">
+                                    {% if form.non_field_errors %}
+                                        {% for item in form.non_field_errors %}
+                                            <p class="text-danger">{{ item }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock right %}
+
+{% block extjs %}
+    <script>
+    $(function () {
+        {% if form.success %}
+            Swal.fire(
+              '用户创建成功',
+              '',
+              'success'
+            )
+        {% endif %}
+    })
+    </script>
+
+{% endblock %}

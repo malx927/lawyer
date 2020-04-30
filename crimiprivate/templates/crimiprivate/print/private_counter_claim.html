@@ -1,0 +1,145 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}反诉状{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        size: a4 portrait;
+        margin:2.5cm;
+    }
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family: 宋体;
+        width:100%;
+    }
+    .table td{
+        height: 20px!important;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+
+    div{
+        line-height: 42px;
+    }
+    span{
+        display:block;
+        text-indent: 2.2rem;
+        line-height: 42px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+
+    .td_right{
+        text-align: right;
+        padding-right:40px;
+    }
+ </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center"><h1>反诉状</h1></caption>
+        <tbody>
+        <tr>
+            <td>反诉人:{{ private_detail.private.party_name }}</td>
+            <td>性别:{{ private_detail.private.get_party_sex_display }}</td>
+            <td>民族:{{ private_detail.private.party_nation }}</td>
+            <td>年龄:{{ private_detail.private.get_birth_date }}</td>
+        </tr>
+        <tr>
+            <td>电话: </td>
+            <td colspan="3">{{ private_detail.private.party_tel }}</td>
+        </tr>
+        <tr>
+            <td>现住址:</td>
+            <td colspan="3">{{ private_detail.private.party_address }}</td>
+        </tr>
+
+        {% for n in natures %}
+            <tr>
+                <td>被反诉人:{{ n.name }}</td>
+                <td>性别:{{ n.get_gender_display }}</td>
+                <td>民族:{{ n.nation }}</td>
+                <td>年龄:{{ n.age }}</td>
+            </tr>
+            <tr>
+                <td>电话:</td>
+                <td colspan="3">{{ n.tel }}</td>
+            </tr>
+            <tr>
+                <td>现住址:</td>
+                <td colspan="3">{{ n.address }}</td>
+            </tr>
+        {% endfor %}
+        {% for l in legals %}
+        <tr>
+            <td>被反诉人：</td>
+            <td colspan="3">{{ l.company_name }}</td>
+        </tr>
+        <tr>
+            <td>社会统一信用代码：</td>
+            <td colspan="3">{{ l.credit_code }}</td>
+        </tr>
+        <tr>
+            <td>法定代表人：</td>
+            <td>{{ l.legal_person }}</td>
+            <td>联系电话:</td>
+            <td>{{ l.telephone }}</td>
+        </tr>
+        <tr>
+            <td>住所地：</td>
+            <td colspan="3">{{ l.address }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="4"><span>反诉人就{{ private_detail.private.case_name }}，对被反诉人提起反诉。</span></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div>反诉请求：</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><span>{{ private_detail.crimiprivatelawsuitscheme.counterclaim_ask|safe }}</span></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div>事实与理由：</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><span>{{ private_detail.crimiprivatelawsuitscheme.counterclaim_reasons|safe }}</span></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_50"></td>
+        </tr>
+        <tr>
+            <td colspan="4"><span>此致</span></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div>{{ private_detail.court_name }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_50"></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_right">
+                <div>反诉人：</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_right">
+                <div>{% now 'Y年m月d日' %}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

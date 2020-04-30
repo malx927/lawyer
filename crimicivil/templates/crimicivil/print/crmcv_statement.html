@@ -1,0 +1,82 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}代理词{% endblock title %}
+{% block css %}
+  <style>
+      @page {
+        margin: 2.5cm;
+        size: a4 portrait;
+    }
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family: 宋体;
+        width:100%;
+    }
+    .table td{
+        height: 20px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+
+    div{
+        line-height: 42px;
+    }
+    span{
+        display:block;
+        text-indent: 2.2rem;
+        line-height: 42px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+    .td_right{
+        text-align: right;
+        padding-right:30px;
+    }
+ </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center">
+            <h1>代理词</h1>
+        </caption>
+        <tbody>
+            <tr>
+                <td><div>尊敬的审判长、审判员:</div></td>
+            </tr>
+            <tr>
+                <td><span>{{ office.name }}接受本案{{ crmcivil_detail.crimicivil.get_party_name }}{% if crmcivil_detail.crimicivil.guard_name %}法定监护人{{crmcivil_detail.crimicivil.guard_name}}{% endif %}的委托，特指派我担任其诉讼代理人。经过今天的庭审调查，对本案有了较全面的了解。现就案件事实和法律适用，提出如下代理意见，供合议庭参考。</span></td>
+            </tr>
+            <tr>
+                <td><div>代理意见</div></td>
+            </tr>
+            <tr>
+                <td><span>{{ crmcivil_detail.crimicivillawsuitscheme.statement|safe }}</span></td>
+            </tr>
+            <tr>
+                <td class="td_50"></td>
+            </tr>
+            <tr>
+                <td><span>此致</span></td>
+            </tr>
+            <tr>
+                <td><div>{{ crmcivil_detail.court_name }}</div></td>
+            </tr>
+            <tr>
+                <td class="td_h"></td>
+            </tr>
+            <tr>
+                <td class="td_right"><div>代理人：{{ crmcivil_detail.crimicivil.lawyer }}{% if crmcivil_detail.crimicivil.assist %}、{{crmcivil_detail.crimicivil.assist}}{% endif %}</div></td>
+            </tr>
+            <tr>
+                <td class="td_right"><div>年   月   日</div></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

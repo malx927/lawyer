@@ -1,0 +1,124 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}权限信息{% endblock title %}
+{% block css %}
+    <style>
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        <div class="container-fluid mgt">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-2"><span class="panel-title h34">权限信息</span></div>
+                            <div class="col-md-10">
+                                <span class="right">
+                                    {% if request|has_permission:'rbac:permission-add' %}
+                                        <a class="btn btn-success" href="{% url 'rbac:permission-add' %}">
+                                        <i class="glyphicon glyphicon-plus">新建</i>
+                                    </a>
+                                    {% endif %}
+                                    {% if request|has_permission:'rbac:permission-batch' %}
+                                        <a class="btn btn-primary" href="{% url 'rbac:permission-batch' %}">
+                                        <i class="glyphicon glyphicon-th-large">批量处理</i>
+                                    </a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>链接地址</th>
+                            <th>编码</th>
+                            <th>父项</th>
+                            <th>菜单</th>
+                            <th>顺序</th>
+                            {% if request|has_permission:"rbac:permission-edit" or  request|has_permission:"rbac:permission-del" %}
+                                <th>选项</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for permission in permissions %}
+                            <tr class="active" id="{{ permission.id }}">
+                                <td>{{ permission.title }}</td>
+                                <td>{{ permission.url }}</td>
+                                <td>{{ permission.name|default:'' }}</td>
+                                <td>{{ permission.pid__title }}</td>
+                                <td>{% if  permission.is_menu == 1 %}是{% else %}否{% endif %}</td>
+                                <td>{{ permission.sort }}</td>
+                                <td>
+                                    {% if request|has_permission:"rbac:permission-edit" %}
+                                        <a class="btn btn-xs btn-primary"
+                                           href="{% url 'rbac:permission-edit' pk=permission.id %}">修改</a>
+                                    {% endif %}
+                                    {% if request|has_permission:"rbac:permission-del" %}
+                                        <a class="btn  btn-xs btn-danger btn-del" href="javascript:void(0);"
+                                           data-item="{% url 'rbac:permission-del' pk=permission.id %}">删除</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% for child in permission.children %}
+                                <tr>
+                                    <td>{{ child.title }}</td>
+                                    <td>{{ child.url }}</td>
+                                    <td>{{ child.name }}</td>
+                                    <td>{{ child.pid__title }}</td>
+                                    <td>{% if  child.is_menu == 1 %}是{% endif %}</td>
+                                    <td>{{ child.sort }}</td>
+                                    <td>
+                                        {% if request|has_permission:"rbac:permission-edit" %}
+                                            <a class="btn btn-xs btn-primary"
+                                               href="{% url 'rbac:permission-edit' pk=child.id %}">修改</a>
+                                        {% endif %}
+                                        {% if request|has_permission:"rbac:permission-del" %}
+                                            <a class="btn  btn-xs btn-danger btn-del" href="#"
+                                               data-item="{% url 'rbac:permission-del' pk=child.id %}">删除</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extjs %}
+    {#<script>#}
+    {#    $(function () {#}
+    {#        $(".btn-del").click(function(e){#}
+    {#            var url = $(this).attr("data-item");#}
+    {#            e.preventDefault();#}
+    {#            Swal.fire({#}
+    {#              title: '真的要删除吗?',#}
+    {#              text: "删除将无法恢复!",#}
+    {#              type: 'warning',#}
+    {#              showCancelButton: true,#}
+    {#              confirmButtonColor: '#3085d6',#}
+    {#              cancelButtonColor: '#d33',#}
+    {#              confirmButtonText: '确定删除',#}
+    {#              cancelButtonText: '取消'#}
+    {#            }).then((result) => {#}
+    {#              if (result.value) {#}
+    {#                   console.log(url);#}
+    {#                   window.location.href =url#}
+    {#Swal.fire(#}
+    {#  'Deleted!',#}
+    {#  'Your file has been deleted.',#}
+    {#  'success'#}
+    {#)#}
+    {#              }#}
+    {#            })#}
+    {##}
+    {#        })#}
+    {#    })#}
+    {#</script>#}
+{% endblock extjs %}
+

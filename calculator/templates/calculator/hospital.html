@@ -1,0 +1,267 @@
+{% extends 'mlawyer/mbase.html' %}{% load static %}
+{% block title %}住院信息{% endblock title %}
+{% block css %}
+    <style>
+        .mgt-20 {
+            margin-top: 20px;
+        }
+        .pdl-5{
+            padding-left: 4px;
+        }
+        .pdr-5{
+            padding-right: 4px;
+        }
+
+    </style>
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div class="mgt-20"></div>
+    <form action="" method="post">
+    {% csrf_token %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">住院信息</div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_enter_time">入院日期</label>
+                        <input type="date" class="form-control" name="enter_time" id="id_enter_time" placeholder="入院日期">
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_leave_time">出院日期</label>
+                        <input type="date" id="id_leave_time" name="leave_time" class="form-control" >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_enter_time">住院天数</label>
+                        <div class="input-group">
+                            <input type="number" readonly class="form-control" name="hospital_day" id="id_hospital_day" placeholder="住院天数">
+                            <div class="input-group-addon">天</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_hospital_costs">医药费、治疗费</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="id_hospital_costs"  name="hospital_costs" placeholder="医药费、治疗费"  >
+                            <div class="input-group-addon">元</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_rest_day">医嘱中需要休养天数</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="rest_day" id="id_rest_day" placeholder="休养天数">
+                            <div class="input-group-addon">天</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_nutrition">医嘱中是否需加强营养</label>
+                        <select name="nutrition" id="id_nutrition"  name="nutrition" class="form-control">
+                            <option value="">----</option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_device_cost">医嘱中辅助器具的金额</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="id_device_cost" name="device_cost" placeholder="辅助器具的金额">
+                            <div class="input-group-addon">元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_device_period">辅助器具更换期</label>
+                        <input type="number" class="form-control" id="id_device_period" name="device_period" placeholder="辅助器具更换期">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_car_fee">交通费</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="id_car_fee"  name="car_fee" placeholder="交通费">
+                            <div class="input-group-addon">元</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="id_hotel_fee">住宿费</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="id_hotel_fee" name="hotel_fee" placeholder="住宿费">
+                            <div class="input-group-addon">元</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="id_cosmetic_fee">整容费</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="id_cosmetic_fee"  name="cosmetic_fee" placeholder="整容费">
+                            <div class="input-group-addon">元</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 pdr-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="id_nurse_one">护理人1工作状况</label>
+                        <select name="nurse_one" id="id_nurse_one" class="form-control">
+                            <option value="">----</option>
+                            <option value="1">有工作</option>
+                            <option value="0">无工作</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_nurse_one_wage">日工资</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="id_nurse_one_wage" name="nurse_one_wage"
+                                   placeholder="日工资">
+                            <div class="input-group-addon">元</div>
+                        </div>
+                        <span class="text-danger" id="id_nurse_one_error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_nurse_one_days">护理天数</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="id_nurse_one_days" name="nurse_one_days"
+                                   placeholder="护理天数">
+                            <div class="input-group-addon">天</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 pdl-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="id_nurse_two">护理人2工作状况</label>
+                        <select name="nurse_two" id="id_nurse_two" class="form-control">
+                            <option value="">----</option>
+                            <option value="1">有工作</option>
+                            <option value="0">无工作</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_nurse_two_wage">日工资</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="id_nurse_two_wage"
+                                   name="nurse_two_wage" placeholder="日工资">
+                            <div class="input-group-addon">元</div>
+                        </div>
+                        <span class="text-danger" id="id_nurse_two_error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_nurse_two_days">护理天数</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="id_nurse_two_days"
+                                   name="nurse_two_days" placeholder="护理天数">
+                            <div class="input-group-addon">天</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-12 text-center">
+            <button type="submit" class="btn btn-success" style="width: 90px;">下一步</button>
+        </div>
+    </div>
+    </form>
+
+{% endblock content %}
+{% block extjs %}
+    <script src="{% static 'mobile/js/moment.js' %}"></script>
+    <script>
+        $(function () {
+            $("#id_nurse_one, #id_nurse_two").change(function (event) {
+                var id= event.target.id;
+                var work_state = event.target.value;
+                if (work_state.length == 0 || work_state == "1") {
+                    $("#" + id +"_wage").val("");
+                    $("#" + id +"_error").text("");
+                    return;
+                }
+                var params = {
+                    "work_state": work_state,
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "calculator-api:indust-nurse-wage" %}',
+                    dataType: 'json',
+                    data: params,
+                    timeout: 5000,
+                    success: function (data) {
+                        console.log(JSON.stringify(data));
+                         if(data.success == "true"){
+                            $("#" + id +"_wage").val(data.result.day_aver_wage);
+                            $("#" + id +"_error").text("");
+                        }
+                        else{
+                            $("#" + id +"_error").text(data.error_msg);
+                            $("#" + id +"_wage").val("")
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                });
+            });
+            $("#id_enter_time, #id_leave_time").change(function(event) {
+                var id = event.target.id;
+                if(id == "id_enter_time"){
+                    var enter_time = event.target.value;
+                    var enter_time = moment(enter_time);
+                    var leave_time = $("#id_leave_time").val();
+                    var leave_time = moment(leave_time);
+                }
+                if(id == "id_leave_time"){
+                    var leave_time = event.target.value;
+                    var leave_time = moment(leave_time);
+                    var enter_time = $("#id_enter_time").val();
+                    var enter_time = moment(enter_time);
+                }
+                var diff_days = leave_time.diff(enter_time,"days") + 1;
+                console.log(diff_days);
+                if(!isNaN(diff_days)){
+                    $("#id_hospital_day").val(diff_days);
+                }
+            })
+        })
+    </script>
+{% endblock %}
+
+

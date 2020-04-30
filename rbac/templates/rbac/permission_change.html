@@ -1,0 +1,44 @@
+{% extends 'rbac/base.html' %}{% load static %}
+{% block title %}权限信息{% endblock title %}
+{% block css %}
+    <style>
+    .pd20{
+        padding: 20px;
+    }
+    .group{
+        background-color: #f8f8f8;
+        padding: 5px 15px;
+        border: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+    </style>
+{% endblock %}
+{% block right %}
+
+<div class="container-fluid pd20">
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for item in form %}
+            <div class="form-group col-md-12 group">
+                {% if item.field.is_checkbox %}
+                    <div class="checkbox">
+                        <label>
+                            {{ item }}{{ item.label }}
+                           <span class="text-danger">{{ item.errors.0 }}</span>
+                        </label>
+                    </div>
+                {% else %}
+                    {{ item.label_tag }}{{ item }}
+                    <span class="text-danger">{{ item.errors.0 }}</span>
+                    <p class="help-block">{{ item.help_text }}</p>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+        <div class="form-group col-md-12 subm">
+                <input type="submit" value="提交" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+{% endblock %}
+

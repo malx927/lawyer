@@ -1,0 +1,309 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}委托代理协议{% endblock title %}
+{% block css %}
+    <style type="text/css">
+        @page {
+            size: a4 portrait;
+            margin: 2.2cm;
+        }
+
+        .table {
+            border: 0px solid black;
+            border-collapse: collapse;
+            font-size: 14pt;
+            font-family: 宋体;
+            color: #000000;
+            width: 100%;
+        }
+
+        .table,
+        td,
+        th {
+            text-align: left;
+            border-top: 0px solid #ddd !important;
+            padding: 2px !important;
+        }
+
+        caption {
+            text-align: center;
+            color: #000;
+        }
+
+        td {
+            color: #000;
+            font-size: 14px !important;
+            line-height: 1.228571 !important;
+        }
+
+        .td_col_1 {
+            text-align: right;
+        }
+
+        .td_col_p0 {
+            padding-right: 0px !important;
+        }
+
+        .td_col_p01 {
+            min-width: 74px;
+        }
+
+        .money {
+            min-width: 30px;
+            text-decoration: underline;
+        }
+
+        .table1 {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption>
+            <h1>委托代理协议</h1>
+        </caption>
+        <tbody>
+        <tr>
+            <td class="td_col_1" style="width:80px;">甲方:</td>
+            <td>{{ private.party_name }}</td>
+        </tr>
+        <tr>
+            <td class="td_col_1">乙方:</td>
+            <td>{{ office.name }}</td>
+        </tr>
+        <tr>
+            <td class="td_col_1"></td>
+            <td>甲方因{{ private.case_name }}，根据中华人民共和国相关法律的规定，聘乙方的律师作为委托代理人。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1"></td>
+            <td>甲乙双方按照诚实信用原则，经协商一致，达成以下协议，共同遵守。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1">第一条</td>
+            <td> 相关事项</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">1、</td>
+            <td><span><b>委托阶段：{{ private.get_commission_stage }}</b></span></td>
+        </tr>
+{#        <tr>#}
+{#            <td class="td_col_1 td_col_p0">2、</td>#}
+{#            <td><span>对方当事人：{{ civil_detail.get_relative_person }}</span></td>#}
+{#        </tr>#}
+        <tr>
+            <td class="td_col_1">第二条</td>
+            <td> 乙方的义务</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">1、</td>
+            <td>委派乙方律师作为上述案件中甲方的委托代理人，甲方同意乙方指派其他业务助理配合完成辅助工作；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">2、</td>
+            <td>乙方律师应当勤勉、尽责地完成当事人委托代理事项；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">3、</td>
+            <td>乙方律师不得违反《律师执业规范》，在涉及甲方的对抗性案件中，未经甲方同意，不得同时担任与甲方具有法律上利益冲突的另一方的委托代理人；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">4、</td>
+            <td>乙方律师对其获知的甲方的商业机密或者甲方的个人隐私负有保密责任，非由法律规定或者甲方同意，不得向任何第三方披露；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">5、</td>
+            <td>乙方对甲方业务应当单独建档，应当保存完整的工作记录，对涉及甲方的原始证据、法律文件和财物应当由甲方自行保管。如需乙方代为保管，双方须办理书面交接手续。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1">第三条</td>
+            <td> 甲方的义务</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">1、</td>
+            <td>甲方应当真实、详尽和及时地向乙方律师叙述案情，提供与委托代理事项有关的证据、文件及其它事实材料；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">2、</td>
+            <td>甲方应当积极、主动地配合乙方律师的工作，甲方对乙方律师提出的要求应当明确、合理；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">3、</td>
+            <td>甲方应当按时、足额向乙方支付律师代理费和工作费用；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">4、</td>
+            <td>甲方指定{{ private.cli_name }}为乙方律师的联系人，负责转达甲方的指示和要求，提供文件和资料等，甲方更换联系人应当通知委托代理人；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">5、</td>
+            <td>甲方有责任对委托代理事项作出独立的判断、决策，甲方根据乙方律师提供法律意见、建议、方案所作出的决定由甲方自行承担后果。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1">第四条</td>
+            <td> 律师代理费</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>经双方协商同意，甲方向乙方支付律师代理费人民币 <b>¥<span
+                    class="money">{{ private.total_expenses|floatformat:2 }}</span>元</b>，（大写）<span
+                    class="money"><b>{{ private.get_total_expenses }}</b></span>，本合同签字之日支付。
+            </td>
+        </tr>
+        <tr>
+            <td class="td_col_1">第五条</td>
+            <td> 办案费用</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>乙方律师办理甲方委托代理事项所发生的下列办案费用，应当由甲方承担。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">1、</td>
+            <td>相关行政、司法、鉴定、公证等部门收取的费用。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">2、</td>
+            <td>交通、食宿等费用。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1">第六条</td>
+            <td> 特别告知</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>诉讼有风险，乙方及承办律师在办案过程中对承办案件的咨询或代理意见、法律意见、建议、方案等仅作为法律层面上的分析论证或预测，不作为诉讼结果的承诺与保证。乙方及承办律师对诉讼结果不承担法律责任。
+            </td>
+        </tr>
+        <tr>
+            <td class="td_col_1">第七条</td>
+            <td> 合同的解除</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">1、</td>
+            <td>甲乙双方经协商同意，可以变更或者解除本合同。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">2、</td>
+            <td>乙方有下列情形之一的，甲方有权解除合同：</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（1）乙方律师违反《律师执业规范》，在涉及甲方的对抗性案件中，未经甲方同意，同时担任与甲方具有法律上利益冲突的另一方的委托代理人；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（2）乙方律师对其获知甲方的商业机密或者甲方的个人隐私负有保密责任，非由法律规定或者甲方同意，擅自向任何第三方披露。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">3、</td>
+            <td>甲方有下列情形之一的，乙方有权解除合同：</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（1）甲方的委托事项违反法律或者违反律师执业规范的；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（2）甲方有捏造事实、伪造证据或者隐瞒重要情节等情形的。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1">第八条</td>
+            <td> 违约责任</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">1、</td>
+            <td>乙方无正当理由不提供双方约定的法律服务或者违反第三条规定的义务，甲方有权要求乙方退还部分或者全部已付的律师代理费。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">2、</td>
+            <td>乙方律师因工作延误、失职、失误导致甲方蒙受损失，或者违反第三条规定的义务之一的，乙方可以通过其所投保的执业保险向甲方承担赔偿责任。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">3、</td>
+            <td>甲方无正当理由不支付律师代理费或者工作费用，或者无故终止合同，乙方有权要求甲方支付未付的律师代理费、未报销的工作费用以及延期支付的利息。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">4、</td>
+            <td>甲方不得以如下非正当理由要求乙方退费：</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（1）甲方单方面又委托其他律师事务所的律师代理的；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（2）乙方完成委托代理事项后，甲方以乙方收费过高为由要求退费的；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（3）甲方作为被告时，乙方律师已经为出庭作好准备，而原告方撤诉的；</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>（4）其他非因乙方或者乙方律师的原因，甲方无故终止合同的。</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">第九条</td>
+            <td> 争议的解决</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>本合同适用中华人民共和国《合同法》、《律师法》、《民事诉讼法》、《仲裁法》等法 律。甲乙双方如果发生争议，
+                应当友好协商解决。如协商不成，任何一方均有权向（注：{{ office.address }}）仲裁委员会提起仲裁。
+            </td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0">第十条</td>
+            <td> 合同的生效</td>
+        </tr>
+        <tr>
+            <td class="td_col_1 td_col_p0"></td>
+            <td>本合同正本一式二份，甲乙双方各执一份，自双方签字盖章之日起生效，至法院（仲裁委）作出判决、裁定、决定（或调解）、裁决之日止。</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+        </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>
+                    <table class="table1">
+                        <tr class="tr_h">
+                            <td class="td_col_1">甲 方：</td>
+                            <td class="text-left">（签章）</td>
+                            <td class="td_col_1">乙 方：</td>
+                            <td class="text-left">{{ office.name }}</td>
+                        </tr>
+                        <tr class="tr_h">
+                            <td class="td_col_1">联系电话：</td>
+                            <td class="text-left">{{ private.cli_tel|default:"" }}</td>
+                            <td class="td_col_1">联系电话：</td>
+                            <td class="text-left">{{ office.telephone }}</td>
+                        </tr>
+                        <tr class="tr_h">
+                            <td class="td_col_1"></td>
+                            <td class="text-left"></td>
+                            <td class="td_col_1">开 户 行：</td>
+                            <td class="text-left">{{ office.bank }}</td>
+                        </tr>
+                        <tr class="tr_h">
+                            <td class="td_col_1"></td>
+                            <td class="text-left"></td>
+                            <td class="td_col_1">账 号：</td>
+                            <td class="text-left">{{ office.account }}</td>
+                        </tr>
+                        <tr class="tr_h">
+                            <td class="td_col_1">签订日期：</td>
+                            <td class="text-left">{% now "Y-m-d" %}</td>
+                            <td class="td_col_1">签订日期：</td>
+                            <td class="text-left">{% now "Y-m-d" %}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock%}

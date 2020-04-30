@@ -1,0 +1,44 @@
+<h3 class="text-center">{{ form.instance.case_name }}</h3>
+<form class="form-horizontal" id="id_form" method="post"  action="{{ action }}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="col-sm-3 control-label">委托阶段: </label>
+        <div class="col-sm-9 form-control-static">
+            {{ form.instance.get_commission_stage }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="id_telephone">案件所处阶段:</label>
+        <div class="col-sm-9 form-control-static">
+            {{ form.instance.stage }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="{{ form.lawyer.id_for_label }}"><span class="red">*</span>{{ form.lawyer.label }}:</label>
+        <div class="col-sm-9 form-control-static">
+            {{ form.lawyer }}
+            <span class="text-danger">{{ form.lawyer.errors.0 }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="{{ form.assist.id_for_label }}">{{ form.assist.label }}</label>
+        <div class="col-sm-9">
+            {{ form.assist }}
+            <span class="text-danger">{{ form.assist.errors.0 }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="{{ form.manager.id_for_label }}">{{ form.manager.label }}</label>
+        <div class="col-sm-9">
+            {{ form.manager }}
+            <span class="text-danger">{{ form.manager.errors.0 }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="{{ form.is_assign.id_for_label }}">{{ form.is_assign.label }}</label>
+        <div class="col-sm-9">
+            {{ form.is_assign }}
+            <span class="text-danger">{{ form.is_assign.errors.0 }}</span>
+        </div>
+    </div>
+</form>

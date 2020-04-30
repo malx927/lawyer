@@ -1,0 +1,83 @@
+@charset "utf-8";
+body {
+	font-family: "Microsoft Yahei";
+	font-size: 14px;
+	color: #333;
+}
+a, a:hover { text-decoration: none; color: #333; }
+ul, li { list-style: none; }
+svg{
+	fill: currentColor;
+}
+.mt-tabpage {
+	width: 800px;
+	/*margin: 30px auto;*/
+	box-shadow: 0 0 5px #999;
+	background-color: #FFFFFF;
+	float: left;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+.mt-tabpage-title {
+	height: 44px;
+	font-size: 0;
+	background-color: #fff;
+	width: 94%;
+	margin: auto;
+	background: #fff;
+	border-bottom: 1px solid #f1f1f1;
+}
+.mt-tabpage-title .mt-tabpage-item {
+	display: inline-block;
+	width: 105px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	color: #666;
+	font-size: 12px;
+}
+.mt-tabpage-title .mt-tabpage-item:hover{
+	color: #eb4537;
+}
+.mt-tabpage-title .mt-tabpage-item-cur {
+	color: #eb4537;
+	font-size: 14px;
+	border-bottom: 1px solid #F85B5E;
+}
+.mt-tabpage-count {
+	position: relative;
+	width: 800px;
+	height: 180px;
+	overflow: hidden;
+}
+.mt-tabpage-cont__wrap {
+	position: absolute;
+}
+.mt-tabpage-count .mt-tabpage-item {
+	width: 800px;
+	height: 200px;
+	/*line-height: 200px;
+	text-align: center;*/
+}
+
+
+/*选项卡1*/
+#lib_Tab1{width:100%;margin:0px;padding:0px;margin-bottom:15px; float: left; }
+/*选项卡2*/
+#lib_Tab2{width:100%;margin:0px;padding:0px;margin-bottom:15px; float: left; }
+/*菜单class*/
+.lib_tabborder{border:1px solid #95C9E1;}
+.lib_Menubox {height:29px;line-height:28px;position:relative;}
+
+.lib_Menubox ul{margin:0px;padding:0px;list-style:none; position:absolute; top:3px; left:0; margin-left:10px; height:25px;text-align:center;}
+.lib_Menubox li{float:left;display:block;cursor:pointer;width:114px;color:#60676c; margin-right:2px;height:25px;line-height:25px; background-color:#E4F2FD}
+.lib_Menubox li.hover{padding:0px;background:#fff;width:116px;border-left:1px solid #95C9E1;border-top:1px solid #95C9E1;border-right:1px solid #95C9E1;
+color:#000;height:25px;line-height:25px;}
+.lib_Contentbox{border-top:none;padding-top:8px; overflow: hidden;}
+.btwendang{ text-align: center; font-size: 16px; padding-top: 10px; padding-bottom: 10px;}
+.lib_Menuboxx li.hover{padding:0px;background:#efefef;width:116px;border-left:1px solid #95C9E1;border-top:1px solid #95C9E1;border-right:1px solid #95C9E1;
+color:#000;height:25px;line-height:25px;}
+.lib_Menuboxx {height:28px;line-height:28px;position:relative;}
+
+.lib_Menuboxx ul{margin:0px;padding:0px;list-style:none; position:absolute; top:3px; left:0; margin-left:10px; height:25px;text-align:center;}
+.lib_Menuboxx li{float:left;display:block;cursor:pointer;width:114px;color:#60676c; margin-right:2px;height:25px;line-height:25px; background-color:#b6c3cd}

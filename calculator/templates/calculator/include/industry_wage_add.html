@@ -1,0 +1,53 @@
+<form class="form-horizontal" id="id_form" method="post" action="{{ action }}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="{{ form.province.id_for_label }}"><span class="red">*</span>{{ form.province.label }}
+        </label>
+        <div class="col-sm-8">
+            {{ form.province }}
+            <span class="text-danger">{{ form.province.errors.0 }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="{{ form.industry.id_for_label }}"><span class="red">*</span>{{ form.industry.label }}
+        </label>
+        <div class="col-sm-8">
+            {{ form.industry }}
+            <span class="text-danger">{{ form.industry.errors.0 }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="{{ form.years.id_for_label }}"><span class="red">*</span>{{ form.years.label }}
+        </label>
+        <div class="col-sm-8">
+            {{ form.years }}
+            <span class="text-danger">{{ form.years.errors.0 }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="{{ form.aver_wage.id_for_label }}"><span class="red">*</span>{{ form.aver_wage.label }}
+        </label>
+        <div class="col-sm-8">
+            {{ form.aver_wage }}
+            <span class="text-danger">{{ form.aver_wage.errors.0 }}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="{{ form.day_aver_wage.id_for_label }}"><span class="red">*</span>{{ form.day_aver_wage.label }}
+        </label>
+        <div class="col-sm-8">
+            {{ form.day_aver_wage }}
+            <span class="text-danger">{{ form.day_aver_wage.errors.0 }}</span>
+        </div>
+    </div>
+</form>
+<script>
+    $("#id_years").datepicker({
+            format: 'yyyy',
+            language: "zh-CN",
+            autoclose:true,
+            startView: 2,
+            minViewMode: 2,
+            maxViewMode: 2,
+        });
+</script>

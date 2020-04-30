@@ -1,0 +1,181 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}起诉状{% endblock title %}
+{% block css %}
+    <style>
+        @page {
+            size: a4 portrait;
+            margin: 2.5cm;
+
+        }
+        .table {
+            border: 0px;
+            border-collapse: collapse;
+            padding-top: 3px;
+            font-size: 15pt;
+            font-family: 宋体;
+            width: 100%;
+        }
+
+        .table td {
+            height: 25px;
+            word-wrap: break-word;
+            word-break: break-all;
+            border: 0px!important;
+            padding-top: 5px!important;
+            padding-bottom: 5px!important;
+        }
+
+        div {
+            line-height: 25px;
+        }
+
+        span {
+            display: block;
+            text-indent: 2.2rem;
+            line-height: 25px;
+        }
+
+        .table .td_h {
+            height: 140px;
+        }
+
+        .table .td_50 {
+            height: 50px;
+        }
+
+        .table .td_20 {
+            height: 20px;
+        }
+
+        .td_right {
+            text-align: right;
+            padding-right: 40px;
+        }
+
+        .sp_h {
+            min-height: 100px;
+        }
+    </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center">
+            <h1>起诉状</h1>
+        </caption>
+        <tbody>
+        {% if civil_detail.civil.party_name %}
+            <tr>
+                <td>原告:{{ civil_detail.civil.party_name }}</td>
+                <td>性别: {{ civil_detail.civil.get_party_sex_display }}</td>
+                <td>民族：{{ civil_detail.civil.party_nation }}</td>
+                <td>年龄: {{ civil_detail.civil.get_birth_date }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">身份证号: {{ civil_detail.civil.party_id_code }}</td>
+                <td colspan="2">电话: {{ civil_detail.civil.party_tel }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">现住址: {{ civil_detail.civil.party_address }}</td>
+            </tr>
+            {% if civil_detail.civil.guard_name %}
+                <tr>
+                    <td colspan="2">法定代理人:{{ civil_detail.civil.guard_name }}({{ civil_detail.civil.guard_relation }})
+                    </td>
+                    <td colspan="2">电话: {{ civil_detail.civil.guard_tel }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4">现住址: {{ civil_detail.civil.guard_address }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td colspan="4" class="td_20"></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">原告：{{ civil_detail.civil.party_legal_name }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">社会统一信用代码: {{ civil_detail.civil.party_legal_code }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">法定代表人: {{ civil_detail.civil.party_legal_person }}</td>
+                <td colspan="2">联系电话: {{ civil_detail.civil.party_legal_telephone }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">住所地:{{ civil_detail.civil.party_legal_address }}</td>
+            </tr>
+        {% endif %}
+        {% for nature in natures %}
+            <tr>
+                <td>被告: {{ nature.name|default:"" }}</td>
+                <td>性别: {{ nature.get_gender_display }}</td>
+                <td>民族：{{ nature.nation|default:"" }}</td>
+                <td>年龄: {{ nature.age|default:"" }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">身份证号: {{ nature.id_code|default:"" }}</td>
+                <td colspan="2">电话: {{ nature.tel|default:"" }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">现住址: {{ nature.address|default:"" }}</td>
+            </tr>
+        {% endfor %}
+        {% for legal in legals %}
+            <tr>
+                <td colspan="4">被告：{{ legal.company_name|default:"" }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">社会统一信用代码: {{ legal.credit_code|default:"" }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">法定代表人: {{ legal.legal_person|default:"" }}</td>
+                <td colspan="2">联系电话: {{ legal.telephone|default:"" }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">住所地: {{ legal.address|default:"" }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="4">
+                <div>诉讼请求:</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><span class="sp_h">{{ civil_detail.civillawsuitscheme.complaint_claim|safe }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div>事实和理由:</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><span class="sp_h">{{ civil_detail.civillawsuitscheme.complaint_reasons|safe }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_20"></td>
+        </tr>
+        <tr>
+            <td colspan="4"><span>此致</span></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div>{{ civil_detail.court_name }}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4" class="td_right">
+                <div>起诉人：{{ civil_detail.civil.get_party_name }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="td_right">
+                <div>{% now 'Y年m月d日' %}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
+

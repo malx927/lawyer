@@ -1,0 +1,184 @@
+{% extends 'mlawyer/mbase.html' %}{% load static %}
+{% block title %}被抚(扶)养人及直系亲属信息{% endblock title %}
+{% block css %}
+    <style>
+        .mgt-20 {
+            margin-top: 20px;
+        }
+    .bottom-color{
+        border-bottom:1px solid #ddd;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .panel-body{
+        padding-bottom: 0px;
+    }
+    .panel-footer {
+        padding: 5px 15px;
+        background-color: transparent;
+        border-top: 0px solid #ddd;
+    }
+    </style>
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div class="mgt-20"></div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="hidden">
+            {{ form.as_p }}
+        </div>
+        <div class="panel panel-default" id="id_{{ supported_formset.prefix }}">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h3 class="panel-title">被抚(扶)养人</h3>
+                    </div>
+                    <div class="col-xs-2 text-right">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body formset-body">
+                {{ supported_formset.management_form }}
+                {% for supported in supported_formset %}
+                    {% for fld in relation.hidden_fields %}{{ fld }}{% endfor %}
+                    {% if relation.instance.pk %}{{ relation.DELETE }}{% endif %}
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">与当事人关系</label>
+                                {{ supported.relation_type }}
+                            </div>
+                            <span class="text-danger">{{ supported.relation_type.errors.0 }}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">是否残障</label>
+                                {{ supported.action_ability }}
+                            </div>
+                            <span class="text-danger">{{ supported.action_ability.errors.0 }}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">劳动收入</label>
+                                {{ supported.is_income }}
+                            </div>
+                            <span class="text-danger">{{ supported.is_income.errors.0 }}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">年龄</label>
+                                <div class="input-group">
+                                    {{ supported.relation_age }}
+                                    <div class="input-group-btn">
+                                    </div>
+                                </div>
+                                <span class="text-danger">{{ supported.relation_age.errors.0 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="panel-footer">
+                <div class="formset-add-btn">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" id="id_{{ relation_formset.prefix }}">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h3 class="panel-title">直系亲属信息</h3>
+                    </div>
+                    <div class="col-xs-2 text-right ">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body formset-body">
+                {{ relation_formset.management_form }}
+                {% for relation in relation_formset %}
+                    {% for fld in relation.hidden_fields %}{{ fld }}{% endfor %}
+                    {% if relation.instance.pk %}{{ relation.DELETE }}{% endif %}
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">与当事人关系</label>
+                                {{ relation.relation_type }}
+                            </div>
+                            <span class="text-danger">{{ relation.relation_type.errors.0 }}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">是否残障</label>
+                                {{ relation.action_ability }}
+                            </div>
+                            <span class="text-danger">{{ relation.action_ability.errors.0 }}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">劳动收入</label>
+                                {{ relation.is_income }}
+                            </div>
+                            <span class="text-danger">{{ relation.is_income.errors.0 }}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="">年龄</label>
+                                <div class="input-group">
+                                    {{ relation.relation_age }}
+                                    <div class="input-group-btn">
+                                    </div>
+                                </div>
+                                <span class="text-danger">{{ relation.relation_age.errors.0 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="panel-footer">
+                <div class="formset-add-btn">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 form-group text-center">
+                <button type="submit" class="btn btn-success">计算</button>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery.formset.js' %}"></script>
+    <script>
+        $(function () {
+            $('#id_{{supported_formset.prefix }} .panel-body .row').formset({
+                'prefix': '{{ supported_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                'formCssClass':'{{ supported_formset.prefix }}-form',
+                added: function (row) {
+                    var xh = $("#id_{{ supported_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".input-group-addon").text(xh);
+                }
+            });
+
+             $('#id_{{relation_formset.prefix }} .panel-body .row').formset({
+                'prefix': '{{ relation_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                 'formCssClass':'{{ relation_formset.prefix }}-form',
+                added: function (row) {
+                    var xh = $("#id_{{ relation_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".input-group-addon").text(xh);
+                }
+            });
+
+
+        })
+    </script>
+{% endblock %}
+

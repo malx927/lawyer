@@ -1,0 +1,19 @@
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.pdr15{
+    padding-right:15px;
+}
+.mgt {
+    margin-top: 20px;
+}
+.h34{
+    height:34px;
+    line-height: 34px;
+}
+.red{
+    color: #ff0000;
+}

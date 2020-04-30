@@ -1,0 +1,9 @@
+{% extends 'mlawyer/mbase.html' %}{% load static%}
+{% block title %}计算器{% endblock title %}
+{% block content %}
+    <div class="col-xs-4 col-sm-4">
+        <div class="xj">
+            <a href="{% url 'calculator:traffic-index' %}"><img src="{% static 'mobile/img/jtsg.png' %}" alt=""/></a>
+        </div>
+    </div>
+{% endblock content %}

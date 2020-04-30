@@ -1,0 +1,168 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}批量处理权限{% endblock title %}
+{% block right %}
+    <div class="container-fluid mgt">
+        <form method="post" action="?type=add">
+            {% csrf_token %}
+            {{ add_formset.management_form }}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-binoculars" aria-hidden="true"></i> 待新建权限列表
+                    <button type="submit" class="right btn btn-success" style="padding: 2px 8px;margin: -3px;">
+                        <i class="fa fa-save" aria-hidden="true"></i>
+                        新建
+                    </button>
+                </div>
+                <div class="panel-body" style="color: #9d9d9d;">
+                    注意：系统中自动发现且数据库中不存在的权限链接地址。
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>权限标题</th>
+                        <th>链接地址</th>
+                        <th>别名</th>
+                        <th>父级权限</th>
+                        <th>菜单</th>
+                        <th>图标</th>
+                        <th>排序</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for form in add_formset %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            {% for field in form %}
+                                <td {% if forloop.first %} class="hide" {% endif %}>
+                                    {% if field.field.is_checkbox %}
+                                        <div class="checkbox text-center">
+                                            <label>
+                                                {{ field }}
+                                            </label>
+                                            <span class="text-danger">{{ field.errors.0 }}</span>
+                                        </div>
+                                    {% else %}
+                                        {{ field }}<span class="text-danger">{{ field.errors.0 }}</span>
+                                    {% endif %}
+
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-th-list" aria-hidden="true"></i> 待删除权限列表
+            </div>
+            <div class="panel-body" style="color: #9d9d9d;">
+                注意：数据库中存在，但系统中不存在的权限链接地址。
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>权限标题</th>
+                    <th>链接地址</th>
+                    <th>别名</th>
+                    <th>父级权限</th>
+                    <th>菜单</th>
+                    <th>图标</th>
+                    <th>排序</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for form in destroy_formset %}
+                    <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    {% for field in form %}
+                        <td {% if forloop.first %} class="hide" {% endif %}>
+                            {% if field.field.is_checkbox %}
+                                <div class="checkbox text-center">
+                                    <label>
+                                        {{ field }}
+                                        <span class="text-danger">{{ field.errors.0 }}</span>
+                                    </label>
+                                </div>
+                            {% else %}
+                                {{ field }}<span class="text-danger">{{ field.errors.0 }}</span>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    <td>
+                        <a href="{% url 'rbac:permission-del' pk=form.initial.id %}" class="btn btn-xs btn-danger">
+                            删除
+                        </a>
+                    </td>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <form method="post" action="?type=update">
+            {% csrf_token %}
+            {{ update_formset.management_form }}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-sitemap" aria-hidden="true"></i> 待更新权限列表
+                    <button type="submit" class="right btn btn-success" style="padding: 2px 8px;margin: -3px;">
+                        <i class="fa fa-save" aria-hidden="true"></i>更新
+                    </button>
+                </div>
+                <div class="panel-body" style="color: #9d9d9d;">
+                    注意：数据库和系统都存在的权限链接地址。
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>权限标题</th>
+                        <th>链接地址</th>
+                        <th>别名</th>
+                        <th>父级权限</th>
+                        <th>菜单</th>
+                        <th>图标</th>
+                        <th>排序</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for form in update_formset %}
+                        <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        {% for field in form %}
+                            <td {% if forloop.first %} class="hide" {% endif %}>
+                                {% if field.field.is_checkbox %}
+                                    <div class="checkbox text-center">
+                                        <label>
+                                            {{ field }}
+                                            <span class="text-danger">{{ field.errors.0 }}</span>
+                                        </label>
+                                    </div>
+                                {% else %}
+                                    {{ field }}<span class="text-danger">{{ field.errors.0 }}</span>
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                        <td>
+                            {% if form.initial.id %}
+                                <a href="{% url 'rbac:permission-del' pk=form.initial.id %}" class="btn btn-xs btn-danger">
+                                    删除
+                                </a>
+                            {% else %}
+                                <a href="{% url 'rbac:permission-del' pk=form.id.value %}" class="btn btn-xs btn-danger">
+                                    删除
+                                </a>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+{% endblock right %}

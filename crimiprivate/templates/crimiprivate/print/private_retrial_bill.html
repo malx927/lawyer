@@ -1,0 +1,161 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}再审申请书{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        size:a4 portrait;
+        margin: 2.5cm;
+    }
+
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family: 宋体;
+        width:100%;
+    }
+    .table td{
+        height: 25px;
+        padding: 4px 8px!important;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+
+    div{
+        line-height: 20px;
+    }
+    span{
+        display:block;
+        text-indent: 2.2rem;
+        line-height: 20px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+    .table .td_20{
+        height:20px;
+    }
+    .td_right{
+        text-align: right;
+    }
+
+ </style>
+{% endblock %}
+{% block print_content %}
+    <div class="print_area" id="print_page">
+        <table class="table">
+            <caption style="text-align: center">
+                <h1>再审申请书</h1>
+            </caption>
+            <tbody>
+            <tr>
+                <td>
+                    申请人(一审{{ first.legal_status }}，二审{{ second.legal_status }}): {{ private_detail.private.party_name }}</td>
+                <td>性别: {{ private_detail.private.get_party_sex_display }}</td>
+            </tr>
+            <tr>
+                <td>民族：{{ private_detail.private.party_nation }}</td>
+                <td>年龄: {{ private_detail.private.get_birth_date }}</td>
+            </tr>
+            <tr>
+                <td>身份证号: {{ private_detail.private.party_id_code }}</td>
+                <td>电话: {{ private_detail.private.party_tel }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">现住址: {{ private_detail.private.party_address }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_20"></td>
+            </tr>
+            {% for nature in natures %}
+                <tr>
+                    <td>被申请人(一审{{ first_relative_status.name }}，二审{{ second_relative_status.name }}）:{{ nature.name }}</td>
+                    <td>性别: {{ nature.get_gender_display }}</td>
+                </tr>
+                <tr>
+                    <td>民族：{{ nature.nation }}</td>
+                    <td>年龄: {{ nature.age }}</td>
+                </tr>
+                <tr>
+                    <td>身份证号: {{ nature.id_code }}</td>
+                    <td>电话: {{ nature.tel }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">现住址: {{ nature.address }}</td>
+                </tr>
+            {% endfor %}
+            {% for legal in legals %}
+                <tr>
+                    <td colspan="2">被申请人(一审{{ first_relative_status.name }}，二审{{ second_relative_status.name }}): {{ legal.company_name }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">社会统一信用代码: {{ legal.credit_code }}</td>
+                </tr>
+                <tr>
+                    <td>法定代表人: {{ legal.legal_person }}</td>
+                    <td>联系电话: {{ legal.telephone }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">住所地:{{ legal.address }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2" class="td_20"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span>因{{ private_detail.private.case_name }}一案，
+                        申请人不服{% if first.judge_manner == 1 %}{{ first.court_name }}{{ first.judge_code }}{% endif %}
+                        {% if second.judge_manner == 1 %} {{ second.court_name }}{{ second.judge_code }}{% endif %}判决，依法申请再审。</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>申请事项:</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><span>{{ private_detail.crimiprivatelawsuitscheme.retrialapply_claim|safe }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>事实和理由:</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><span>{{ private_detail.crimiprivatelawsuitscheme.retrialapply_reasons|safe }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_20"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span>此致</span></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>{{ private_detail.court_name }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_50"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_right">
+                    <div style="padding-right:30px;">申请人：</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_right">
+                    <div  style="padding-right:30px;">{% now 'Y年m月d日' %}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

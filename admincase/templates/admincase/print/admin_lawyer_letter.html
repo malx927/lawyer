@@ -1,0 +1,76 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}律师事务所函{% endblock title %}
+{% block css %}
+  <style>
+      @page {
+          margin: 2.5cm;
+          size: a4 portrait;
+      }
+      .table {
+          border: 0px solid black;
+          border-collapse: collapse;
+          padding-top: 3px;
+          font-size: 16pt;
+          font-family: 宋体;
+          width: 100%;
+      }
+
+      .table td {
+          height: 20px;
+          word-wrap: break-word;
+          word-break: break-all;
+          border: 0px!important;
+      }
+      div {
+          line-height: 42px;
+      }
+      span {
+          display: block;
+          text-indent: 2.2rem;
+          line-height: 42px;
+      }
+      .table .td_h {
+          height: 140px;
+      }
+      .right {
+          text-align: right;
+      }
+      .td_right {
+          text-align: right;
+          padding-right: 30px;
+      }
+ </style>
+{% endblock %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center">
+            <h1>律师事务所函</h1>
+        </caption>
+        <tbody>
+            <tr>
+                <td class="right"><span>序号：{{ admin_detail.admin.case_id }}</span></td>
+            </tr>
+            <tr>
+                <td><div>{{ admin_detail.court_name }}: </div></td>
+            </tr>
+            <tr>
+                <td><span>本所接受{{ admin_detail.admin.get_cli_name }}的委托，指派律师{{ admin_detail.admin.lawyer }}
+                    {% if admin_detail.admin.assist %}、{{ admin_detail.admin.assist }}{% endif %}，
+                    担任你院办理的{{ admin_detail.admin.case_name }}中{{ admin_detail.admin.get_party_name }}的诉讼代理人。</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="td_h"><span>特此函告!</span></td>
+            </tr>
+            <tr>
+                <td class="td_right"><div>{{ office.name }}</div></td>
+            </tr>
+            <tr>
+                <td><div></div></td>
+            </tr>
+            <tr>
+                <td class="td_right"><div>{% now 'Y年m月d日' %}</div></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

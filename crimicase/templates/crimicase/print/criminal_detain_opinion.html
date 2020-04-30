@@ -1,0 +1,97 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}羁押必要性审查申请{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        size:a4 portrait;
+        margin: 2.5cm;
+    }
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family: 宋体;
+        width:100%;
+    }
+    .table td{
+        height: 25px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+    div{
+        line-height: 30px;
+    }
+    span{
+        display:block;
+        text-indent: 3.5rem;
+        line-height: 30px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+    .table .td_20{
+        height:20px;
+    }
+
+    .td_right{
+        text-align: right;
+        padding-right:40px;
+    }
+
+ </style>
+{% endblock %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center;padding-bottom: 30px;">
+            <h1>羁押必要性审查申请</h1>
+        </caption>
+        <tbody>
+        <tr>
+            <td>申请人：{{ criminal_detail.criminal.lawyer }},{{ office.name }}律师</td>
+        </tr>
+        <tr>
+            <td>联系电话：{{ criminal_detail.criminal.lawyer.telephone }}</td>
+        </tr>
+        <tr>
+            <td>申请事项：申请对{{ criminal_detail.criminal.case_name }}中的犯罪嫌疑人{{ criminal_detail.criminal.get_party_name }}进行羁押必要性审查</td>
+        </tr>
+        <tr>
+            <td>
+                <div>申请理由:</div>
+            </td>
+        </tr>
+        <tr>
+            <td><span>{{ criminal_detail.crimilawsuitscheme.detain_reason|safe }}</span></td>
+        </tr>
+        <tr>
+            <td class="td_50"></td>
+        </tr>
+        <tr>
+            <td><span>此致</span></td>
+        </tr>
+        <tr>
+            <td>
+                <div>{{ criminal_detail.procuracy_name|default:"" }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_50"></td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <div>申请人：{{ criminal_detail.criminal.lawyer }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td_right">
+                <div>{% now 'Y年m月d日' %}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

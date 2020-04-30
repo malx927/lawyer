@@ -1,0 +1,331 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}委托代理协议{% endblock title %}
+{% block css %}
+  <style type="text/css">
+    @page {
+        size:a4 portrait;
+        margin: 2.2cm;
+    }
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        font-size:14pt;
+        font-family:宋体;
+        color:#000000;
+        width:100%;
+    }
+    caption {
+        text-align: center;
+        color: #000;
+    }
+    .table td{
+        height: 18px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px solid black!important;
+        padding: 2px 8px!important;
+
+    }
+    .td_col_1{
+      width:12%;
+      text-align: right;
+      padding-right:10px;
+    }
+    .td_col_p0{
+      padding-right:0px;
+    }
+    div{
+        line-height: 18px;
+    }
+    span{
+        display:block;
+        text-indent: 2rem;
+        line-height: 18px;
+    }
+    
+    .money {
+      text-indent:0rem;
+      display: inline-block;
+      min-width: 30px;
+      text-decoration: underline;
+    }
+    .table1{
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+  </style>
+{% endblock css %}
+{% block print_content %}
+   <div class="container">
+      <table class="table"  id="print_page">
+          <caption><h1>委托代理协议</h1></caption>
+          <tbody>
+            <tr>
+              <td class="td_col_1">甲方:</td>
+              <td>{{ criminal.get_party_name }}</td>
+            </tr>
+            <tr>
+              <td  class="td_col_1">乙方:</td>
+              <td>{{ office.name }}</td>
+            </tr>
+            <tr>
+              <td class="td_col_1"></td>
+              <td>甲方因{{ criminal.case_name }}，根据《中华人民共和国刑事诉讼法》和《中华人民共和国律师法》等有关法律的规定，
+                聘请乙方律师提供法律帮助、辩护或代理。甲、乙双方本着诚实信用原则，经充分协商，订立本合同，
+                共同信守。
+                </td>
+            </tr>
+            <tr>
+              <td class="td_col_1">第一条</td>
+              <td> 相关事项</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0">1、</td>
+                <td>乙方接受甲方委托，指派律师作为甲方的辩护人或代理人，甲方同意乙方指派其他业务助理配合完成辅助工作；</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0">2、</td>
+                <td><b>委托阶段：{{ criminal.get_commission_stage }}</b></td>
+            </tr>
+            <tr>
+              <td class="td_col_1">第二条</td>
+              <td> 乙方提供法律服务范围包括（因乙方律师所不能控制的原因无法完成或无法及时完成的除外）:</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0">(一) </td>
+              <td> 侦查阶段：</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>1、提供法律咨询;</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>2、代理申诉、控告;</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>3、申请取保候审;</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>4、向侦查机关了解犯罪嫌疑人涉嫌的罪名;</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>5、会见犯罪嫌疑人;</td>
+            </tr>
+            <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>6、查阅、摘抄、复制本案的诉讼文书、技术性鉴定材料。</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0">(二) </td>
+              <td>审查起诉阶段：</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>1、提供法律咨询;</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>2、代理申诉、控告;</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>3、申请取保候审;</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>4、会见犯罪嫌疑人;</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>5、查阅、摘抄、复制本案的诉讼文书、技术性鉴定材料。</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0">(三) </td>
+              <td>审判阶段：</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>1、一审出庭辩护或代理;</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>2、二审上诉及辩护或代理;</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>3、再审申请及辩护或代理。</td>
+            </tr>
+            <tr>
+                <td class="td_col_1">第三条</td>
+                <td>甲方的义务</td>
+              </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0">1、</td>
+              <td>甲方应当真实、详尽和及时地向乙方律师叙述案情及介绍与案件有关的情况，提供与委托事项有关的证据、文件及其他事实材料。不得隐瞒事实，伪造证据，弄虚作假，否则，律师有权拒绝辩护或代理，
+                  所收律师费不予退回。
+                </td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0">2、</td>
+              <td>甲方应当积极、主动地配合乙方律师的工作，对乙方律师提出的要求应当明确、合理。</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0">3、</td>
+              <td>甲方应当按时、足额向乙方支付本合同第四条约定的律师费。</td>
+            </tr>
+            <tr>
+              <td class="td_col_1">第四条</td>
+              <td>律师代理费</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>经双方协商同意，甲方向乙方支付律师代理费人民币<b>¥<span class="money">{{ criminal.total_expenses|floatformat:2 }}</span>元</b>,(大写)<span class="money"><b>{{ criminal.get_total_expenses }}</b></span>，本合同签字之日支付。</td>
+            </tr>
+            <tr>
+              <td class="td_col_1">第五条</td>
+              <td> 办案费用</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>乙方律师办理甲方委托代理事项所发生的下列办案费用，应当由甲方承担。</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>1、相关行政、司法、鉴定、公证等部门收取的费用。</td>
+            </tr>
+            <tr>
+              <td class="td_col_1 td_col_p0"></td>
+              <td>2、交通、食宿等费用。</td>
+            </tr>
+              <tr>
+                <td class="td_col_1">第六条</td>
+                <td>合同的变更和解除</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0">1、</td>
+                <td>甲、乙双方经协商同意，可以变更或者解除本合同</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0">2、</td>
+                <td>甲方有下列情形之一的，乙方有权解除合同，依约所收费用不予退还：</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(1)甲方的要求违反法律、法规或违反律师职业道德和执业规范，或者甲方有捏造事实、伪造证据或者隐瞒重要情节等情形的;
+               </td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(2)甲方逾期十日仍不向乙方足额支付律师费的;</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(3)甲方有其他违约行为，导致乙方律师无法正常履行职责的。</td>
+              </tr>
+              <tr>
+                <td class="td_col_1">第七条</td>
+                <td>特别告知</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>诉讼有风险，乙方及承办律师在办案过程中对承办案件的咨询或代理意见、法律意见、建议、方案等仅作为法律层面上的分析论证或预测，不作为诉讼结果的承诺与保证。乙方及承办律师对诉讼结果不承担
+                    法律责任。下列情况视为案件代理终结，所交代理费不予退还：庭内外调解和解、撤诉、判决、裁定、裁决、解除委托。
+                </td>
+              </tr>
+              <tr>
+                  <td class="td_col_1">第八条</td>
+                  <td>违约责任</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0">1、</td>
+                <td>乙方无正当理由不履行本协议第二条约定服务的，甲方有权要求部份或全部退还律师代理费，但甲方不得以如下理由要求乙方退费：</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(1)甲方就已委托乙方代理的事项单方面另行委托其他律师事务所的律师代理的;</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(2)乙方接受委托后，甲方以乙方收费过高为由要求退费的;</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(3)乙方接受委托并作好出庭准备后，侦查机关撤销案件，检察机关不予起诉或者撤回案件的;</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(4)在自诉案件中，甲方或对方当事人不起诉或撤诉的;</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0"></td>
+                <td>(5)其他非因乙方或者乙方律师的原因，甲方无故终止合同或不合理的单方解除合同的。</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0">2、</td>
+                <td>甲方无正当理由不支付律师服务费或者办案费，或者不合理的单方解除合同，乙方有权要求甲方支付未付的律师服务费及办案费，或暂停工作直至甲方正确履行义务为止。</td>
+              </tr>
+              <tr>
+                <td class="td_col_1 td_col_p0">3、</td>
+                <td>甲方未按合同约定按期交纳律师费，经催告仍未履行的，乙方可单方面终止该合同。</td>
+              </tr>
+              <tr>
+                  <td class="td_col_1 td_col_p0">第九条</td>
+                  <td>争议的解决</td>
+              </tr>
+              <tr>
+                  <td class="td_col_1 td_col_p0"></td>
+                  <td>本合同适用中华人民共和国《合同法》、《律师法》、《民事诉讼法》、《仲裁法》等法 律。甲乙双方如果发生争议，应当友好协商解决。如协商不成，任何一方均有权向（{{ office.address }}）仲裁委员会提起仲裁。
+                    </td>
+              </tr>
+              <tr>
+                  <td class="td_col_1 td_col_p0">第十条</td>
+                  <td>合同的生效</td>
+              </tr>
+              <tr>
+                  <td class="td_col_1 td_col_p0"></td>
+                  <td>本合同正本一式二份，甲乙双方各执一份，自双方签字盖章之日起生效，至法院（仲裁委）
+                      作出判决、裁定、决定（或调解）、裁决之日止。
+                  </td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td><td></td>
+              </tr>
+            {% if criminal.party_name %}
+              <tr>
+                  <td class="td_col_1"></td>
+                  <td>
+                    <table class="table1">
+                        <tr><td>甲    方：</td><td>（签章）</td><td>乙    方：</td><td>{{ office.name }}</td></tr>
+                        <tr><td>联系电话：</td><td>{{ criminal.party_tel|default:"" }}</td><td>联系电话：</td><td>{{ office.telephone }}</td></tr>
+                        <tr><td></td><td></td><td>开 户 行：</td><td>{{ office.bank }}</td></tr>
+                        <tr><td></td><td></td><td>账    号：</td><td>{{ office.account }}</td></tr>
+                        <tr><td>签订日期：</td><td>{% now 'Y年m月d日' %}</td><td>签订日期：</td><td>{% now 'Y年m月d日' %}</td></tr>
+                      </table>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if criminal.party_legal_name %}
+              <tr>
+                  <td class="td_col_1"></td>
+                  <td>
+                    <table class="table1">
+                        <tr><td>甲    方：</td><td>（签章）{{ criminal.party_legal_name }}</td><td>乙    方：</td><td>{{ office.name }}</td></tr>
+                        <tr><td>联系电话：</td><td>{{ criminal.party_legal_telephone }}</td><td>联系电话：</td><td>{{ office.telephone }}</td></tr>
+                        <tr><td>地   址：</td><td>{{ criminal.party_legal_address }}</td><td>开 户 行：</td><td>{{ office.bank }}</td></tr>
+                        <tr><td>开 户 行：</td><td></td><td>账    号：</td><td>{{ office.account }}</td></tr>
+                        <tr><td>账    号：</td><td></td><td></td><td></td></tr>
+                        <tr><td>税    号：</td><td>{{ criminal.party_legal_code }}</td><td></td><td></td></tr>
+                        <tr><td>签订日期：</td><td>{% now "Y年m月d日" %}</td><td>签订日期：</td><td>{% now "Y年m月d日" %}</td></tr>
+                      </table>
+                  </td>
+              </tr>
+          {% endif %}
+          </tbody>
+        </table>
+  </div>
+{% endblock %}

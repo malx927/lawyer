@@ -1,0 +1,559 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}刑事附带民事案件{% endblock title %}
+{% block css %}
+    <style>
+        .panel-ex {
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 5px;
+        }
+
+        .tab-content-ex {
+            margin-top: 15px;
+            margin-left: 10px;
+            margin-right: 10px;
+        "
+        }
+
+        .mgt-50 {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .btn-w300 {
+            width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .mgb-25 {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #999;
+        }
+    #main .panel{
+        margin-bottom: 0px!important;
+    }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        <h3 class="text-center">刑事附带民事案件</h3>
+    </div>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="panel panel-default" id="main">
+                <div class="panel-heading">
+                    <div class="panel-title">刑事附带民事案件信息</div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.case_name.id_for_label }}"><span
+                                    class="red">*</span>{{ form.case_name.label }}</label>
+                            <div class="col-sm-7">
+                                {{ form.case_name }}
+                                <span class="text-danger">{{ form.case_name.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.case_prop.id_for_label }}">{{ form.case_prop.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.case_prop }}
+                                <span class="text-danger">{{ form.case_prop.errors.0 }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.info_type.id_for_label }}"><span
+                                    class="red">*</span>{{ form.info_type.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.info_type }}
+                                <span class="text-danger">{{ form.info_type.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-2 control-label"
+                                   for="{{ form.stage.id_for_label }}"><span
+                                    class="red">*</span>{{ form.stage.label }}</label>
+                            <div class="col-sm-2">
+                                {{ form.stage }}
+                                <span class="text-danger">{{ form.stage.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.commission_stage.id_for_label }}">{{ form.commission_stage.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.commission_stage }}
+                                <span class="text-danger">{{ form.commission_stage.errors.0 }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.agent.id_for_label }}">{{ form.agent.label }}</label>
+                            <div class="col-sm-3">
+                                {{ form.agent }}
+                                <span class="text-danger">{{ form.agent.errors.0 }}</span>
+                            </div>
+                            <label class="col-sm-2 control-label"
+                                   for="{{ form.org_legal_status.id_for_label }}">{{ form.org_legal_status.label }}</label>
+                            <div class="col-sm-2">
+                                {{ form.org_legal_status }}
+                                <span class="text-danger">{{ form.org_legal_status.errors.0 }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label"
+                                       for="{{ form.total_expenses.id_for_label }}">{{ form.total_expenses.label }}</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        {{ form.total_expenses }}
+                                        <div class="input-group-addon">元</div>
+                                    </div>
+                                    <span class="text-danger">{{ form.total_expenses.errors.0 }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label"
+                                   for="{{ form.case_brief.id_for_label }}">{{ form.case_brief.label }}</label>
+                            <div class="col-sm-11">
+                                    {{ form.case_brief }}
+                                <span class="text-danger">{{ form.case_brief.errors.0 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">委托人信息</div>
+                </div>
+                <div class="panel-body panel-ex">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#cli_person" data-toggle="tab">自然人</a></li>
+                        <li><a href="#cli_guarder" data-toggle="tab">监护人</a></li>
+                        <li><a href="#cli_legal_person" data-toggle="tab">法人</a></li>
+                    </ul>
+                    <div class="tab-content tab-content-ex">
+                        <div class="tab-pane fade in active" id="cli_person">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.cli_name.id_for_label }}">{{ form.cli_name.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.cli_name }}
+                                        <span class="text-danger">{{ form.cli_name.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_tel.id_for_label }}">{{ form.cli_tel.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.cli_tel }}
+                                        <span class="text-danger">{{ form.cli_tel.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_relation.id_for_label }}">{{ form.cli_relation.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.cli_relation }}
+                                        <span class="text-danger">{{ form.cli_relation.errors.0 }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_address.id_for_label }}">{{ form.cli_address.label }}</label>
+                                    <div class="col-sm-6">
+                                        {{ form.cli_address }}
+                                        <span class="text-danger">{{ form.cli_address.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_id_card.id_for_label }}">{{ form.cli_id_card.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.cli_id_card }}
+                                        <span class="text-danger">{{ form.cli_id_card.errors.0 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="cli_guarder">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.guard_name.id_for_label }}">{{ form.guard_name.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.guard_name }}
+                                        <span class="text-danger">{{ form.guard_name.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.guard_tel.id_for_label }}">{{ form.guard_tel.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.guard_tel }}
+                                        <span class="text-danger">{{ form.guard_tel.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.guard_relation.id_for_label }}">{{ form.guard_relation.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.guard_relation }}
+                                        <span class="text-danger">{{ form.guard_relation.errors.0 }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.guard_address.id_for_label }}">{{ form.guard_address.label }}</label>
+                                    <div class="col-sm-6">
+                                        {{ form.guard_address }}
+                                        <span class="text-danger">{{ form.guard_address.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.guard_id_card.id_for_label }}">{{ form.guard_id_card.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.guard_id_card }}
+                                        <span class="text-danger">{{ form.guard_id_card.errors.0 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="cli_legal_person">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.cli_legal_name.id_for_label }}">{{ form.cli_legal_name.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.cli_legal_name }}
+                                        <span class="text-danger">{{ form.cli_legal_name.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_legal_person.id_for_label }}">{{ form.cli_legal_person.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.cli_legal_person }}
+                                        <span class="text-danger">{{ form.cli_legal_person.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_legal_tel.id_for_label }}">{{ form.cli_legal_tel.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.cli_legal_tel }}
+                                        <span class="text-danger">{{ form.cli_legal_tel.errors.0 }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ form.cli_legal_address.id_for_label }}">{{ form.cli_legal_address.label }}</label>
+                                    <div class="col-sm-3">
+                                        {{ form.cli_legal_address }}
+                                        <span class="text-danger">{{ form.cli_legal_address.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_legal_code.id_for_label }}">{{ form.cli_legal_code.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.cli_legal_code }}
+                                        <span class="text-danger">{{ form.cli_legal_code.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-2 control-label"
+                                           for="{{ form.cli_legal_job.id_for_label }}">{{ form.cli_legal_job.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ form.cli_legal_job }}
+                                        <span class="text-danger">{{ form.cli_legal_job.errors.0 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h3 class="panel-title">当事人信息</h3>
+                        </div>
+                        <div class="col-sm-4 text-right">
+                            <a id="id_copy" class="btn btn-success btn-sm">委托人和当事人为同一人</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body panel-ex">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#parter_person" data-toggle="tab">自然人</a></li>
+                        <li><a href="#parter_legal" data-toggle="tab">法人</a></li>
+                    </ul>
+                    <div class="tab-content  tab-content-ex">
+                        <div class="tab-pane fade in active" id="parter_person">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_name.id_for_label }}">{{ form.party_name.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.party_name }}
+                                        <span class="text-danger">{{ form.party_name.errors.0 }}</span>
+                                    </div>
+
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_sex.id_for_label }}">{{ form.party_sex.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_sex }}
+                                        <span class="text-danger">{{ form.party_sex.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_birth.id_for_label }}">{{ form.party_birth.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_birth }}
+                                        <span class="text-danger">{{ form.party_birth.errors.0 }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_person_status.id_for_label }}">{{ form.party_person_status.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.party_person_status }}
+                                        <span class="text-danger">{{ form.party_person_status.errors.0 }}</span>
+                                    </div>
+
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_nation.id_for_label }}">{{ form.party_nation.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_nation }}
+                                        <span class="text-danger">{{ form.party_nation.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_job.id_for_label }}">{{ form.party_job.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_job }}
+                                        <span class="text-danger">{{ form.party_job.errors.0 }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_tel.id_for_label }}">{{ form.party_tel.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.party_tel }}
+                                        <span class="text-danger">{{ form.party_tel.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_id_code.id_for_label }}">{{ form.party_id_code.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_id_code }}
+                                        <span class="text-danger">{{ form.party_id_code.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_address.id_for_label }}">{{ form.party_address.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_address }}
+                                        <span class="text-danger">{{ form.party_address.errors.0 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade " id="parter_legal">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_legal_name.id_for_label }}">{{ form.party_legal_name.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_legal_name }}
+                                        <span class="text-danger">{{ form.party_legal_name.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_legal_person.id_for_label }}">{{ form.party_legal_person.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.party_legal_person }}
+                                        <span class="text-danger">{{ form.party_legal_person.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_legal_job.id_for_label }}">{{ form.party_legal_job.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.party_legal_job }}
+                                        <span class="text-danger">{{ form.party_legal_job.errors.0 }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_company_status.id_for_label }}">{{ form.party_company_status.label }}</label>
+                                    <div class="col-xs-3">
+                                        {{ form.party_company_status }}
+                                        <span class="text-danger">{{ form.party_company_status.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_legal_code.id_for_label }}">{{ form.party_legal_code.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.party_legal_code }}
+                                        <span class="text-danger">{{ form.party_legal_code.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-xs-1 control-label"
+                                           for="{{ form.party_legal_telephone.id_for_label }}">{{ form.party_legal_telephone.label }}</label>
+                                    <div class="col-xs-2">
+                                        {{ form.party_legal_telephone }}
+                                        <span class="text-danger">{{ form.party_legal_telephone.errors.0 }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label"
+                                           for="{{ form.party_legal_address.id_for_label }}">{{ form.party_legal_address.label }}</label>
+                                    <div class="col-xs-7">
+                                        {{ form.party_legal_address }}
+                                        <span class="text-danger">{{ form.party_legal_address.errors.0 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{ form.lawyer }}{{ form.assist }}{{ form.manager }}
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" id="id_{{ result_formset.prefix }}">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <h3 class="panel-title">历史判决结果(记录当事人在本所代理前案件的判决信息)</h3>
+                            </div>
+                            <div class="col-sm-1 text-right">
+                                <span class="formset-add-btn"></span>&nbsp;&nbsp;
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body formset-body">
+                        {{ result_formset.management_form }}
+                        {{ result_formset.non_form_errors }}
+                        {% for result in result_formset %}
+                            <div class="form-horizontal mgb-25">
+                                {% for fld in result.hidden_fields %}{{ fld }}{% endfor %}
+                                {% if result.instance.pk %}{{ result.DELETE }}{% endif %}
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ result.stage.id_for_label }}">{{ result.stage.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ result.stage }}
+                                        <span class="text-danger">{{ result.stage.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ result.legal_status.id_for_label }}">{{ result.legal_status.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ result.legal_status }}
+                                        <span class="text-danger">{{ result.legal_status.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ result.court_name.id_for_label }}">{{ result.court_name.label }}</label>
+                                    <div class="col-sm-5">
+                                        {{ result.court_name }}
+                                        <span class="text-danger">{{ result.court_name.errors.0 }}</span>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ result.judge_date.id_for_label }}">{{ result.judge_date.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ result.judge_date }}
+                                        <span class="text-danger">{{ result.judge_date.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ result.judge_code.id_for_label }}">{{ result.judge_code.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ result.judge_code }}
+                                        <span class="text-danger">{{ result.judge_code.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ result.judge_result.id_for_label }}">{{ result.judge_result.label }}</label>
+                                    <div class="col-sm-2">
+                                        {{ result.judge_result }}
+                                        <span class="text-danger">{{ result.judge_result.errors.0 }}</span>
+                                    </div>
+                                    <label class="col-sm-1 control-label"
+                                           for="{{ result.judge_manner.id_for_label }}">{{ result.judge_manner.label }}</label>
+                                    <div class="col-sm-2">
+                                        <div class="input-group">
+                                            {{ result.judge_manner }}
+                                            <span class="input-group-btn">
+                                        </span>
+                                        </div>
+                                        <span class="text-danger">{{ result.judge_manner.errors.0 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mgt-50">
+                <div class="col-xs-12 text-center">
+
+                    <button type="submit" class="btn btn-primary btn-w300">下一步</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock right %}
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery.formset.js' %}"></script>
+    <script>
+        $(function () {
+            $("#id_party_birth").datepicker({
+                format: "yyyy-mm-dd",
+                language: "zh-CN",
+                autoclose: true,
+            });
+            $("[id$=judge_date]").datepicker({
+                format: "yyyy-mm-dd",
+                language: "zh-CN",
+                autoclose: true,
+            });
+
+            $('#id_{{ result_formset.prefix }} .panel-body .form-horizontal').formset({
+                'prefix': '{{ result_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                'formCssClass':'{{ result_formset.prefix }}-form',
+                added: function (row) {
+                    {#var xh = $("#id_{{ nature_person_formset.prefix }}-TOTAL_FORMS").val();#}
+                    {#row.find(".xh").text(xh);#}
+                }
+            });
+            $('#accordion').on('show.bs.collapse', function (e) {
+                $('a[data-toggle="collapse"]').html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
+            });
+            $('#accordion').on('hidden.bs.collapse', function (e) {
+                $('a[data-toggle="collapse"]').html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
+            });
+            $("#id_copy").click(function () {
+                //自然人
+                $("#id_party_name").val($("#id_cli_name").val());
+                $("#id_party_tel").val($("#id_cli_tel").val());
+                $("#id_party_address").val($("#id_cli_address").val());
+                $("#id_party_id_code").val($("#id_cli_id_card").val());
+                //法人
+                $("#id_party_legal_name").val($("#id_cli_legal_name").val());
+                $("#id_party_legal_person").val($("#id_cli_legal_person").val());
+                $("#id_party_legal_telephone").val($("#id_cli_legal_tel").val());
+                $("#id_party_legal_address").val($("#id_cli_legal_address").val());
+                $("#id_party_legal_code").val($("#id_cli_legal_code").val());
+                $("#id_party_legal_job").val($("#id_cli_legal_job").val());
+
+            });
+            $('.summernote').summernote({
+                height: 100,
+                tabsize: 2,
+                lang: 'zh-CN',
+                followingToolbar: true,
+                placeholder: '请在此输入内容...',
+                {#fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],#}
+             toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['table', ['table']],
+                    {#['insert', ['link', 'picture', 'hr']],#}
+                    ['view', ['fullscreen', 'codeview']],
+                    ['help', ['help']]
+                  ],
+            });
+
+        })
+
+    </script>
+{% endblock %}

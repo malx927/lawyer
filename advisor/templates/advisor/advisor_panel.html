@@ -1,0 +1,31 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}用户授权{% endblock title %}
+{% block right %}
+    {% for item in children_menus %}
+        {% if item.is_menu %}
+        <div class="ynbox">
+            <div class="ynntowbox"><a href="{{ item.url }}"><img
+                    src="{% static item.icon %}"></a></div>
+            <div class="ynname"><a href="{{ item.url }}">{{ item.title }}</a></div>
+        </div>
+        {% endif %}
+    {% endfor %}
+
+{#    <div class="ynbox">#}
+{#        <div class="ynntowbox"><a href="{% url 'advisor:consult-unit-add' %}"><img#}
+{#                src="{% static 'lawyer/img/fpgwdw.jpg' %}"></a></div>#}
+{#        <div class="ynname"><a href="{% url 'advisor:consult-unit-add' %}">新建顾问单位</a></div>#}
+{#    </div>#}
+{#    <div class="ynbox">#}
+{#        <div class="ynntowbox"><a href="{% url 'advisor:consult-unit-list' %}"><img#}
+{#                src="{% static 'lawyer/img/fpgwdw.jpg' %}"></a></div>#}
+{#        <div class="ynname"><a href="{% url 'advisor:consult-unit-list' %}">分配法律顾问</a></div>#}
+{#    </div>#}
+{#    <div class="ynbox">#}
+{#        <div class="ynntowbox"><a href="{% url 'advisor:consult-unit-list' %}"><img#}
+{#                src="{% static 'lawyer/img/cxgwdw.jpg' %}"></a></div>#}
+{#        <div class="ynname"><a href="{% url 'advisor:consult-unit-list' %}">查询顾问单位</a></div>#}
+{#    </div>#}
+
+{% endblock right %}
+

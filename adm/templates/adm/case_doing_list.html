@@ -1,0 +1,258 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}未完案件{% endblock title %}
+{% block css %}
+    <style>
+        .table tr > td {
+            border-top: 0px!important;
+            vertical-align: middle!important;
+        }
+    .nav-tabs-custom {
+        margin-bottom: 20px;
+        background: #fff;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        border-radius: 4px;
+    }
+    .nav-tabs-custom>.nav-tabs>li {
+        border-top: 2px solid transparent;
+        margin-bottom: -2px;
+        margin-right: 5px;
+    }
+    .nav-tabs-custom>.nav-tabs>li.active {
+        {#border-top-color: #3c8dbc!important;#}
+    }
+    .tab-content-ex {
+        margin-top: 15px;
+     }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="container">
+        <div class="page-header">
+            <h3 class="text-center">未完案件信息</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active"><a href="#id_civil" data-toggle="tab">民事案件</a></li>
+                        <li><a href="#id_criminal" data-toggle="tab">刑事案件</a></li>
+                        <li><a href="#id_admin_case" data-toggle="tab">行政案件</a></li>
+                        <li><a href="#id_criminal_private" data-toggle="tab">刑事自诉</a></li>
+                        <li><a href="#id_criminal_civil" data-toggle="tab">刑事附带民事</a></li>
+                        <li><a href="#id_arbitration" data-toggle="tab">仲裁案件</a></li>
+                    </ul>
+                    <div class="tab-content tab-content-ex">
+                        <div class="tab-pane fade in active" id="id_civil">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th>案件名称</th>
+                                    <th>案件进程</th>
+                                    <th>案件阶段</th>
+                                    {% if request|has_permission:'civil-case:civil-case-del' %}
+                                    <th>操作</th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for c in civils %}
+                                        <tr>
+                                            <td class="text-center">{{ forloop.counter }}</td>
+                                            <td><a href="{% url 'civil-case:civil-case-update' c.id %}">{{ c.case_name }}</a></td>
+                                            <td>{{ c.get_info_type_display }}</td>
+                                            <td>
+                                                {% for d in c.civildetail_set.all %}
+                                                <a href="{% url 'civil-case:civil-case-detail-update' d.id %}"  class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                                {% endfor %}
+                                            </td>
+
+                                            <td>
+                                                {% if request|has_permission:'civil-case:civil-case-del' %}
+                                                <a href="#"  data-item="{% url 'civil-case:civil-case-del' c.id %}" class="btn btn-xs btn-danger btn-del">删除</a>
+                                                {% endif %}
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade " id="id_criminal">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th>案件名称</th>
+                                    <th>案件进程</th>
+                                    <th>案件阶段</th>
+                                    {% if request|has_permission:'criminal:criminal-case-del' %}
+                                        <th>操作</th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in criminals %}
+                                    <tr>
+                                        <td class="text-center">{{ forloop.counter }}</td>
+                                        <td>
+                                            <a href="{% url 'criminal:criminal-case-update' c.id %}">{{ c.case_name }}</a>
+                                        </td>
+                                        <td>{{ c.get_info_type_display }}</td>
+                                        <td>
+                                            {% for d in c.criminaldetail_set.all %}
+                                                <a href="{% url 'criminal:criminal-case-detail-update' d.id %}"
+                                                   class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% if request|has_permission:'criminal:criminal-case-del' %}
+                                                <a href="#" data-item="{% url 'criminal:criminal-case-del' c.id %}"
+                                                   class="btn btn-xs btn-danger btn-del">删除</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade " id="id_admin_case">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th>案件名称</th>
+                                    <th>案件进程</th>
+                                    <th>案件阶段</th>
+                                    {% if request|has_permission:'admincase:admin-case-del' %}
+                                        <th>操作</th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for ad in admins %}
+                                    <tr>
+                                        <td class="text-center">{{ forloop.counter }}</td>
+                                        <td>
+                                            <a href="{% url 'admincase:admin-case-update' ad.id %}">{{ ad.case_name }}</a>
+                                        </td>
+                                        <td>{{ ad.get_info_type_display }}</td>
+                                        <td>
+                                            {% for d in ad.admindetail_set.all %}
+                                                <a href="{% url 'admincase:admin-case-detail-update' d.id %}"
+                                                   class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% if request|has_permission:'admincase:admin-case-del' %}
+                                                <a href="#" data-item="{% url 'admincase:admin-case-del' ad.id %}"
+                                                   class="btn btn-xs btn-danger btn-del">删除</a>
+                                            {% endif %}
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade " id="id_criminal_private">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th>案件名称</th>
+                                    <th>案件进程</th>
+                                    <th>案件阶段</th>
+                                    {% if request|has_permission:'private:private-case-del' %}
+                                        <th>操作</th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for p in privates %}
+                                    <tr>
+                                        <td class="text-center">{{ forloop.counter }}</td>
+                                        <td>
+                                            <a href="{% url 'private:private-case-update' p.id %}">{{ p.case_name }}</a>
+                                        </td>
+                                        <td>{{ p.get_info_type_display }}</td>
+                                        <td>
+                                            {% for d in p.crimiprivatedetail_set.all %}
+                                                <a href="{% url 'private:private-case-detail-update' d.id %}"
+                                                   class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% if request|has_permission:'private:private-case-del' %}
+                                                <a href="#" data-item="{% url 'private:private-case-del' p.id %}"
+                                                   class="btn btn-xs btn-danger btn-del">删除</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade " id="id_criminal_civil">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">序号</th>
+                                    <th>案件名称</th>
+                                    <th>案件进程</th>
+                                    <th>案件阶段</th>
+                                    {% if request|has_permission:'crmcivil:crmcivil-case-del' %}
+                                        <th>操作</th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for cc in crimicivils %}
+                                    <tr>
+                                        <td class="text-center">{{ forloop.counter }}</td>
+                                        <td>
+                                            <a href="{% url 'crmcivil:crmcivil-case-update' cc.id %}">{{ cc.case_name }}</a>
+                                        </td>
+                                        <td>{{ cc.get_info_type_display }}</td>
+                                        <td>
+                                            {% for d in cc.crimicivildetail_set.all %}
+                                                <a href="{% url 'crmcivil:crmcivil-case-detail-update' d.id %}"
+                                                   class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% if request|has_permission:'crmcivil:crmcivil-case-del' %}
+                                                <a href="#" data-item="{% url 'crmcivil:crmcivil-case-del' cc.id %}"
+                                                   class="btn btn-xs btn-danger btn-del">删除</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tab-pane fade " id="id_arbitration">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock right %}
+{% block extjs %}
+<script>
+    $(function(){
+        var activeTab = sessionStorage.getItem("tab");
+        if(activeTab){
+            $('a[href="'+ activeTab +'"]').tab("show");
+        }
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var activeTab = $(e.target).attr("href");
+            sessionStorage.setItem("tab", activeTab);
+        });
+    });
+</script>
+{% endblock extjs %}

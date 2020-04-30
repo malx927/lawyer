@@ -1,0 +1,171 @@
+ul,ol,li{
+	list-style-type:none;
+}
+.banner{
+	background-image: url(../img/banner.jpg);
+	width: 100%;
+	height: 290px;
+	background-repeat: no-repeat;							
+}
+.dabiaoti{
+	font-size: 20px;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-weight: 700;
+}
+.biaoti{
+	font-size: 16px;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+}
+.biaotinei{
+	border: 1px solid #E3E3E3;
+	border-radius:5px;
+}
+.quyuleixing{
+	font-size: 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+	width: 90%;
+	text-align: center;
+	padding-top: 10px;
+}
+.lvsuoxx{
+	font-size: 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+	width: 90%;
+	text-align: left;
+	padding-top: 10px;
+}
+.ynbox{
+	width: 70px; 
+	height: 130px; 
+	float: left; 
+	margin-top: 80px; 
+	margin-left: 15%;
+}
+.ynnbox{
+	width: 70px; 
+	height: 70px;
+	margin-bottom: 5px;
+}
+.lsbox{
+	font-size: 16px;
+	padding: 10px;
+}
+.lsmz{
+	float: left;
+	padding: 10px;
+	border: 1px solid #EEE;
+	background-color: #f9f9f9;
+	padding-right: 80px;
+}
+.lsmz a{
+	color: #000;
+	font-family: "microsoft yahei";
+	font-size: 14px;
+}
+.lsmz li{
+	color: #000;
+	font-family: "microsoft yahei";
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+.sqbottom{
+	overflow: hidden; 
+	display: block; 
+	width: 100%; 
+	padding-left: 35px; 
+	padding-bottom: 20px;
+}
+.sjqj{
+	float: left; 
+}
+.sqbbox{
+	display: flex; 
+	float: left; 
+	padding-right: 10px;
+}
+.sqbbox span{
+	line-height: 23px; 
+	float: left;
+}
+.shuliang{
+	width: 200px;
+	margin: 0 auto;
+}
+.shuliang li{
+	font-size: 16px;
+	color: #000;
+	font-family: "microsoft yahei";
+	padding-top: 10px;
+}
+.lsxxbox span{
+	font-size: 16px;
+}
+.lsxxbox{
+	padding-bottom: 20px;
+}
+.neibiaoqian{
+	width: 80px; 
+	line-height: 24px; 
+	float: left; 
+	font-size: 16px; 
+	margin-right: 10px;
+}
+#mytab{
+	font-size: 13px;
+}
+.box{
+	position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1)
+}
+.pad{padding: 10px;}
+.dabj{
+	margin: 0; 
+	background-color: #eee;
+}
+.nrk{
+	background-color: #fff;
+	min-height: 545px;
+}
+.ding{
+	background-color: #acacac;
+}
+.ynname{
+	text-align: center; 
+	padding-top: 5px;
+}
+.ynname a{
+	font-size: 16px; 
+	text-decoration: none; 
+	color: #000;
+}
+.xgmm{
+	width: 300px;
+	margin: 0 auto;
+	
+}
+.xgmmm{
+	width: 270px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.xgmmm span{
+	width: 70px;
+	font-size: 14px;
+	display: block;
+	float: left;
+}
+.an{
+	text-align: center;
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>权限信息</title>
+		<link rel="stylesheet" href="../lib/css/stylels.css" />
+		<link rel="stylesheet" type="text/css" href="../lib/css/bootstrap.min.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<div class="yt">
+			<div class="logo"></div>
+			<div class="youyt">
+				<div class="yonghuming">用户名：<span>某某某</span></div>
+				<div><input type="submit" value="修改密码" style="float: right; border: 1px solid #008AFF; border-radius:4px; margin-bottom: 5px;" onclick="javascript:location.href='xgmm.html'"></div>
+				<div><input type="submit" value="退出" style="float: right; border: 1px solid #008AFF; border-radius:4px;" onclick="javascript:location.href='lsdsy.html'"></div>
+			</div>
+		</div>
+		<!--<div class="banner"></div>-->
+		<div class="dabox">
+			<div class="liftbox">
+				<div class="move"><a href="ajxx.html">案件信息</a></div>
+				<div class="move"><a href="gwdw.html">法律顾问</a></div>
+				<div class="move"><a href="#">非诉业务</a></div>
+				<div class="move"><a href="index.html">用户授权</a></div>
+				<div class="move"><a href="ryxx.html">人员信息</a></div>
+				<div class="move"><a href="lsxx.html">律所信息</a></div>
+				<div class="move"><a href="qxfp.html">权限分配</a></div>
+				<div class="move"><a href="jsgl.html">角色管理</a></div>
+				<div class="move green"><a href="qxxx.html">权限信息</a></div>
+			</div>
+			<div class="youbox">
+				
+					<div class="row">
+						<div class="container-fluid" style="margin-top: 20px;">
+							<div class="col-md-4">
+								<form class="form-group">
+									<div class="form-group addel">
+										<div class="panel-heading sqxxx" style="padding: 7px 0px;">
+											<h3 class="panel-title panel-heading liebiao" style="font-size: 14px; padding: 12px; margin-left: 19px; float: left;">菜单管理</h3>
+											<button type="button" class="btn btn-success addel-add" style="padding: 5px 10px; line-height: 21px; float: right; margin-right: 17px;">
+												<i class="fa fa-remove glyphicon glyphicon-plus" style="text-decoration: none; font-style: normal;">添加</i>
+											</button>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<ul class="mt">
+												<li class="col-md-6">名称</li>
+												<li class="col-md-6">选项</li>
+											</ul>
+										</div>
+										<div class="form-group target" style="margin-bottom: 0;">
+											<div class="input-group">
+												<span class="input-group-btn" style="border: 1px solid #ddd;">
+													<div class="col-xs-6" style="padding: 0px;">
+														<h3 class="panel-title panel-heading liebiao" style="font-size: 14px; padding: 12px; margin-left: 19px;"><a href="">管理员（2）</a></h3>
+													</div>
+													
+											 		<div class="col-xs-6" style="padding: 0px;">
+														<button type="button" class="btn btn-primary" style="margin-top: 3px; margin-bottom: 3px; margin-right: 10px; margin-left: 12px;" onclick="disp_prompt()">
+															<i class="fa fa-plus" style="font-style: normal;">修改</i>
+														</button>
+														<button type="button" class="btn btn-danger addel-delete">
+															<i class="fa fa-remove" style="color:#FFF text-decoration: none; font-weight: bold; font-style: normal;">删除</i>
+														</button>
+													</div>
+												</span>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							
+							<div class="col-md-8">
+								<form class="form-group">
+									<div class="form-group addel">
+										<div class="panel-heading sqxxx" style="padding: 7px 0px;">
+											<h3 class="panel-title panel-heading liebiao" style="font-size: 14px; padding: 12px; margin-left: 19px; float: left;">权限管理</h3>
+											<button type="button" class="btn btn-primary addel-add" style="padding: 5px 10px; line-height: 21px; float: right; margin-right: 17px; margin-left: 10px;" onclick="javascript:location.href='plclqx.html'" >
+												<i class="fa fa-remove glyphicon glyphicon-th-large" style="text-decoration: none; font-style: normal;">批量处理</i>
+											</button>
+											<button type="button" class="btn btn-success addel-add" style="padding: 5px 10px; line-height: 21px; float: right;" onclick="javascript:location.href='xjqx.html'">
+												<i class="fa fa-remove glyphicon glyphicon-plus" style="text-decoration: none; font-style: normal;">新建</i>
+											</button>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<ul class="mt">
+												<li class="col-md-2">名称</li>
+												<li class="col-md-3">URL</li>
+												<li class="col-md-2">CODE</li>
+												<li class="col-md-1">菜单</li>
+												<li class="col-md-2">所属菜单</li>
+												<li class="col-md-2">选项</li>
+											</ul>
+										</div>
+										
+										<div class="panel-heading" style="background-color: #ddd; border: 1px solid #ddd; padding: 0px;">
+											<div class="form-group target" style="margin-bottom: 0;">
+												<div class="input-group">
+													<span class="input-group-btn" style="border: 1px solid #ddd;">
+														<div class="col-md-2" style="padding: 0px;">
+															<h3 class="panel-title panel-heading liebiao" style="font-size: 14px; padding: 12px; margin-left: 19px;">权限信息</h3>
+														</div>
+														<div class="col-md-3" style="padding: 0px;">
+															<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px; margin-left: 13px;">/rbac/menu/list/</h3>
+														</div>
+														<div class="col-md-2" style="padding: 0px;">
+															<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px; margin-left: 8px;">rbac:menu_list</h3>
+														</div>
+														<div class="col-md-1" style="padding: 0px;">
+															<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px;">是</h3>
+														</div>
+														<div class="col-md-2" style="padding: 0px;">
+															<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px;">权限管理</h3>
+														</div>
+												 		<div class="col-md-2" style="padding: 0px;">
+															<button type="button" class="btn btn-primary" style="margin-top: 3px; margin-bottom: 3px; margin-right: 10px;" onclick="javascript:location.href='xjqx.html'">
+																<i class="fa fa-plus" style="font-style: normal;">修改</i>
+															</button>
+															<button type="button" class="btn btn-danger addel-delete">
+																<i class="fa fa-remove" style="color: #fff; text-decoration: none; font-weight: bold; font-style: normal;">删除</i>
+															</button>
+														</div>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="form-group target" style="margin-bottom: 0;">
+											<div class="input-group">
+												<span class="input-group-btn" style="border: 1px solid #ddd;">
+													<div class="col-md-2" style="padding: 0px;">
+														<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px; margin-left: 19px;">1</h3>
+													</div>
+													<div class="col-md-3" style="padding: 0px;">
+														<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px; margin-left: 13px;">角色1</h3>
+													</div>
+													<div class="col-md-2" style="padding: 0px;">
+														<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px; margin-left: 8px;">10</h3>
+													</div>
+													<div class="col-md-1" style="padding: 0px;">
+														<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px;">10</h3>
+													</div>
+													<div class="col-md-2" style="padding: 0px;">
+														<h3 class="panel-title panel-heading" style="font-size: 14px; padding: 12px;">10</h3>
+													</div>
+											 		<div class="col-md-2" style="padding: 0px;">
+														<button type="button" class="btn btn-primary" style="margin-top: 3px; margin-bottom: 3px; margin-right: 10px;" onclick="javascript:location.href='xjqx.html'">
+															<i class="fa fa-plus" style="font-style: normal;">修改</i>
+														</button>
+														<button type="button" class="btn btn-danger addel-delete">
+															<i class="fa fa-remove" style="color: #fff; text-decoration: none; font-weight: bold; font-style: normal;">删除</i>
+														</button>
+													</div>
+												</span>
+											</div>
+										</div>
+										
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>	
+			</div>
+		</div>
+<script type="text/javascript" src="../lib/js/jquery-2.1.1.min.js" ></script>
+<script type="text/javascript" src="../lib/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="../lib/js/addel.jquery.js" ></script>
+<script>
+$(document).ready(function () {
+	$('.addel').addel({
+		classes: {
+			target: 'target'
+		},
+		animation: {
+			duration: 300
+		}
+	}).on('addel:delete', function (event) {
+		if (!window.confirm('您确定要删除该项吗 ' + event.target.find(':input').val() + '?')) {
+			event.preventDefault();
+		}
+	});
+});
+</script>
+<script type="text/javascript">
+
+function disp_prompt(){
+	var name=prompt("请输入新的菜单名称")
+		if (name!=null && name!="")
+
+{
+
+alert("修改成功");
+
+}
+
+}
+
+</script>
+	</body>
+</html>

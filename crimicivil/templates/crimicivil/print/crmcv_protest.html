@@ -1,0 +1,109 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}刑事抗诉申请书{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        size:a4 portrait;
+        margin: 2.5cm;
+    }
+
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family: 宋体;
+        width:100%;
+    }
+    .table td{
+        height: 25px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+    div{
+        line-height: 30px;
+    }
+    span{
+        display:block;
+        text-indent: 2.2rem;
+        line-height: 30px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+    .table .td_20{
+        height:20px;
+    }
+    .td_right{
+        text-align: right;
+        padding-right:40px;
+    }
+ </style>
+{% endblock %}
+{% block print_content %}
+<div class="print_area" id="print_page">
+    <table class="table">
+        <caption style="text-align: center; padding-bottom: 30px;"><h1>刑事抗诉申请书</h1></caption>
+        <tbody>
+        <tr>
+            <td>申请人:{{ crmcivil_detail.crimicivil.party_name }}</td>
+            <td>性别: {{ crmcivil_detail.crimicivil.get_party_sex_display }}</td>
+            <td>民族：{{ crmcivil_detail.crimicivil.party_nation }}</td>
+            <td>年龄: {{ crmcivil_detail.crimicivil.get_birth_date }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">身份证号: {{ crmcivil_detail.crimicivil.party_id_code }}</td>
+            <td colspan="2">电话: {{ crmcivil_detail.crimicivil.party_tel }}</td>
+        </tr>
+        <tr>
+            <td colspan="4">现住址: {{ crmcivil_detail.crimicivil.party_address }}</td>
+        </tr>
+
+            <tr>
+                <td colspan="4">
+                    <span>申请人因{{crmcivil_detail.crimicivil.case_name}}，不服{{ first_trial.court_name }}作出的{{ first_trial.judge_code }}判决，
+                        请求贵院向{{ first_trial.court_name }}提出抗诉。</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><div>申请事项:</div></td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>{{ crmcivil_detail.crimicivillawsuitscheme.protest_application|safe }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div>事实和理由:</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>{{ crmcivil_detail.crimicivillawsuitscheme.protest_reasons|safe }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_20"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>此致</span></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div>{{ crmcivil_detail.court_name }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_50"></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_right"><div style="padding-right:40px;">申请人：</div></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_right"><div>{% now 'Y年m月d日' %}</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

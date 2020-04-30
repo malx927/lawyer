@@ -1,0 +1,181 @@
+{% extends 'mlawyer/mbase.html' %}{% load static %}
+{% block title %}计算结果{% endblock title %}
+{% block css %}
+    <style>
+        .mgt-20 {
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div class="mgt-20"></div>
+    <form action="" method="post">
+        {% csrf_token %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">计算结果</h3>
+                </div>
+                <div class="col-xs-2 text-right">
+                </div>
+            </div>
+        </div>
+        <table class="table table-responsive  table-bordered" >
+            <thead>
+            <th class="text-center">序号</th>
+            <th class="text-center">费用名称</th>
+            <th class="text-center">费用金额(元)</th>
+{#            <th class="text-center">说明</th>#}
+            </thead>
+            <tbody>
+            <tr>
+                <td class="text-center">1</td>
+                <td class="text-center">医疗费</td>
+                <td class="text-center">{{ hospital_fee|default:0.00|floatformat:2 }}</td>
+{#                <td></td>#}
+            </tr>
+            <tr>
+                <td class="text-center">2</td>
+                <td class="text-center">交通费</td>
+                <td class="text-center">{{ car_fee|default:0.00|floatformat:2 }}</td>
+{#                <td></td>#}
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td class="text-center">住宿费</td>
+                <td class="text-center">{{ hotel_fee|default:0.00|floatformat:2 }}</td>
+{#                <td></td>#}
+            </tr>
+            <tr>
+                <td class="text-center">4</td>
+                <td class="text-center">鉴定费</td>
+                <td class="text-center">{{ appraise_fee|default:0.00|floatformat:2 }}</td>
+{#                <td></td>#}
+            </tr>
+            <tr>
+                <td class="text-center">5</td>
+                <td class="text-center">伤残辅助器具费</td>
+                <td class="text-center">{{ device_cost|default:0.00|floatformat:2 }}</td>
+{#                <td></td>#}
+            </tr>
+             <tr>
+                <td class="text-center">6</td>
+                <td class="text-center">误工费</td>
+                <td class="text-center">{{ delay_fee.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if delay_fee.values > 0 %}#}
+{#                        {{ delay_fee.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+             <tr>
+                <td class="text-center">7</td>
+                <td class="text-center">护理费</td>
+                <td class="text-center">{{ nurse_fee.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if nurse_fee.values > 0 %}#}
+{#                        {{ nurse_fee.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+             <tr>
+                <td class="text-center">8</td>
+                <td class="text-center">住院伙食补助费</td>
+                <td class="text-center">{{ food_allowance.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if food_allowance.values > 0 %}#}
+{#                        {{ food_allowance.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+            <tr>
+                <td class="text-center">9</td>
+                <td class="text-center">护理依赖费</td>
+                <td class="text-center">{{ nurse_denpendence.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if nurse_denpendence.values > 0 %}#}
+{#                        {{ nurse_denpendence.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+            <tr>
+                <td class="text-center">10</td>
+                <td class="text-center">营养费</td>
+                <td class="text-center">{{ nutrition_fee.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if nutrition_fee.values > 0 %}#}
+{#                        {{ nutrition_fee.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+             <tr>
+                <td class="text-center">11</td>
+                <td class="text-center">伤残赔偿金</td>
+                <td class="text-center">{{ disability_fee.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if disability_fee.values > 0 %}#}
+{#                        {{ disability_fee.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+            <tr>
+                <td class="text-center">12</td>
+                <td class="text-center">死亡赔偿金</td>
+                <td class="text-center">{{ dead_compensation_fee.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if dead_compensation_fee.values > 0 %}#}
+{#                        {{ dead_compensation_fee.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+            <tr>
+                <td class="text-center">13</td>
+                <td class="text-center">被抚(扶)养人生活费</td>
+                <td class="text-center">{{ supported_living_expense.value|floatformat:2 }}</td>
+{#                <td class="text-center">#}
+{#                    {% if supported_living_expense.values > 0 %}#}
+{#                        {{ supported_living_expense.formats }}#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+            <tr>
+                <td class="text-center">14</td>
+                <td class="text-center">丧葬费</td>
+                <td class="text-center">{{ funeral_expense|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">15</td>
+                <td class="text-center">整容费</td>
+                <td class="text-center">{{ cosmetic_expense|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">16</td>
+                <td class="text-center">精神抚慰金</td>
+                <td class="text-center">{{ spirit_fee|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">17</td>
+                <td class="text-center">其他费用</td>
+                <td class="text-center">{{ other_fee|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <td class="text-center"></td>
+                <td class="text-center">合计</td>
+                <td class="text-center">{{ totals_fee|floatformat:2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <a href="{% url 'calculator:calc-index' %}" class="btn btn-success btn-xs" style="width: 90px;">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+{% endblock content %}
+
+

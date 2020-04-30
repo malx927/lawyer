@@ -1,0 +1,103 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}案件受理阶段{% endblock title %}
+{% block css %}
+    <style>
+
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center">{{ crmcivil_detail.crimicivil.case_name }}案件信息</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title h34">{{ crmcivil_detail.crimicivil.case_name }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-xs-4 control-label">委托人:</label>
+                                <div class="col-sm-4 col-xs-8 form-control-static">
+                                    {{ crmcivil_detail.crimicivil.get_cli_name }}
+                                </div>
+                                <label class="col-sm-2 col-xs-4 control-label">联系电话:</label>
+                                <div class="form-control-static col-sm-4 col-xs-8">
+                                        {{ crmcivil_detail.crimicivil.get_cli_telephone|default:"" }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-xs-4 control-label">当事人:</label>
+                                <div class="col-sm-4 col-xs-8 form-control-static">
+                                    {{ crmcivil_detail.crimicivil.get_party_name }}
+                                </div>
+                                <label class="col-sm-2 col-xs-4 control-label">联系电话:</label>
+                                <div class="form-control-static col-sm-4 col-xs-8">
+                                        {{ crmcivil_detail.crimicivil.get_party_telephone|default:"" }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-xs-4 control-label">办案机关:</label>
+                                <div class="col-sm-4 col-xs-8 form-control-static">
+                                    {{ crmcivil_detail.court_name|default:"" }}
+                                </div>
+                                <label class="col-sm-2 col-xs-4 control-label">联系电话:</label>
+                                <div class="form-control-static col-sm-4 col-xs-8">
+                                        {{ crmcivil_detail.court_tel|default:"" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer text-center">
+                        <a href="{% url 'print:crmcivil-case-print' crmcivil_detail.id %}" class="btn btn-primary">打印相关资料</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">人员信息</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+{#                    <button type="button" class="btn btn-primary" id="sava-edit-btn">确定</button>#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock right %}
+
+{% block extjs %}
+<script>
+    $(function () {
+        {% if form.success %}
+            Swal.fire(
+              '用户创建成功',
+              '',
+              'success'
+            )
+        {% endif %}
+        $('#myModal').on('show.bs.modal', function(event){
+            var button = $(event.relatedTarget);
+            var uri = button.attr('data-uri');
+            $(this).find('.modal-body').load(uri, function (response, status, xhr) {
+                if (status == "error") {
+                    var msg = "Sorry but there was an error: ";
+                    modal.find('.modal-body').html(msg + xhr.status + " " + (typeof xhr === 'string' ? xhr : xhr.responseText || xhr.statusText || 'Unknown error!'));
+                }
+            });
+        })
+    })
+</script>
+{% endblock %}

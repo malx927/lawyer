@@ -1,0 +1,192 @@
+{% extends 'mlawyer/mbase.html' %}{% load static %}
+{% block title %}鉴定信息{% endblock title %}
+{% block css %}
+    <style>
+        .mgt-20 {
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div class="mgt-20"></div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">鉴定信息</div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_fixed_date">定残日期</label>
+                            <input type="date" class="form-control" id="id_fixed_date" name="fixed_date" placeholder="定残日期">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_nutrition_duration">鉴定营养期限</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="id_nutrition_duration" name="nutrition_duration" placeholder="营养期限">
+                                <div class="input-group-addon">天</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_delay_duration">鉴定误工期限</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="id_delay_duration" name="delay_duration" placeholder="误工期限">
+                                <div class="input-group-addon">天</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_nurse_duration">鉴定护理期限</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="id_nurse_duration" name="nurse_duration" placeholder="护理期限">
+                                <div class="input-group-addon">天</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_nurse_persons">鉴定护理人数</label>
+                            <input type="text" class="form-control" id="id_nurse_persons" name="nurse_persons" placeholder="护理人数">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_late_treat_fee">鉴定后期治疗费</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" class="form-control" id="late_treat_fee" name="late_treat_fee" placeholder="鉴定后期治疗费">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_nurse_depend_level">护理依赖等级</label>
+                            <select name="nurse_depend_level" id="id_nurse_depend_level"  class="form-control">
+                                <option value="">----</option>
+                                <option value="50">一级</option>
+                                <option value="40">二级</option>
+                                <option value="30">三级</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_nurse_depend_duration">护理依赖期限</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="id_nurse_depend_duration" name="nurse_depend_duration" placeholder="护理依赖期限">
+                                <div class="input-group-addon">天</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="id_appraise_fee">鉴定费</label>
+                            <div class="input-group">
+                                <input type="number" step="0.01" class="form-control" id="id_appraise_fee" name="appraise_fee" placeholder="鉴定费">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">定残级别</div>
+            </div>
+            <div class="panel-body" id="id_{{ disability_formset.prefix }}">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_top_disability">顶级伤残</label>
+                            <select name="top_disability" id="id_top_disability"  class="form-control">
+                                {% for key, value in disability_type.items %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  formset-body">
+                    {{ disability_formset.management_form }}
+                    {% for disability in disability_formset %}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="">次级伤残</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">{{ forloop.counter }}</div>
+                                    {{ disability.name }}
+                                    <div class="input-group-btn">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-xs-12 btn-xs formset-add-btn">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 text-center">
+                <button type="submit" class="btn btn-success" style="width: 90px;">下一步</button>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery.formset.js' %}"></script>
+    <script>
+        $(function () {
+             $('#id_{{disability_formset.prefix }} .formset-body .col-xs-12').formset({
+                'prefix': '{{ disability_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>增加次级伤残',
+                added: function (row) {
+                    var xh = $("#id_{{ disability_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".input-group-addon").text(xh);
+                }
+            });
+        })
+
+    </script>
+{% endblock %}
+
+
+{#<script>#}
+{#    $(document).ready(function () {#}
+{#        $('.addel-container').addel({#}
+{#            events: {#}
+{#                added: function (event) {#}
+{#                    var old_xh = event.target.last().find('.input-group-addon').text();#}
+{#                    console.log(old_xh);#}
+{#                    var xh = parseInt(old_xh) + 1;#}
+{#                    event.added.find(".input-group-addon").text(xh);#}
+{#                }#}
+{#            }#}
+{#        }).on('addel:delete', function (event) {#}
+{#            if (!window.confirm('确定要删除吗?')) {#}
+{#                console.log('Deletion prevented!');#}
+{#                event.preventDefault();#}
+{#            }#}
+{#        });#}
+{#    });#}
+{#</script>#}

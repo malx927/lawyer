@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>权限分配</title>
+		<link rel="stylesheet" href="../lib/css/stylels.css" />
+		<link rel="stylesheet" type="text/css" href="../lib/css/bootstrap.min.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<div class="yt">
+			<div class="logo"></div>
+			<div class="youyt">
+				<div class="yonghuming">用户名：<span>某某某</span></div>
+				<div><input type="submit" value="修改密码" style="float: right; border: 1px solid #008AFF; border-radius:4px; margin-bottom: 5px;" onclick="javascript:location.href='xgmm.html'"></div>
+				<div><input type="submit" value="退出" style="float: right; border: 1px solid #008AFF; border-radius:4px;" onclick="javascript:location.href='lsdsy.html'"></div>
+			</div>
+		</div>
+		<!--<div class="banner"></div>-->
+		<div class="dabox">
+			<div class="liftbox">
+				<div class="move"><a href="ajxx.html">案件信息</a></div>
+				<div class="move"><a href="gwdw.html">法律顾问</a></div>
+				<div class="move"><a href="#">非诉业务</a></div>
+				<div class="move"><a href="index.html">用户授权</a></div>
+				<div class="move"><a href="ryxx.html">人员信息</a></div>
+				<div class="move"><a href="lsxx.html">律所信息</a></div>
+				<div class="move green"><a href="qxfp.html">权限分配</a></div>
+				<div class="move"><a href="jsgl.html">角色管理</a></div>
+				<div class="move"><a href="qxxx.html">权限信息</a></div>
+			</div>
+			<div class="youbox">
+				
+					<div class="row">
+						<div class="container-fluid" style="margin-top: 20px;">
+							<div class="col-md-2">
+								<form class="form-group">
+									<div class="form-group" style="overflow: hidden;">
+										<div class="panel-heading sqxx">
+											<h3 class="panel-title">用户信息</h3>
+										</div>
+										<div class="col-md-12 sqxxb">
+											<label for="exampleInputName2" style="line-height: 30px; display: block; margin-left: 10px;"><a href="">用户1</a></label>
+	    									<label for="exampleInputName2" style="line-height: 30px; display: block; margin-left: 10px;"><a href="">用户2</a></label>
+	    									<label for="exampleInputName2" style="line-height: 30px; display: block; margin-left: 10px;"><a href="">用户3</a></label>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-md-3">
+								<form class="form-group">
+									<div class="form-group" style="overflow: hidden;">
+										<div class="panel-heading sqxx">
+											<h3 class="panel-title">角色
+											<button type="button" class="btn btn-success" style="float: right; padding: 2px 4px; line-height: 15px;" >
+												<i class="fa fa-remove" style="text-decoration: none; font-style: normal;">保存</i>
+											</button>
+											</h3>
+										</div>
+										<div class="col-md-12 sqxxb">
+											<label for="exampleInputName2" style="line-height: 20px; display: block; margin-left: 5px; color: #d4dce6;">提示：点击用户后才能为其分配角色</label>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<h3 class="panel-title" style="font-size: 14px; line-height: 18px; padding-top: 35px;">角色
+												<i class="fa fa-remove" style="text-decoration: none; font-style: normal; float: right; margin-right: 70px;">保存</i>
+											</h3>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<h3 class="panel-title" style="font-size: 14px; color:#337ab7;"><a href="">主管</a>
+											<input type="checkbox" class="frmr">
+											</h3>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<h3 class="panel-title" style="font-size: 14px; color:#337ab7;"><a href="">业务员</a>
+											<input type="checkbox" class="frmr">
+											</h3>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<h3 class="panel-title" style="font-size: 14px; color:#337ab7;"><a href="">管理员</a>
+											<input type="checkbox" class="frmr">
+											</h3>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-md-7">
+								<form class="form-group">
+									<div class="form-group" style="overflow: hidden;">
+										<div class="panel-heading sqxx">
+											<h3 class="panel-title">权限分配</h3>
+										</div>
+										<div class="col-md-12 sqxxb">
+											<label for="exampleInputName2" style="line-height: 20px; display: block; margin-left: 5px; color: #d4dce6;">提示：点击角色后，才能为其分配权限。</label>
+										</div>
+										<div class="panel-heading" style="background-color: #ddd; border: 1px solid #ddd;">
+											<h3 class="panel-title" style="font-size: 14px; line-height: 18px; padding-top: 35px;">信息管理</h3>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<div style="overflow: hidden; margin-bottom: 5px;">
+												<input type="checkbox"class="mrft">
+												<h3 class="panel-title ffl" style="font-size: 14px;">账单列表</h3>
+											</div>
+											<div style="overflow: hidden; padding-left: 20px;">
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">添加账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">删除账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">修改订单</h3>
+												</label>
+											</div>
+											<div style="overflow: hidden; margin-bottom: 5px;">
+												<input type="checkbox"class="mrft">
+												<h3 class="panel-title ffl" style="font-size: 14px;">账单列表</h3>
+											</div>
+											<div style="overflow: hidden; padding-left: 20px;">
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">添加账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">删除账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">修改订单</h3>
+												</label>
+											</div>
+										</div>
+										
+										<div class="panel-heading" style="background-color: #ddd; border: 1px solid #ddd;">
+											<h3 class="panel-title" style="font-size: 14px; line-height: 18px;">信息管理</h3>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<div style="overflow: hidden; margin-bottom: 5px;">
+												<input type="checkbox"class="mrft">
+												<h3 class="panel-title ffl" style="font-size: 14px;">账单列表</h3>
+											</div>
+											<div style="overflow: hidden; padding-left: 20px;">
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">添加账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">删除账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">修改订单</h3>
+												</label>
+											</div>
+											<div style="overflow: hidden; margin-bottom: 5px;">
+												<input type="checkbox"class="mrft">
+												<h3 class="panel-title ffl" style="font-size: 14px;">账单列表</h3>
+											</div>
+											<div style="overflow: hidden; padding-left: 20px;">
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">添加账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">删除账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">修改订单</h3>
+												</label>
+											</div>
+										</div>
+										
+										<div class="panel-heading panel-default" style="background-color: #ddd; border: 1px solid #ddd;">
+											<h3 class="panel-title" style="font-size: 14px; line-height: 18px;">信息管理</h3>
+										</div>
+										<div class="panel-heading panel-default" style="border: 1px solid #ddd;">
+											<div style="overflow: hidden; margin-bottom: 5px;">
+												<input type="checkbox"class="mrft">
+												<h3 class="panel-title ffl" style="font-size: 14px;">账单列表</h3>
+											</div>
+											<div style="overflow: hidden; padding-left: 20px;">
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">添加账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">删除账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">修改订单</h3>
+												</label>
+											</div>
+											<div style="overflow: hidden; margin-bottom: 5px;">
+												<input type="checkbox"class="mrft">
+												<h3 class="panel-title ffl" style="font-size: 14px;">账单列表</h3>
+											</div>
+											<div style="overflow: hidden; padding-left: 20px;">
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">添加账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">删除账单</h3>
+												</label>
+												<label style="margin-right: 10px;">
+													<input type="checkbox"class="mrft">
+													<h3 class="panel-title ffl" style="font-size: 14px;">修改订单</h3>
+												</label>
+											</div>
+										</div>
+										
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>	
+			</div>
+		</div>
+<script type="text/javascript" src="../lib/js/jquery-2.1.1.min.js" ></script>
+<script type="text/javascript" src="../lib/js/bootstrap.min.js" ></script>
+	</body>
+</html>

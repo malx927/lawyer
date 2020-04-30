@@ -1,0 +1,11 @@
+<form class="form-horizontal" id="id_form" method="post" action="{{ action }}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="{{ form.name.id_for_label }}"><span class="red">*</span>{{ form.name.label }}
+        </label>
+        <div class="col-sm-8">
+            {{ form.name }}
+            <span class="text-danger">{{ form.name.errors.0 }}</span>
+        </div>
+    </div>
+</form>

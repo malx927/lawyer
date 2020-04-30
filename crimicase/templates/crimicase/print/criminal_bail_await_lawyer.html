@@ -1,0 +1,106 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}取保候审申请书{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        size:a4 portrait;
+        margin: 2.0cm;
+    }
+
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family:宋体;
+        color:#000000;
+        width:100%;
+    }
+    .table td{
+        height: 25px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+
+    div{
+        line-height: 30px;
+    }
+    span{
+        display:block;
+        text-indent: 2.2rem;
+        line-height: 30px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+    .table .td_20{
+        height:20px;
+    }
+
+    .td_right{
+        text-align: right;
+        padding-right:40px;
+    }
+    .sp_h{
+        min-height: 150px;
+    }
+ </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center; padding-bottom: 30px;">
+            <h1>取保候审申请书</h1>
+        </caption>
+        <tbody>
+        <tr>
+            <td style="width:120px;">申请人:</td>
+            <td>{{ criminal_detail.criminal.lawyer }},{{ office.name }}律师</td>
+        </tr>
+        <tr>
+            <td>联系电话:</td>
+            <td>{{ criminal_detail.criminal.lawyer.telephone }}</td>
+        </tr>
+        <tr>
+            <td>申请事项:</td>
+            <td>对{{ criminal_detail.criminal.case_name }}中的在押犯罪嫌疑人/被告人{{ criminal_detail.criminal.get_party_name }}申请取保候审</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>申请理由:</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="sp_h"><span>{{ criminal_detail.crimilawsuitscheme.bail_reasons|safe }}</span></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_20"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><span>此致</span></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>{{ criminal_detail.court_name|default:"" }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_h"></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_right">
+                <div>申请人:{{ criminal_detail.criminal.lawyer }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="td_right">
+                <div>{% now 'Y年m月d日' %}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
+

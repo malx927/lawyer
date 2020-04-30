@@ -1,0 +1,29 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}我的案件{% endblock title %}
+{% block right %}
+    <div class="ynbox">
+        <div class="ynnbox"><a href="{% url 'civil-case:civil-case-add' %}"><img src="{% static 'lawyer/img/msaj.jpg' %}" width="70" height="70"></a></div>
+        <div class="ynname"><a href="{% url 'civil-case:civil-case-add' %}">民事案件</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynnbox"><a href="{% url 'criminal:criminal-case-add' %}"><img src="{% static 'lawyer/img/xsaj.jpg' %}" width="70" height="70"></a></div>
+        <div class="ynname"><a href="{% url 'criminal:criminal-case-add' %}">刑事案件</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynnbox"><a href="{% url 'private:private-case-add' %}"><img src="{% static 'lawyer/img/zs.jpg' %}" width="70" height="70"></a></div>
+        <div class="ynname"><a href="{% url 'private:private-case-add' %}">刑事自诉</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynnbox"><a href="{% url 'crmcivil:crmcivil-case-add' %}"><img src="{% static 'lawyer/img/xfm.jpg' %}" width="70" height="70"></a></div>
+        <div class="ynname"><a href="{% url 'crmcivil:crmcivil-case-add' %}">刑事附带民事</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynnbox"><a href="{% url 'admincase:admin-case-add' %}"><img src="{% static 'lawyer/img/xzaj.jpg' %}" width="70" height="70"></a></div>
+        <div class="ynname"><a href="{% url 'admincase:admin-case-add' %}">行政案件</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynnbox"><a href="#"><img src="{% static 'lawyer/img/zc.jpg' %}" width="70" height="70"></a></div>
+        <div class="ynname"><a href="#">仲裁案件</a></div>
+    </div>
+{% endblock right %}
+

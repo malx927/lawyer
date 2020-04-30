@@ -1,0 +1,86 @@
+{% extends 'mlawyer/mbase.html' %}{% load static %}
+{% block title %}被抚(扶)养人及直系亲属信息{% endblock title %}
+{% block css %}
+    <style>
+        .mgt-20 {
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div class="mgt-20"></div>
+    <form action="" method="post">
+        {% csrf_token %}
+    <div class="panel panel-default" id="id_{{ relation_formset.prefix }}">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">被抚(扶)养人及直系亲属信息</h3>
+                </div>
+                <div class="col-xs-2 text-right formset-add-btn">
+                </div>
+            </div>
+        </div>
+        <table class="table table-responsive  table-bordered" >
+            <thead>
+            <th class="text-center" style="width:30%;font-size: 12px;">与当事人关系</th>
+            <th class="text-center" style="width:20%;font-size: 12px;">行为能力</th>
+            <th class="text-center" style="font-size: 12px;">劳动收入</th>
+            <th class="text-center" style="width:20%;font-size:12px;">年龄</th>
+            </thead>
+            <tbody class="formset-body">
+            {{ relation_formset.management_form }}
+            {% for relation in relation_formset %}
+                <tr>
+                    <td class="text-center">
+                        {{ relation.relation_type }}
+                    </td>
+                    <td class="text-center">
+                        {{ relation.action_ability }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        {{ relation.is_income }}
+                    </td>
+                    <td class="text-center">
+                        <div class="input-group">
+                            {{ relation.relation_age }}
+                            <div class="input-group-btn">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button type="submit" class="btn btn-success">计算</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    </form>
+{% endblock content %}
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery.formset.js' %}"></script>
+    <script>
+        $(function () {
+             $('#id_{{relation_formset.prefix }} tbody tr').formset({
+                'prefix': '{{ relation_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                added: function (row) {
+                    var xh = $("#id_{{ relation_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".input-group-addon").text(xh);
+                }
+            });
+        })
+    </script>
+{% endblock %}
+

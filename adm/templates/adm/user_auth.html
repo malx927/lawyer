@@ -1,0 +1,105 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}用户授权{% endblock title %}
+{% block right %}
+    <div class="bddbox">
+        <div class="panel panel-default mgt">
+            <div class="panel-heading">
+                <h3 class="panel-title">用户授权</h3>
+            </div>
+            <div class="panel-body">
+                {% if form %}
+                    <form class="form-horizontal" method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.post.id_for_label }}"
+                                   class="col-sm-3 control-label">{{ form.post.label }}:</label>
+                            <div class="col-sm-9">
+                                {{ form.post }}
+                                <p class="text-danger">{{ form.post.errors.0 }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_name"
+                                   class="col-sm-3 control-label">{{ form.name.label }}:</label>
+                            <div class="col-sm-9">
+                                {{ form.name }}
+                                <p class="text-danger">{{ form.name.errors.0 }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.real_name.id_for_label }}"
+                                   class="col-sm-3 control-label">{{ form.real_name.label }}:</label>
+                            <div class="col-sm-9">
+                                {{ form.real_name }}
+                                <p class="text-danger">{{ form.real_name.errors.0 }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.telephone.id_for_label }}"
+                                   class="col-sm-3 control-label">{{ form.telephone.label }}:</label>
+                            <div class="col-sm-9">
+                                {{ form.telephone }}
+                                <p class="text-danger">{{ form.telephone.errors.0 }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.password.id_for_label }}"
+                                   class="col-sm-3 control-label">{{ form.password.label }}:</label>
+                            <div class="col-sm-9">
+                                {{ form.password }}
+                                <p class="text-danger">{{ form.password.errors.0 }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.password1.id_for_label }}"
+                                   class="col-sm-3 control-label">{{ form.password1.label }}:</label>
+                            <div class="col-sm-9">
+                                {{ form.password1 }}
+                                <p class="text-danger">{{ form.password1.errors.0 }}</p>
+                                <p class="text-danger">{{ message }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.roles.id_for_label }}"
+                                   class="col-sm-3 control-label">{{ form.roles.label }}:</label>
+                            <div class="col-sm-9">
+                                {{ form.roles }}
+                                <p class="text-danger">{{ form.roles.errors.0 }}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center">
+                                    {% if form.non_field_errors %}
+                                        {% for item in form.non_field_errors %}
+                                            <p class="text-danger">{{ item }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock right %}
+
+{% block extjs %}
+    <script>
+    $(function () {
+        {% if form.success %}
+            Swal.fire(
+              '用户创建成功',
+              '',
+              'success'
+            )
+        {% endif %}
+    })
+    </script>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static %}
+{% block title %}授权委托书{% endblock title %}
+{% block css %}
+    <style>
+        @page {
+            margin: 2.5cm;
+            size: a4 portrait;
+        }
+        .table {
+            border-collapse: collapse;
+            padding-top: 3px;
+            font-size:15pt;
+            font-family:宋体;
+            color:#000000;
+            width: 100%;
+        }
+
+        .table td {
+            height: 20px;
+            word-wrap: break-word;
+            word-break: break-all;
+            border-top: 0px solid #ddd !important;
+        }
+
+        div {
+            line-height: 42px;
+        }
+
+        span {
+            display: block;
+            text-indent: 3.5rem;
+            line-height: 42px;
+        }
+    </style>
+{% endblock css %}
+{% block print_content %}
+    <table class="table" id="print_page">
+        <caption style="text-align: center">
+            <h1>授权委托书</h1>
+        </caption>
+        <tbody>
+        <tr>
+            <td><span>委托人{{ admin.get_party_name }}根据相关法律的规定，特聘请{{ office.name }}律师{{ admin.lawyer }}{% if admin.assist %}、{{ admin.assist }}{% endif %}为{{ admin.case_name }}中{{ admin.get_party_name }}的诉讼代理人。</span></td>
+        </tr>
+        <tr>
+            <td>
+                <div>委托代理权限：</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td><span>{{ admin.agent.name }}：{{ admin.agent.explain }}</span></td>
+        </tr>
+        <tr>
+            <td>
+                <div>本委托书有效期自即日起至案件结束之日止。</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table">
+                    <tr>
+                        <td colspan=2>
+                            <div>律所电话: {{ office.telephone }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>律师姓名: {{ admin.lawyer }}</div>
+                        </td>
+                        <td>
+                            <div>电话: {{ admin.lawyer.telephone }}</div>
+                        </td>
+                    </tr>
+                    {% if admin.assist %}
+                    <tr>
+                        <td>
+                            <div>律师姓名: {{ admin.assist }}</div>
+                        </td>
+                        <td>
+                            <div>电话: {{ admin.assist.telephone }}</div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>委托人:</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>{% now "Y年m月d日" %}</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+

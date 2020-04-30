@@ -1,0 +1,162 @@
+{% extends 'rbac/base.html' %}{% load static %}
+{% load rbac %}
+{% block title %} 权限分配 {% endblock title %}
+{% block css %}
+    <style>
+        .mgt{
+           margin-top: 20px;
+        }
+
+    .user-area{
+        line-height: 30px;
+        display: block;
+        margin-left: 10px;
+    }
+    .user-area a:hover{
+        color: red;
+    }
+    .active a{
+        font-weight: bold;
+        color: red;
+    }
+    .bg{
+        background-color: #f5f5f5;
+
+    }
+    .table td{
+        color: #333;
+    }
+    .table td span{
+        display: inline-block;
+        margin-left: 10px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .table td label, input{
+        font-weight: normal;
+        padding:0;
+        margin:0;
+    }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        <div class="container-fluid mgt">
+            <div class="col-md-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">用户信息</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% for user in users %}
+                                {% if user.id|safe == uid %}
+                                    <label class="user-area active"><a href="?uid={{ user.id }}">{{ user.name }}</a></label>
+                                {% else %}
+                                    <label class="user-area"><a href="?uid={{ user.id }}">{{ user.name }}</a></label>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="postType" value="role">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">角色
+                                {% if uid %}
+                                    <button type="submit" class="btn  btn-xs btn-success right">
+                                        <i class="fa fa-save"></i> 保存
+                                    </button>
+                                {% endif %}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <label style="color: #d4dce6;">提示：点击用户后才能为其分配角色</label>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>角色</th>
+                                <th>选择</th>
+                            </tr>
+                            </thead>
+                        <tbody>
+                        {% for role in roles %}
+                            <tr {% if role.id|safe == rid %} class="active" {% endif %}>
+                                <td><a href="?{% get_role_url request role.id %}">{{ role.name }}</a></td>
+                                <td>
+                                    {% if role.id in user_has_roles_dict %}
+                                        <input type="checkbox" name="roles" value="{{ role.id }}" checked/>
+                                    {% else %}
+                                        <input type="checkbox" name="roles" value="{{ role.id }}"/>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-7">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="postType" value="permission">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-sitemap" aria-hidden="true"></i> 权限分配
+                            {% if rid %}
+                                <button class="right btn btn-success btn-xs">
+                                    <i class="fa fa-save" aria-hidden="true"></i> 保存
+                                </button>
+                            {% endif %}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <label style="color: #d4dce6;">提示：点击角色后，才能为其分配权限。</label>
+                        </div>
+                        <table class="table">
+                            <tbody>
+                            {% for item in all_menu_list %}
+                                <tr class="panel-heading bg">
+                                    <td>
+                                        {% if item.id in role_has_permissions_dict %}
+                                            <input id="permission_{{ item.id }}" name="permissions" value="{{ item.id }}" type="checkbox" checked>
+                                            <label for="permission_{{ item.id }}">{{ item.title }}</label>
+                                        {% else %}
+                                            <input id="permission_{{ item.id }}" name="permissions" value="{{ item.id }}" type="checkbox">
+                                            <label for="permission_{{ item.id }}">{{ item.title }}</label>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 25px;">
+                                        {% for node in item.children %}
+                                            <span>
+                                                {% if node.id in role_has_permissions_dict %}
+                                                    <input id="permission_{{ node.id }}" name="permissions" value="{{ node.id }}" type="checkbox" checked>
+                                                {% else %}
+                                                    <input id="permission_{{ node.id }}" name="permissions" value="{{ node.id }}" type="checkbox">
+                                                {% endif %}
+                                                <label for="permission_{{ node.id }}">{{ node.title }}</label>
+                                            </span>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

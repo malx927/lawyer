@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>案件查询</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../lib/css/stylels.css" />
+		<link rel="stylesheet" type="text/css" href="../lib/css/bootstrap.min.css"/>
+		<script type="text/javascript" src="laydate/laydate.js" ></script>
+	</head>
+	<body>
+		<div class="yt">
+			<div class="logo"></div>
+			<div class="youyt">
+				<div class="yonghuming">用户名：<span>某某某</span></div>
+				<div><input type="submit" value="修改密码" style="float: right; border: 1px solid #008AFF; border-radius:4px; margin-bottom: 5px;" onclick="javascript:location.href='xgmm.html'"></div>
+				<div><input type="submit" value="退出" style="float: right; border: 1px solid #008AFF; border-radius:4px;" onclick="javascript:location.href='lsdsy.html'"></div>
+			</div>
+		</div>
+		<!--<div class="banner"></div>-->
+		<div class="dabox">
+			<div class="liftbox">
+				<div class="move green"><a href="ajxx.html">案件信息</a></div>
+				<div class="move"><a href="gwdw.html">法律顾问</a></div>
+				<div class="move"><a href="#">非诉业务</a></div>
+				<div class="move"><a href="index.html">用户授权</a></div>
+				<div class="move"><a href="ryxx.html">人员信息</a></div>
+				<div class="move"><a href="lsxx.html">律所信息</a></div>
+				<div class="move"><a href="qxfp.html">权限分配</a></div>
+				<div class="move"><a href="jsgl.html">角色管理</a></div>
+				<div class="move"><a href="qxxx.html">权限信息</a></div>
+			</div>
+			<div class="youbox">
+				<div class="sqbox">
+					<div class="sqtop">案件查询</div>
+					<div class="sqbottom">
+						<form>							
+							<div class="sqbbox">
+								<div class="sjqj">时间区间：</div>
+    							<ul class="inline">
+    							开始日：<li class="inline laydate-icon" id="start" placeholder="请选择开始时间" style="width:180px;"></li>
+    							结束日：<li class="inline laydate-icon" id="end" placeholder="请选择结束时间" style="width:180px;"></li>
+    							</ul>
+								</div>
+							
+							<div class="sqbbox">
+								<span>主办律师：</span>
+								<input type="text" name="username" id="username" placeholder="请输入主办律师" required>
+							</div>
+							
+							<div class="sqbbox">
+								<span>辅助律师：</span>
+								<input type="text" name="username" id="username" placeholder="请输入辅助律师" required>
+							</div>
+							
+														
+							<div class="sqbbox">
+								<span>律师助理：</span>
+								<input type="text" name="username" id="username" placeholder="请输入律师助理" required>
+							</div>
+							
+							<div class="sqbbox">
+								<span>案件属性：</span>
+								<select name="carlist" form="carform" style="width: 200px; text-align-last:center;">
+  									<option value="民事案件">民事案件</option>
+  									<option value="行政案件">行政案件</option>
+  									<option value="刑事案件">刑事案件</option>
+  									<option value="刑事附带民事案件">刑事附带民事案件</option>
+  									<option value="刑事自诉案件">刑事自诉案件</option>
+  									<option value="执行案件">执行案件</option>
+  									<option value="仲裁案件">仲裁案件</option> 									
+								</select>
+							</div>
+							
+							<div class="sqbbox">
+								<input type="submit" value="未完案件查询" onclick="javascript:location.href='wwajcx.html'">
+							</div>
+							
+							<div class="subm">
+								<input type="submit" value="查询" onclick="javascript:location.href='ajzl.html'">
+							</div>
+						</form>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+<script type="text/javascript" src="../lib/js/jquery-2.1.1.min.js" ></script>
+<script type="text/javascript" src="../lib/js/bootstrap.min.js" ></script>			
+<script>
+!function(){
+laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+laydate({elem: '#demo'});//绑定元素
+}();
+//日期范围限制
+var start = {
+    elem: '#start',
+    format: 'YYYY-MM-DD',
+    min: laydate.now(), //设定最小日期为当前日期
+    max: '2099-06-16', //最大日期
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+         end.min = datas; //开始日选好后，重置结束日的最小日期
+         end.start = datas //将结束日的初始值设定为开始日
+    }
+};
+var end = {
+    elem: '#end',
+    format: 'YYYY-MM-DD',
+    min: laydate.now(),
+    max: '2099-06-16',
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+        start.max = datas; //结束日选好后，充值开始日的最大日期
+    }
+};
+laydate(start);
+laydate(end);
+
+</script>		
+	</body>
+</html>

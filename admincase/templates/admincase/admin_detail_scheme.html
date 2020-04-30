@@ -1,0 +1,405 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}行政案件诉讼方案{% endblock title %}
+{% block css %}
+    <style>
+        .panel-ex {
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 5px;
+        }
+     .tab-content-ex{
+         margin-top:15px;
+         margin-left: 10px;
+         margin-right: 10px;"
+     }
+     .mgb-25{
+         margin-bottom: 25px;
+     }
+    .form-group{
+         margin-bottom: 10px;
+    }
+    .mgt-50{
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .btn-w160{
+        width: 160px;
+    }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        {% if action == "update" %}
+            <h3 class="text-center">[{{ form.instance.admin_detail.admin.case_name }}]诉讼方案</h3>
+            <h4 class="text-center">{{ form.instance.admin_detail.stage }}{{ form.instance.admin_detail.legal_status }}</h4>
+        {% else %}
+            <h3 class="text-center">[{{ admin_detail.admin.case_name }}]诉讼方案</h3>
+            <h4 class="text-center">{{ admin_detail.stage }}--{{ admin_detail.legal_status }}</h4>
+        {% endif %}
+    </div>
+    <div class="container-fluid">
+        <form  method="post">
+            {% if action == "update" %}
+            <input type="hidden" name="admin_detail" id="id_admin_detail" value="{{ form.admin_detail.value }}">
+            {% else %}
+            <input type="hidden" name="admin_detail" id="id_admin_detail" value="{{ admin_detail.id }}">
+            {% endif %}
+        {% csrf_token %}
+         {% if not form.complaint_claim.is_hidden %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">{{ form.complaint_claim.help_text }}</div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.complaint_claim.id_for_label }}">{{ form.complaint_claim.label }}</label>
+                            {{ form.complaint_claim }}
+                            <span class="text-danger">{{ form.complaint_claim.errors.0 }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.complaint_reasons.id_for_label }}">{{ form.complaint_reasons.label }}</label>
+                            {{ form.complaint_reasons }}
+                            <span class="text-danger">{{ form.complaint_reasons.errors.0 }}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+         {% endif %}
+        {% if not form.appeal_claim.is_hidden %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ form.appeal_claim.help_text }}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.appeal_claim.id_for_label }}">{{ form.appeal_claim.label }}</label>
+                            {{ form.appeal_claim }}
+                            <span class="text-danger">{{ form.appeal_claim.errors.0 }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.appeal_reasons.id_for_label }}">{{ form.appeal_reasons.label }}</label>
+                            {{ form.appeal_reasons }}
+                            <span class="text-danger">{{ form.appeal_reasons.errors.0 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if not form.pleadings.is_hidden %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">{{ form.pleadings.help_text }}</div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.pleadings.id_for_label }}">{{ form.pleadings.label }}</label>
+                            {{ form.pleadings }}
+                            <span class="text-danger">{{ form.pleadings.errors.0 }}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+        {% if not form.retrialapply_claim.is_hidden %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ form.retrialapply_claim.help_text }}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.retrialapply_claim.id_for_label }}">{{ form.retrialapply_claim.label }}</label>
+                            {{ form.retrialapply_claim }}
+                            <span class="text-danger">{{ form.retrialapply_claim.errors.0 }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.retrialapply_reasons.id_for_label }}">{{ form.retrialapply_reasons.label }}</label>
+                            {{ form.retrialapply_reasons }}
+                            <span class="text-danger">{{ form.retrialapply_reasons.errors.0 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if not form.statement.is_hidden %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">{{ form.statement.help_text }}</div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label"
+                                   for="{{ form.statement.id_for_label }}">{{ form.statement.label }}</label>
+                            {{ form.statement }}
+                            <span class="text-danger">{{ form.statement.errors.0 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+            <div class="panel panel-default"  id="id_{{ evidence_formset.prefix }}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">证据目录</h3>
+                        </div>
+                        <div class="col-sm-10 text-right formset-add-btn">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead class="thead">
+                        <tr>
+                            <th class="text-center" style="width: 30%">证据名称</th>
+                            <th class="text-center" style="width: 8%">证据类型</th>
+                            <th class="text-center" style="width: 8%">证据来源</th>
+                            <th class="text-center">证据目的</th>
+                        </tr>
+                    </thead>
+                    <tbody class="formset-body">
+                        {{ evidence_formset.management_form }}
+                        {{ evidence_formset.non_form_errors }}
+                        {% for evidence in evidence_formset %}
+                            {% for fld in evidence.hidden_fields %}{{ fld }}{% endfor %}
+
+                            <tr>
+                                <td>
+                                    {% if evidence.instance.pk %}{{ evidence.DELETE }}{% endif %}
+                                    {{ evidence.evi_name }}
+                                    <span class="text-danger">{{ evidence.evi_name.errors.0 }}</span>
+                                </td>
+                                <td>
+                                    {{ evidence.evi_type }}
+                                    <span class="text-danger">{{ evidence.evi_type.errors.0 }}</span>
+                                </td>
+                                <td>
+                                    {{ evidence.evi_source }}
+                                    <span class="text-danger">{{ evidence.evi_source.errors.0 }}</span>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        {{ evidence.evi_purpose }}
+                                        <span class="input-group-btn"></span>
+                                    </div>
+                                     <span class="text-danger">{{ evidence.evi_purpose.errors.0 }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default"  id="id_{{ asking_formset.prefix }}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">询问提纲</h3>
+                        </div>
+                        <div class="col-sm-10 text-right formset-add-btn">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead class="thead">
+                        <tr>
+                            <th class="text-center">询问对象</th>
+                            <th class="text-center">询问内容</th>
+                        </tr>
+                    </thead>
+                    <tbody class="formset-body">
+                        {{ asking_formset.management_form }}
+                        {{ asking_formset.non_form_errors }}
+                        {% for asking in asking_formset %}
+                            {% for fld in asking.hidden_fields %}{{ fld }}{% endfor %}
+                            <tr>
+                                <td>
+                                    {% if asking.instance.pk %}{{ asking.DELETE }}{% endif %}
+                                    {{ asking.target }}
+                                    <span class="text-danger">{{ asking.target.errors.0 }}</span>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        {{ asking.content }}
+                                        <span class="input-group-btn"></span>
+                                    </div>
+
+                                    <span class="text-danger">{{ asking.content.errors.0 }}</span>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default"  id="id_{{ applications_formset.prefix }}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">所需申请书</h3>
+                        </div>
+                        <div class="col-sm-10 text-right formset-add-btn">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <tbody class="formset-body">
+                        {{ applications_formset.management_form }}
+                        {{ applications_formset.non_form_errors }}
+                        {% for applications in applications_formset %}
+                            {% for fld in applications.hidden_fields %}{{ fld }}{% endfor %}
+
+                            <tr>
+                                <td>
+                                    {% if applications.instance.pk %}{{ applications.DELETE }}{% endif %}
+                                    <div class="input-group">
+                                        {{ applications.appli_name }}
+                                        <span class="input-group-btn"></span>
+                                    </div>
+                                    <span class="text-danger">{{ applications.appli_name.errors.0 }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="panel panel-default"  id="id_{{ compensate_formset.prefix }}">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <h3 class="panel-title">赔偿明细</h3>
+                        </div>
+                        <div class="col-sm-10 text-right formset-add-btn">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <tbody class="formset-body">
+                        {{ compensate_formset.management_form }}
+                        {{ compensate_formset.non_form_errors }}
+                        {% for compensate in compensate_formset %}
+                            {% for fld in compensate.hidden_fields %}{{ fld }}{% endfor %}
+
+                            <tr>
+                                <td>
+                                    {% if compensate.instance.pk %}{{ compensate.DELETE }}{% endif %}
+                                    <div class="input-group">
+                                        {{ compensate.content }}
+                                        <span class="input-group-btn"></span>
+                                    </div>
+                                    <span class="text-danger">{{ compensate.content.errors.0 }}</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="row mgt-50">
+                <div class="col-sm-12 text-center">
+                    <input type="hidden" name="action" value="{{ action }}">
+                    <button type="submit" class="btn btn-primary btn-w160" name="save" >保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock right %}
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery.formset.js' %}"></script>
+    <script>
+    $(function () {
+        $('#id_{{ evidence_formset.prefix }} tbody tr').formset({
+                'prefix': '{{ evidence_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                'formCssClass':'{{ evidence_formset.prefix }}-form',
+                added: function (row) {
+                    {#var xh = $("#id_{{ nature_person_formset.prefix }}-TOTAL_FORMS").val();#}
+                    {#row.find(".xh").text(xh);#}
+                }
+         });
+
+        $('#id_{{ asking_formset.prefix }} tbody tr').formset({
+            'prefix': '{{ asking_formset.prefix }}',
+            'addCssClass': 'add-row btn btn-success btn-xs',
+            'deleteCssClass': 'delete-row btn btn-danger',
+            'deleteText': '<i class="fa fa-remove"></i>',
+            'addText': '<i class="fa fa-plus"></i>',
+            'formCssClass': '{{ asking_formset.prefix }}-form',
+            added: function (row) {
+                {#var xh = $("#id_{{ nature_person_formset.prefix }}-TOTAL_FORMS").val();#}
+                {#row.find(".xh").text(xh);#}
+            }
+        });
+
+        $('#id_{{ compensate_formset.prefix }} tbody tr').formset({
+            'prefix': '{{ compensate_formset.prefix }}',
+            'addCssClass': 'add-row btn btn-success btn-xs',
+            'deleteCssClass': 'delete-row btn btn-danger',
+            'deleteText': '<i class="fa fa-remove"></i>',
+            'addText': '<i class="fa fa-plus"></i>',
+            'formCssClass': '{{ compensate_formset.prefix }}-form',
+            added: function (row) {
+                {#var xh = $("#id_{{ nature_person_formset.prefix }}-TOTAL_FORMS").val();#}
+                {#row.find(".xh").text(xh);#}
+            }
+        });
+
+        $('#id_{{ applications_formset.prefix }} tbody tr').formset({
+            'prefix': '{{ applications_formset.prefix }}',
+            'addCssClass': 'add-row btn btn-success btn-xs',
+            'deleteCssClass': 'delete-row btn btn-danger',
+            'deleteText': '<i class="fa fa-remove"></i>',
+            'addText': '<i class="fa fa-plus"></i>',
+            'formCssClass': '{{ applications_formset.prefix }}-form',
+            added: function (row) {
+                {#var xh = $("#id_{{ nature_person_formset.prefix }}-TOTAL_FORMS").val();#}
+                {#row.find(".xh").text(xh);#}
+            }
+        });
+
+         $('.summernote').summernote({
+                height: 200,
+                tabsize: 2,
+                lang: 'zh-CN',
+                followingToolbar: true,
+                placeholder: '请在此输入内容...',
+                {#fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],#}
+             toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['table', ['table']],
+                    {#['insert', ['link', 'picture', 'hr']],#}
+                    ['view', ['fullscreen', 'codeview']],
+                    ['help', ['help']]
+                  ],
+            });
+    })
+
+    </script>
+{% endblock %}
+

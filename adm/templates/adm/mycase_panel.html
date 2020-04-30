@@ -1,0 +1,17 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}我的案件{% endblock title %}
+{% block right %}
+    <div class="ynbox">
+        <div class="ynntowbox"><a href="{% url 'adm:case-category' %}"><img src="{% static 'lawyer/img/xjaj.jpg' %}"></a></div>
+        <div class="ynname"><a href="{% url 'adm:case-category' %}">新建案件</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynntowbox"><a href="{% url 'adm:case-doing-list' %}"><img src="{% static 'lawyer/img/wwc.jpg' %}"></a></div>
+        <div class="ynname"><a href="{% url 'adm:case-doing-list' %}">未完案件</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynntowbox"><a href="{% url 'adm:case-search-list' %}"><img src="{% static 'lawyer/img/ajcx.jpg' %}"></a></div>
+        <div class="ynname"><a href="{% url 'adm:case-search-list' %}">案件查询</a></div>
+    </div>
+{% endblock right %}
+

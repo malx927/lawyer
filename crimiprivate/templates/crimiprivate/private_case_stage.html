@@ -1,0 +1,92 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}案件受理阶段{% endblock title %}
+{% block css %}
+    <style>
+        {#.table tr > td {#}
+        {#    border-top: 0px!important;#}
+        {#    vertical-align: middle!important;#}
+        {#}#}
+
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center">{{ private.case_name }}已受理阶段</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <h3 class="panel-title h34">案件已受理阶段</h3>
+                            </div>
+                            <div class="col-sm-10 text-right">
+                                <a class="btn btn-success" href="{% url 'private:private-case-detail' private.id %}">
+                                    <i class="glyphicon glyphicon-th-large">新增</i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="text-center">序号</th>
+                            <th>案件名称</th>
+                            <th>执行阶段</th>
+                            <th>法律地位</th>
+                            <th>选项</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for detail in private_details %}
+                            <tr>
+                                <td class="text-center">{{ forloop.counter }}</td>
+                                <td>{{ detail.private.case_name }}</td>
+                                <td>{{ detail.stage }}</td>
+                                <td>{{ detail.legal_status }}</td>
+
+                                <td>
+                                    <a href="{% url 'private:private-case-detail-update' detail.id %}" class="btn btn-primary btn-xs">进入</a>&nbsp;
+                                    <a href="{% url 'private:private-case-detail-scheme' detail.id %}" class="btn btn-primary btn-xs">诉讼方案</a>
+                                    {% if request|has_permission:'private:private-case-detail-delete' %}
+                                    <a href="{% url 'private:private-case-detail-delete' detail.id %}" class="btn btn-danger btn-xs btn-remove">删除</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock right %}
+
+{% block extjs %}
+<script>
+    $(function () {
+        $(".btn-remove").click(function (e) {
+            e.preventDefault();
+            var url = $(this).attr("href");
+            Swal.fire({
+                title: '真的要删除吗?',
+                text: "删除将无法恢复!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '确定删除',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = url
+                }
+            })
+        })
+    });
+</script>
+{% endblock %}

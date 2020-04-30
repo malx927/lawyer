@@ -1,0 +1,190 @@
+ul,ol,li{ list-style-type:none;}
+.font{
+	font-size: 14px; 
+	text-align: center;
+}
+.fontt{
+	font-size: 12px; 
+	text-align: center;
+}
+.ding{height: 100px; background-color: #acacac;}
+.logowei{height: 100px; background-color: #acacac;}
+.banner{width: 100%; height: 250px; background-image: url(../img/bj.jpg); background-repeat: no-repeat;}
+.move{height: 30px; background-color: #999; margin: 10px auto;
+    text-align: center;
+    line-height:30px;
+    border: 1px solid #ddd;
+     border-radius:4px;
+    min-width: 60px;
+}
+.move a{
+    text-decoration: none;
+    color: #000;
+}
+.green{
+    background-color: #428bca;
+}
+.green a{
+    color: #fff;
+}
+.bdbox{display: flex; padding-bottom: 10px; float: left; padding-right: 10px;}
+.bdbox span{line-height: 30px; float: left; font-size: 14px;}
+.bdbbox form input{    
+	outline: none;
+    flex: 1;
+    height: 25px;
+    }
+
+.subm input{width: 70px;}
+.sq{
+	width: 100%; 
+	overflow: hidden; 
+	padding-top: 15px; 
+	padding-left: 20px"
+}
+.sqtop{font-size: 24px; text-align: center; padding-top: 10px; padding-bottom: 10px;}
+.sqbottom{overflow: hidden; display: block; width: 100%; padding-left: 35px; padding-bottom: 20px;}
+.lsxxdbox{width: 300px; margin: 0 auto;}
+.lsxxbox span{font-size: 16px;}
+.lsxxbox{padding-bottom: 20px; margin-left: 20px;}
+.xiugaianniu{width: 270px; text-align: center; margin: 0 auto;}
+.neibiaoqian{line-height: 24px; float: left; font-size: 16px;}
+.lsxxxbox{padding-bottom: 20px; font-size: 16px;}
+.lsxxbiaoqian{width: 145px; float: left; margin-right: 10px;}
+.ynbox{ height: 130px; float: left; margin-top: 80px; margin-left: 10%;}
+.ynnbox{width: 70px; height: 70px; margin: 0 auto;}
+.ynname{text-align: center; padding-top: 5px;}
+.ynname a{font-size: 16px; text-decoration: none; color: #000;}
+.ynntowbox{width: 102px; height: 102px; margin: 0 auto; }
+.sqbbox{display: flex; float: left; padding-right: 10px;}
+.sqbbox span{ line-height: 23px; float: left;}
+.sjqj{float: left; line-height: 34px; }
+.sqbox form input{   
+	outline: none;
+    flex: 1;
+    height: 25px;
+    }
+.anjianneirong{padding-bottom: 5px; font-size: 16px;}
+.dayin{width: 230px; padding-bottom: 10px;}
+.biaoqianming{float: left; padding-left: 3px; font-family: "microsoft yahei"; font-size: 14px; color: #000; margin-right: 10px; line-height: 30px;}
+.biaoqianbox{ float: left; padding: 10px;}
+.diweibiaoqian{width: 100%; margin: 15px auto; text-align: center; font-family: "microsoft yahei"; font-size: 16px;}
+.geduan{width: 100%; height: 5px;}
+.dk{background-color: #ddd;}
+.ndk{background-color: #fff; min-height: 830px;}
+
+.bddbox{width: 400px; margin: 0 auto; padding-top: 10px;}
+.subm{    text-align: center;
+    padding: 20px;
+}
+.xx a{
+	background-color: #999;
+	color: #000;
+}
+ .start{
+    cursor: pointer;
+} 
+.end{
+    cursor: pointer;
+    background-color: #00B4E1;
+	color: #fff;
+    border: none;
+}
+.xgmm{
+	width: 300px;
+	margin: 0 auto;
+	
+}
+.xgmmm{
+	width: 270px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.xgmmm span{
+	width: 70px;
+	font-size: 14px;
+	display: block;
+	float: left;
+}
+.an{
+	text-align: center;
+}
+.ajlb{
+	padding-top: 20px; 
+}
+.chaxun{
+	float: left; 
+	width: 150px;
+}
+.chaxunl{
+	float: left; 
+	line-height: 30px;
+}
+.chaxunbox{
+	margin-right: 5px; 
+	margin-left: 15px; 
+	float: left;
+	padding-top: 4px;
+}
+.fldw{
+	background-color: #f8f8f8; 
+	padding: 10px; 
+	
+	border: 1px solid #ddd;
+}
+.fabox{
+	background-color: #f8f8f8; 
+	border: 1px solid #ddd;
+}
+.baocun{
+	float: left; 
+	margin-top:50px;
+	width: 100%; 
+	text-align: center; 
+	margin-bottom: 30px;
+}
+.mtb{
+	margin-top:10px; 
+	margin-bottom: 10px;
+}
+.pdt{
+	padding-top: 20px;
+}
+.shanchu{
+	color: red; 
+	text-decoration: none; 
+	font-weight: bold; 
+	font-style: normal;
+}
+.pin{
+	padding: inherit;
+}
+.oh{
+	overflow: hidden;
+}
+.flt{
+	float: left;
+}
+.flr{
+	float: right;
+}
+.mboom{
+	margin-bottom: 0;
+}
+.mmrl{
+	margin-right: 5px; 
+	margin-left: 15px; 
+}
+.cmfl{
+	color: red; 
+	float: left; 
+	margin-right: 5px; 
+	line-height: 30px;
+}
+.mrflt{
+	
+}
+.pflt{
+	padding: 3px;
+	float:left;
+}

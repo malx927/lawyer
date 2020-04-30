@@ -1,0 +1,71 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="{% static 'lawyer/css/stylezc.css'%}">
+    <script src="{% static 'lawyer/js/form.js' %}"></script>
+</head>
+<body>
+    <div class="form" style="position:relative">
+		<!--登录表单-->
+        <div class="form_register">  
+            <form action="" method="post">
+                {% csrf_token %}
+            	<div class="form_item">
+                    <label for="type">用户类型：</label>
+                    <input type="text" name="type" id="id_type" placeholder="律师事务所" readonly="true" >
+                </div>
+                <div class="form_item">
+                    <label for="username">用户名：</label>
+                    <input type="text" name="username" id="id_username" placeholder="请输入用户名" required >
+                </div>
+                <div class="form_item">
+                    <label for="password">密码：</label>
+                    <input type="password" name="password" id="id_password" placeholder="请输入密码名" required>
+                </div>
+                <div class="form_item">
+                    <input type="submit" value="登录">
+                </div>
+            </form>
+            {% if msg %}
+                <div class="info"><span class="switch login_Btn">{{ msg }}</span></div>
+            {% endif %}
+
+        </div>
+		
+		<!--修改密码表单-->
+        <!--<div class="form_login" style="height:0;">
+			
+			<form action="#">
+
+				<div class="form_item">
+					<label for="username">原密码：</label>
+					<input type="text" name="username" id="username" placeholder="请输入用户名" required>
+				</div>
+				<div class="form_item">
+					<label for="password">修改密码：</label>
+					<input type="password" name="password" id="password" placeholder="请输入密码名" required>
+				</div>
+				<div class="form_item">
+					<label for="password">确认密码：</label>
+					<input type="password" name="password" id="password" placeholder="请输入密码名" required>
+				</div>
+				<div class="form_item">
+					<input type="submit" value="确定">
+				</div>
+			</form>
+			<div class="info"><span class="switch register_Btn">返回登录</span></div>
+			
+         </div>-->
+        
+    </div>
+<scrpt>
+    <script type="text/javascript">
+        document.getElementById('id_username').focus()
+    </script>
+</scrpt>
+</body>
+</html>

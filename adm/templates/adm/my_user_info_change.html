@@ -1,0 +1,313 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}用户授权{% endblock title %}
+{% block css %}
+    <style>
+        td{
+            border-left: 0px!important;
+        }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        <h3 class="text-center">个人信息完善</h3>
+    </div>
+    <div class="container">
+        <form  method="post">
+        {% csrf_token %}
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <h3 class="panel-title">基础信息</h3>
+            </div>
+            <div class="panel-body ">
+                <div class="form-horizontal">
+                    <div class="form-group"><input type="hidden" name="user_id" value="{{ user_id }}">
+                        {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+                        <label class="col-sm-1 control-label" for="{{ form.real_name.id_for_label }}">{{ form.real_name.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.real_name }}
+                            <span class="text-danger">{{ form.real_name.errors.0 }}</span>
+                        </div>
+                        <label class="col-sm-1 control-label" for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.gender }}
+                            <span class="text-danger">{{ form.gender.errors.0 }}</span>
+                        </div>
+                        <label class="col-sm-1 control-label" for="{{ form.post.id_for_label }}">{{ form.post.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.post }}
+                            <span class="text-danger">{{ form.post.errors.0 }}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"
+                               for="{{ form.telephone.id_for_label }}">{{ form.telephone.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.telephone }}
+                            <span class="text-danger">{{ form.telephone.errors.0 }}</span>
+                        </div>
+                        <label class="col-sm-1 control-label"
+                               for="{{ form.job_time.id_for_label }}">{{ form.job_time.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.job_time }}
+                            <span class="text-danger">{{ form.job_time.errors.0 }}</span>
+                        </div>
+                        <label class="col-sm-1 control-label" for="">执业年限</label>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="{{ form.instance.practice_years }}" disabled>
+                                <div class="input-group-addon">年</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"
+                               for="{{ form.job.id_for_label }}">{{ form.job.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.job }}
+                            <span class="text-danger">{{ form.job.errors.0 }}</span>
+                        </div>
+                        <label class="col-sm-1 control-label"
+                               for="{{ form.license_num.id_for_label }}">{{ form.license_num.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.license_num }}
+                            <span class="text-danger">{{ form.license_num.errors.0 }}</span>
+                        </div>
+                        <label class="col-sm-1 control-label"
+                               for="{{ form.prof_title.id_for_label }}">{{ form.prof_title.label }}</label>
+                        <div class="col-sm-3">
+                            {{ form.prof_title }}
+                            <span class="text-danger">{{ form.prof_title.errors.0 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default"   id="id_{{ special_formset.prefix }}">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h3 class="panel-title">优势类型</h3>
+                    </div>
+                    <div class="col-sm-10 text-right formset-add-btn">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-responsive  table-bordered">
+                <thead>
+                    <th class="text-center" style="width:10%;">序号</th>
+                    <th class="text-center">优势类型</th>
+                </thead>
+                <tbody class="formset-body">
+                {{ special_formset.management_form }}
+                {{ special_formset.non_form_errors }}
+                {% for special in special_formset %}
+                    <tr id="{{ special.prefix }}-row">
+                        <td class="text-center xh">
+                            {% for fld in special.hidden_fields %}{{ fld }}{% endfor %}
+                            {% if special.instance.pk %}{{ special.DELETE }}{% endif %}{{ forloop.counter }}
+                        </td>
+                        <td class="text-center">
+                            <div class="input-group">
+                                {{ special.title }}
+                                <span class="input-group-btn">
+{#                                    <a type="button" class="btn btn-danger" data-addel-delete><i class="fa fa-remove"></i></a>#}
+                                </span>
+                            </div>
+                            <span class="text-danger">{{ special.title.errors.0 }}</span>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default" id="id_{{ professional_formset.prefix }}">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h3 class="panel-title">其他职称</h3>
+                    </div>
+                    <div class="col-sm-10 text-right formset-add-btn">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-responsive  table-bordered">
+                <thead>
+                    <th class="text-center" style="width:10%;">序号</th>
+                    <th class="text-center">其他职称</th>
+                </thead>
+                <tbody class="formset-body">
+                {{ professional_formset.management_form }}
+                {{ professional_formset.non_form_errors }}
+                {% for professional in professional_formset %}
+                    <tr>
+                        <td class="text-center xh">
+                            {% for fld in professional.hidden_fields %}{{ fld }}{% endfor %}
+                            {% if professional.instance.pk %}{{ professional.DELETE }}{% endif %}
+                            {{ forloop.counter }}
+                        </td>
+                        <td class="text-center">
+                            <div class="input-group">
+                                {{ professional.title }}
+                                <span class="input-group-btn">
+
+                                </span>
+                            </div>
+                            <span class="text-danger">{{ professional.title.errors.0 }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default" id="id_{{ social_formset.prefix }}">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h3 class="panel-title">社会任职</h3>
+                    </div>
+                    <div class="col-sm-10 text-right formset-add-btn">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-responsive  table-bordered">
+                <thead>
+                    <th class="text-center" style="width:10%;">序号</th>
+                    <th class="text-center">社会任职</th>
+                </thead>
+                <tbody class="formset-body">
+                {{ social_formset.management_form }}
+                {{ social_formset.non_form_errors }}
+                {% for social in social_formset %}
+                    <tr>
+                        <td class="text-center xh">
+                            {% for fld in social.hidden_fields %}{{ fld }}{% endfor %}
+                            {% if social.instance.pk %}{{ social.DELETE }}{% endif %}
+                            {{ forloop.counter }}
+                        </td>
+                        <td class="text-center">
+                            <div class="input-group">
+                                {{ social.title }}
+                                <span class="input-group-btn">
+                                </span>
+                            </div>
+                            <span class="text-danger">{{ social.title.errors.0 }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <input type="submit" value="&nbsp;保存&nbsp;" class="btn btn-primary" >
+            </div>
+        </div>
+        </form>
+    </div>
+
+{% endblock right %}
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery.formset.js' %}"></script>
+{#    <script src="{% static 'lawyer/js/addel.jquery.min.js' %}"></script>#}
+    <script>
+        $(function () {
+            $("#id_job_time").datepicker({
+                format: "yyyy-mm-dd",
+                language: "zh-CN",
+                autoclose: true,
+
+            });
+            $('#id_{{ special_formset.prefix }} tbody tr').formset({
+                'prefix': '{{ special_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                'formCssClass':'{{ special_formset.prefix }}-form',
+                added: function (row) {
+                    var xh = $("#id_{{ special_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".xh").text(xh);
+                }
+            });
+            $('#id_{{ professional_formset.prefix }} tbody tr').formset({
+                'prefix': '{{ professional_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                'formCssClass':'{{ professional_formset.prefix }}-form',
+                added: function (row) {
+                    var xh = $("#id_{{ professional_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".xh").text(xh);
+                }
+            });
+            $('#id_{{ social_formset.prefix }} tbody tr').formset({
+                'prefix': '{{ social_formset.prefix }}',
+                'addCssClass': 'add-row btn btn-success btn-xs',
+                'deleteCssClass': 'delete-row btn btn-danger',
+                'deleteText': '<i class="fa fa-remove"></i>',
+                'addText': '<i class="fa fa-plus"></i>',
+                'formCssClass':'{{ social_formset.prefix }}-form',
+                added: function (row) {
+                    var xh = $("#id_{{ social_formset.prefix }}-TOTAL_FORMS").val();
+                    row.find(".xh").text(xh);
+                }
+            })
+        })
+    </script>
+{% endblock %}
+
+
+{#<h1>Add Recipe</h1>#}
+{#<form action="." method="post">#}
+{#    {% csrf_token %}#}
+{#    #}
+{#    {{ form.as_p }}#}
+{#    #}
+{#    <fieldset>#}
+{#        <legend>Recipe Ingredient</legend>#}
+{#        {{ ingredient_formset.management_form }}#}
+{#        {{ ingredient_formset.non_form_errors }}#}
+{#        {% for form in ingredient_formset %}#}
+{#                {{ form.name.errors }}#}
+{#                {{ form.name.label_tag }}#}
+{#                {{ form.name }}#}
+{#            </div>#}
+{#      {% endfor %}#}
+{#    </fieldset>#}
+{# #}
+{#    <input type="submit" value="Add recipe" class="submit" />#}
+{#</form>#}
+{#   <script>#}
+{#    $(document).ready(function () {#}
+{#        $('.addel-container').addel({#}
+{#            events: {#}
+{#                added: function (event) {#}
+{#                   var old_xh = event.target.last().find('.xh').text();#}
+{#                   var xh = parseInt(old_xh) + 1;#}
+{#                   event.added.find(".xh").text(xh);#}
+{#                   event.added.find(":input:enabled").each(function () {#}
+{#                       if(this.id.match(/[\d]+/)!=null){#}
+{#                           this.id = this.id.replace(/[\d]+/, old_xh);#}
+{#                           this.name = this.name.replace(/[\d]+/, old_xh);#}
+{#                           console.log(this.id, this.name);#}
+{#                       }#}
+{##}
+{#                   })#}
+{#                }#}
+{#            }#}
+{#        }).on('addel:delete', function (event) {#}
+{#            console.log(event.target);#}
+{#            if (!window.confirm('确定删除' + '"' + event.target.find(':input').val() + '"?')) {#}
+{#                console.log('Deletion prevented!');#}
+{#                event.preventDefault();#}
+{#            }#}
+{#        });#}
+{#         $("#id_job_time").datepicker({#}
+{#            format: "yyyy-mm-dd",#}
+{#            language: "zh-CN",#}
+{#            autoclose: true,#}
+{#        });#}
+{#    });#}
+{#    </script>#}

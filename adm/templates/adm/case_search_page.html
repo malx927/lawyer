@@ -1,0 +1,230 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %} 案件查询 {% endblock title %}
+{% block css %}
+    <style>
+        .mgt {
+            margin-top: 20px;
+        }
+
+        .panel-heading {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        <div class="container-fluid mgt">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-ex">
+                        <form class="form-inline" method="get">
+                            <div class="form-group">
+                                <label class="sr-only" for="id_start_time">时间</label>
+                                <input type="text" class="form-control" id="id_start_time" name="start_time"
+                                       value="{{ start_time|default:"" }}" placeholder="开始时间">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="id_person">结束时间</label>
+                                <input type="text" class="form-control" id="id_end_time" name="end_time"
+                                       value="{{ end_time|default:"" }}" placeholder="结束时间">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="id_case_type">案件类型</label>
+                                <select class="form-control" id="id_case_type" name="case_type">
+                                    {% for ct in case_types %}
+                                        <option value="{{ ct.0 }}" {% if ct.0 == case_type %}
+                                                selected {% endif %}>{{ ct.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="id_client_name">委托人</label>
+                                <input type="text" class="form-control" id="id_client_name" name="client_name"
+                                       value="{{ client_name|default:"" }}" placeholder="委托人">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="id_party_name">当事人</label>
+                                <input type="text" class="form-control" id="id_party_name" name="party_name"
+                                       value="{{ party_name|default:"" }}" placeholder="当事人">
+                            </div>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> 查询</button>
+                            <button type="button" id="btn_reset" class="btn btn-success"><i class="fa fa-undo"></i> 重置
+                            </button>
+                        </form>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {% if case_type == "1" %}
+                                {% for case in cases %}
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">{{ case.case_name|default:"" }}</h3>
+                                            </div>
+                                            <div class="panel-body form-horizontal">
+                                                <p class="form-control-static">案件名称: <a href="{% url 'civil-case:civil-case-update' case.id %}">{{ case.case_name }}</a>
+                                                </p>
+                                                <p class="form-control-static">案件进程: {{ case.get_info_type_display }}</p>
+                                                <p class="form-control-static">
+                                                    案件阶段: {% for d in case.civildetail_set.all %}
+                                                    <a href="{% url 'civil-case:civil-case-detail-update' d.id %}"
+                                                       class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                                {% empty %}
+                                                    无
+                                                {% endfor %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <div class="col-xs-12 col-sm-12 text-center">
+                                        <p class="text-danger">暂无案件</p>
+                                    </div>
+                                {% endfor %}
+                             {% elif case_type == "2"  %}
+                                {% for case in cases %}
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">{{ case.case_name|default:"" }}</h3>
+                                            </div>
+                                            <div class="panel-body form-horizontal">
+                                                <p class="form-control-static">案件名称: <a href="{% url 'criminal:criminal-case-update' case.id %}">{{ case.case_name }}</a>
+                                                </p>
+                                                <p class="form-control-static">案件进程: {{ case.get_info_type_display }}</p>
+                                                <p class="form-control-static">
+                                                    案件阶段: {% for d in case.criminaldetail_set.all %}
+                                                    <a href="{% url 'criminal:criminal-case-detail-update' d.id %}"
+                                                       class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                                {% empty %}
+                                                    无
+                                                {% endfor %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <div class="col-xs-12 col-sm-12 text-center">
+                                        <p class="text-danger">暂无案件</p>
+                                    </div>
+                                {% endfor %}
+                            {% elif case_type == "3" %}
+                                {% for case in cases %}
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">{{ case.case_name|default:"" }}</h3>
+                                            </div>
+                                            <div class="panel-body form-horizontal">
+                                                <p class="form-control-static">案件名称: <a
+                                                        href="{% url 'private:private-case-update' case.id %}">{{ case.case_name }}</a>
+                                                </p>
+                                                <p class="form-control-static">
+                                                    案件进程: {{ case.get_info_type_display }}</p>
+                                                <p class="form-control-static">
+                                                    案件阶段: {% for d in case.crimiprivatedetail_set.all %}
+                                                    <a href="{% url 'private:private-case-detail-update' d.id %}"
+                                                       class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                                {% empty %}
+                                                    无
+                                                {% endfor %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <div class="col-xs-12 col-sm-12 text-center">
+                                        <p class="text-danger">暂无案件</p>
+                                    </div>
+                                {% endfor %}
+                            {% elif case_type == "4" %}
+                                {% for case in cases %}
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">{{ case.case_name|default:"" }}</h3>
+                                            </div>
+                                            <div class="panel-body form-horizontal">
+                                                <p class="form-control-static">案件名称: <a
+                                                        href="{% url 'crmcivil:crmcivil-case-update' case.id %}">{{ case.case_name }}</a>
+                                                </p>
+                                                <p class="form-control-static">
+                                                    案件进程: {{ case.get_info_type_display }}</p>
+                                                <p class="form-control-static">
+                                                    案件阶段: {% for d in case.crimicivildetail_set.all %}
+                                                    <a href="{% url 'crmcivil:crmcivil-case-detail-update' d.id %}"
+                                                       class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                                {% empty %}
+                                                    无
+                                                {% endfor %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <div class="col-xs-12 col-sm-12 text-center">
+                                        <p class="text-danger">暂无案件</p>
+                                    </div>
+                                {% endfor %}
+                            {% elif  case_type == "5"%}
+                                {% for case in cases %}
+                                    <div class="col-xs-6 col-sm-3">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">{{ case.case_name|default:"" }}</h3>
+                                            </div>
+                                            <div class="panel-body form-horizontal">
+                                                <p class="form-control-static">案件名称: <a
+                                                        href="{% url 'admincase:admin-case-update' case.id %}">{{ case.case_name }}</a>
+                                                </p>
+                                                <p class="form-control-static">
+                                                    案件进程: {{ case.get_info_type_display }}</p>
+                                                <p class="form-control-static">
+                                                    案件阶段: {% for d in case.admindetail_set.all %}
+                                                    <a href="{% url 'admincase:admin-case-detail-update' d.id %}"
+                                                       class="btn btn-xs btn-primary">{{ d.stage }}</a>
+                                                {% empty %}
+                                                    无
+                                                {% endfor %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <div class="col-xs-12 col-sm-12 text-center">
+                                        <p class="text-danger">暂无案件</p>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extjs %}
+    <script>
+        $(function () {
+            $("#id_start_time, #id_end_time").datepicker({
+                format: "yyyy-mm-dd",
+                language: "zh-CN",
+                autoclose: true,
+            });
+            $("#btn_reset").click(function () {
+                $("#id_client_name").val("");
+                $("#id_party_name").val("");
+                $("#id_start_time").val("");
+                $("#id_end_time").val("");
+                $("#id_case_type").val("1");
+            });
+        })
+
+    </script>
+{% endblock %}
+
+
+
+

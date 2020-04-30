@@ -1,0 +1,14 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}我的案件{% endblock title %}
+{% block right %}
+    <div class="ynbox">
+        <div class="ynntowbox"><a href="{% url 'adm:case-distrib-list' %}"><img src="{% static 'lawyer/img/fpaj.jpg' %}"></a></div>
+        <div class="ynname"><a href="{% url 'adm:case-distrib-list' %}">案件分配</a></div>
+    </div>
+    <div class="ynbox">
+        <div class="ynntowbox"><a href="#"><img src="{% static 'lawyer/img/ajcx.jpg' %}"></a></div>
+        <div class="ynname"><a href="#">案件查询</a></div>
+    </div>
+
+{% endblock right %}
+

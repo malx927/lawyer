@@ -1,0 +1,105 @@
+<!DOCTYPE html>{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <title>{% block title %}手机律师端{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'mobile/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'mobile/css/style.css' %}"/>
+{% block css %}{% endblock %}
+{% block js %}{% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container-fluid mgb-34">
+    {% block header %}
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="{% static 'mobile/img/b1.jpg' %}"/>
+                </div>
+                <div class="item">
+                    <img src="{% static 'mobile/img/b2.jpg' %}"/>
+                </div>
+                <div class="item">
+                    <img src="{% static 'mobile/img/b3.jpg' %}"/>
+                </div>
+            </div>
+        </div>
+    {% endblock header %}
+    <div class="container">
+        {% block content %}
+            <div class="row">
+                <div class="col-xs-4 col-sm-4">
+                    <div class="xj">
+                        <a href="wdaj.html"><img src="{% static 'mobile/img/wdaj.png' %}" alt=""/></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <div class="xj">
+                        <a href="gwdw.html"><img src="{% static 'mobile/img/gwdw.png' %}" alt=""/></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <div class="xj">
+                        <a href=""><img src="{% static 'mobile/img/fsaj.png' %}" alt=""/></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <div class="xj">
+                        <a href="lvshi.html"><img src="{% static 'mobile/img/wdxx.png' %}" alt=""/></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <div class="xj">
+                        <a href="lsxx.html"><img src="{% static 'mobile/img/l1.png' %}" alt=""/></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <div class="xj">
+                        <a href="jsq.html"><img src="{% static 'mobile/img/jsq.png' %}" alt=""/></a>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <div class="xj">
+                        <a href="xgmm.html"><img src="{% static 'mobile/img/xgmm.png' %}" alt=""/></a>
+                    </div>
+                </div>
+                <div style="margin-top:550px;"></div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock body %}
+{% block footer %}
+    <div class="footer" style="z-index: 999">
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+                <a href="#" type="button" class="btn btn-primary">首页</a>
+            </div>
+            <div class="btn-group">
+                <a href="#" type="button" class="btn btn-primary">添加我的信息</a>
+            </div>
+            <div class="btn-group">
+                <a href="#" type="button" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+{% endblock footer %}
+
+</div>
+{% block bottomjs %}
+    <script type="text/javascript" src="{% static 'mobile/js/jquery-2.1.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mobile/js/bootstrap.min.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'lawyer/js/addel.jquery.js' %}"></script>#}
+{% endblock bottomjs %}
+{% block extjs %}
+    <script>
+        $(".carousel").carousel({
+            interval: 4000 //轮播间隔时间
+        })
+    </script>
+{% endblock extjs %}
+</body>
+</html>

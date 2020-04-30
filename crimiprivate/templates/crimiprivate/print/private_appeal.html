@@ -1,0 +1,138 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}上诉状{% endblock title %}
+{% block css %}
+  <style>
+    @page {
+        size:a4 portrait;
+        margin: 2.5cm;
+    }
+
+    .table {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding-top: 3px;
+        font-size:15pt;
+        font-family: 宋体;
+        width:100%;
+    }
+    .table td{
+        height: 25px;
+        word-wrap:break-word;
+        word-break:break-all;
+        border: 0px!important;
+    }
+    div{
+        line-height: 30px;
+    }
+    span{
+        display:block;
+        text-indent: 2.2rem;
+        line-height: 30px;
+    }
+    .table .td_h{
+        height: 140px;
+    }
+    .table .td_50{
+        height:50px;
+    }
+    .table .td_20{
+        height:20px;
+    }
+    .td_right{
+        text-align: right;
+        padding-right:40px;
+    }
+ </style>
+{% endblock %}
+{% block print_content %}
+<div class="print_area" id="print_page">
+    <table class="table">
+        <caption style="text-align: center; padding-bottom: 30px;"><h1>上诉状</h1></caption>
+        <tbody>
+        <tr>
+            <td>上诉人{% if first_trial %}(原审{{ first_trial.legal_status.name }}){% endif %}
+                :{{ private_detail.private.party_name }}</td>
+            <td>性别: {{ private_detail.private.get_party_sex_display }}</td>
+            <td>民族：{{ private_detail.private.party_nation }}</td>
+            <td>年龄: {{ private_detail.private.get_birth_date }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">身份证号: {{ private_detail.private.party_id_code }}</td>
+            <td colspan="2">电话: {{ private_detail.private.party_tel }}</td>
+        </tr>
+        <tr>
+            <td colspan="4">现住址: {{ private_detail.private.party_address }}</td>
+        </tr>
+        {% for nature in natures %}
+            <tr>
+                <td>被上诉人{% if relative_legal_status %}(原审{{ relative_legal_status.name }}){% endif %}:{{ nature.name }}</td>
+                <td>性别: {{ nature.get_gender_display }}</td>
+                <td>民族：{{ nature.nation }}</td>
+                <td>年龄: {{ nature.age }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">电话: {{ nature.tel }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">现住址: {{ nature.address }}</td>
+            </tr>
+        {% endfor %}
+        {% for legal in legals %}
+            <tr>
+                <td colspan="4">被上诉人{% if relative_legal_status %}(原审{{ relative_legal_status.name }}){% endif %}
+                    :{{ legal.company_name }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">社会统一信用代码: {{ legal.credit_code }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">法定代表人: {{ legal.legal_person }}</td>
+                <td colspan="2">联系电话: {{ legal.telephone }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">住所地:{{ legal.address }}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td colspan="4">
+                    <span>上诉人因不服{{ first_trial.court_name }}作出的（{{ first_trial.judge_code }}）判决，现依法提起上诉。</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><div>上诉请求:</div></td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>{{ private_detail.crimiprivatelawsuitscheme.appeal_claim|safe }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div>事实和理由:</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>{{ private_detail.crimiprivatelawsuitscheme.appeal_reasons|safe }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_20"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>此致</span></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div>{{ private_detail.court_name }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_50"></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_right"><div style="padding-right:40px;">上诉人：</div></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td_right"><div>{% now 'Y年m月d日' %}</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

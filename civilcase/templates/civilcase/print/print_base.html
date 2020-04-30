@@ -1,0 +1,47 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'lawyer/css/bootstrap.min.css' %}"/>
+    <script type="text/javascript" src="{% static 'lawyer/js/jquery-2.1.1.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'lawyer/js/jQuery.print.js' %}" ></script>
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+</head>
+<body>
+<div class="container">
+    {% block body %}
+        {% block print %}
+            <div class="row">
+                <div class="page-header text-right">
+                    <button class="print-link no-print btn btn-primary btn-sm" id="id_print_btn">打印</button>
+                    <button class="print-link no-print btn btn-default btn-sm" id="id_print_back"> 返回</button>
+                </div>
+            </div>
+        {% endblock print %}
+        {% block print_content %}
+        {% endblock print_content %}
+    {% endblock body %}
+</div>
+</body>
+{% block bottom_js %}
+    <script>
+        $(function () {
+            $("#id_print_btn").click(function (event) {
+                jQuery('#print_page').print({
+                    deferred: $.Deferred().done(function () {
+                        console.log('Printing done');
+                    })
+                });
+            });
+
+            $("#id_print_back").click(function (event) {
+                    window.history.go(-1)
+            });
+        })
+    </script>
+{% endblock bottom_js %}
+</html>

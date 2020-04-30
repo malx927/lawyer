@@ -1,0 +1,63 @@
+{% extends 'civilcase/print/print_base.html' %}{% load static%}
+{% block title %}相关申请书{% endblock title %}
+{% block css %}
+    <style type="text/css">
+        @page {
+            size: a4 ;
+            margin: 2.5cm;
+        }
+
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: 宋体;
+            font-size: 15pt;
+            margin: 0 auto;
+        }
+
+        .table,
+        td,
+        th {
+            border: 1px solid black !important;
+            text-align: center;
+            height: 35px;
+            padding: 5px;
+        }
+
+        .td_10 {
+            width: 8%;
+        }
+
+        .td_20 {
+            width: 15%
+        }
+
+        caption {
+            text-align: center;
+            color: #000;
+        }
+
+        .left {
+            text-align: left;
+        }
+    </style>
+{% endblock %}
+{% block print_content %}
+    <table class="table" id="print_page">
+            <caption style="padding-bottom:30px;"><h1>相关申请书</h1></caption>
+            <thead>
+            <tr>
+                <th class="td_10">序号</th>
+                <th>相关申请书</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for a in applications %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="left">{{ a.appli_name }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

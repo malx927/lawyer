@@ -1,0 +1,7 @@
+.idea
+doc/
+html/
+*.sql
+*.txt
+*.zip
+__pycache__/

@@ -1,0 +1,70 @@
+<!DOCTYPE html>{% load static %}{% load rbac %}
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,shrink-to-fit=no" />
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'lawyer/css/bootstrap.min.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}"/>
+        <link rel="stylesheet" href="{% static 'lawyer/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'lawyer/css/common.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'sweetalert2/sweetalert2.min.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-datepicker/css/datepicker.css' %}"  media="screen"  />
+        <link rel="stylesheet" type="text/css" href="{% static 'summernote/summernote.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-validator/bootstrapValidator.min.css'%}">
+
+        {% block css%}{% endblock %}
+        {% block js %}{% endblock %}
+	</head>
+	<body>
+    {% block main_body %}
+        {% block header %}
+            <div class="ding">
+                <nav class="navbar-fixed">
+                    <div class="container logowei">
+                        <a class="navbar-brand navbar-left pin"><img src="{% static 'lawyer/img/logo.png' %}"></a>
+                        <div class="navbar-right pdt">
+                            <p class="navbar-text">用户名：{{ request.session.real_name }}</p>
+                            <a href="{% url 'password-change' request.session.user_id %}"
+                               class="btn navbar-btn btn-primary btn-sm">修改密码</a>
+                            <a href="{% url 'logout' %}" class="btn navbar-btn btn-primary btn-sm">退出</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        {% endblock %}
+        {% block main %}
+            <div class="container-fluid dk">
+                <div class="row">
+                    <div class="col-md-1 pdt">
+                        {% block left %}
+                            {% menu request %}
+                        {% endblock left %}
+                    </div>
+                    <div class="col-md-11 ndk">
+                        {% block right %}
+
+                        {% endblock right %}
+                    </div>
+                </div>
+            </div>
+        {% endblock main %}
+
+    {% endblock main_body %}
+    {% block bottom %}
+        <script type="text/javascript" src="{% static 'lawyer/js/jquery-2.1.1.min.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'lawyer/js/bootstrap.min.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'sweetalert2/promise.auto.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'sweetalert2/sweetalert2.min.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.js' %}"></script>
+        <script type="text/javascript" src="{% static 'bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js' %}"></script>
+        <script type="text/javascript" src="{% static 'summernote/summernote.js' %}"></script>
+        <script type="text/javascript" src="{% static 'summernote/lang/summernote-zh-CN.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'bootstrap-validator/bootstrapValidator.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'rbac/js/rbac.js' %}" ></script>
+    {% endblock %}
+    {% block extjs %}
+    
+    {% endblock %}
+	</body>
+</html>

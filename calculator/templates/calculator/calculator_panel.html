@@ -1,0 +1,22 @@
+{% extends 'rbac/base.html' %}{% load static rbac %}
+{% block title %}计算器维护{% endblock title %}
+{% block right %}
+    {% for item in children_menus %}
+        {% if item.is_menu %}
+        <div class="ynbox">
+            <div class="ynntowbox">
+                <a href="{{ item.url }}">
+                    {% if item.icon %}
+                        <img src="{% static item.icon %}">
+                    {% else %}
+                        <img src="{% static 'lawyer/img/fpgwdw.jpg' %}">
+                    {% endif %}
+                </a>
+            </div>
+            <div class="ynname"><a href="{{ item.url }}">{{ item.title }}</a></div>
+        </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock right %}
+

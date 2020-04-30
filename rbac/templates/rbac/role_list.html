@@ -1,0 +1,66 @@
+{% extends 'rbac/base.html' %}{% load static %}
+{% block title %} 角色管理 {% endblock title %}
+{% block css %}
+    <style>
+        .mgt{
+           margin-top: 20px;
+        }
+        .panel-heading{
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+    </style>
+{% endblock %}
+{% block right %}
+    <div class="row">
+        <div class="container-fluid mgt">
+            <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading panel-heading-ex">
+                            <form class="form-inline" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="text" class="form-control"  name="name" value="{{ form.name.value|default:'' }}" placeholder="请输入角色名称" required>
+                                </div>
+                                {% if form.name.value %}
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> 保存</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> 添加</button>
+                                {% endif %}
+                            </form>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>角色名称</th>
+                                <th>权限数量</th>
+                                <th>选项</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for role in roles %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ role.name }}</td>
+                                    <td>{{ role.permissions.count }}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-primary " href="{% url 'rbac:role-edit' pk=role.id %}">修改</a>
+                                        <a class="btn  btn-xs btn-danger btn-del" href="#" data-item="{% url 'rbac:role-del' pk=role.id %}">删除</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
